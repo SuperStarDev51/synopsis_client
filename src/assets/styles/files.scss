@@ -1,0 +1,80 @@
+@import './colors';
+
+.c-files {
+	flex: 1;
+	position: relative;
+
+	&__row {
+		max-width: 770px;
+		padding-bottom: 1rem;
+		position: relative;
+
+		&-header {
+			font-size: 2.1875rem;
+			font-weight: 700;
+			opacity: 0.5;
+			margin-bottom: 10px;
+			color: $color-yellow;
+			position: relative;
+			cursor: pointer;
+			padding-left: 30px;
+			margin-left: -30px;
+			display: inline-block;
+
+			&::after {
+				display: inline-block;
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 0px;
+				margin-top: -4px;
+				transform: rotate(45deg) translateY(-50%);
+				width: 0.65rem;
+				height: 0.65rem;
+				border-right: 0.155rem solid $color-gray;
+				border-bottom: 0.155rem solid $color-gray;
+				transition: all 0.15s $easing;
+			}
+
+			&.popup-open {
+				&::after {
+					transform: translateY(-50%) rotateZ(-45deg) rotateX(190deg);
+					margin-top: 0;
+					left: 5px;
+				}
+			}
+		}
+
+		&-body {
+			padding-left: 0.45rem;
+			@include flex-row(wrap, flex-start, flex-start);
+		}
+
+		&-item {
+			font-size: 0.875rem;
+			text-align: center;
+			color: $color-gray2;
+			width: 7.2rem;
+			margin-right: 1.625rem;
+			margin-bottom: 1.7rem;
+			cursor: pointer;
+			transition: all $timing $easing;
+
+			svg {
+				display: block;
+				width: 3.8rem;
+				height: auto;
+				margin: 0 auto 0.8rem;
+				transition: all $timing $easing;
+			}
+
+			@include hover {
+				color: $color-yellow;
+
+				svg {
+					fill: $color-yellow;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,21 @@
+.shooting-days-columns-view {
+	height: calc(100vh - 270px);
+}
+.shooting-days-columns-view .list {
+	height: 100%!important;
+}
+.shooting-days-columns-view .list-inner {
+	height: calc(100% - 4.9rem);
+	overflow-x: hidden;
+	overflow-y: auto;
+	border: 1px solid #99A9B9;
+}
+.shooting-days-columns-view .shootingDaysDroppable-container {
+	height: 100%;
+	& > div {
+		height: 100%;
+	}
+}
+.content-wrapper {
+	min-height: calc(100vh - 16rem)!important;
+}

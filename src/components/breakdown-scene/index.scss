@@ -1,0 +1,121 @@
+
+.task-item__delete {
+	display: none;
+	position: absolute;
+	right: 1rem;
+	top: 50%;
+	transform: translateY(-50%);
+	background: white;
+}
+.task-item:hover .task-item__delete {
+	display: block;
+}
+.task-category-input {
+	position: relative;
+	margin-right: -1.5rem;
+	padding-right: 1.5rem;
+}
+.other-task-category-item .task-category-input .n-btn-delete {
+	position: absolute;
+	right: 0;
+	top: .2rem;
+	display: none;
+}
+.task-category-input:hover .n-btn-delete {
+	display: block;
+}
+
+.scene-disabled {
+	border: 2px solid red!important;
+	opacity: .5;
+	cursor: default;
+
+	button, select, input, textarea, .chip-closable, .task-item__delete, select__control {
+		pointer-events: none;
+	}
+}
+
+.scene-collapse-arrow {}
+
+.scene-set-disable {
+	position: absolute;
+	right: 0;
+	top: 0;
+	cursor: pointer;
+}
+.scene-put-back {
+	font-weight: bold;
+	&:hover {
+		text-decoration: underline;
+	}
+}
+.brekdown-scene-script-text {
+	cursor: text;
+
+	> .display-inline-block {
+
+		&::selection {
+			color: #e83e8c !important;
+			background: #eee !important;
+		}
+		&-moz-selection {
+			color: #e83e8c !important;
+			background: #eee !important;
+		}
+	}
+}
+
+.chip-smaller {
+	font-size: .7rem!important;
+	margin-right: .2rem!important;
+}
+
+.move-to-shooting-day-list {
+	position: absolute;
+	left: .7rem;
+	top: .5rem;
+	font-size: .7rem;
+}
+.move-to-shooting-day-column {
+	position: absolute;
+	right: 0;
+	top: .5rem;
+	font-size: .7rem;
+}
+.breakdownscene-location-name {
+	max-width: 20%;
+	flex: 0 0 20%;
+}
+.shooting-days-columns-view .breakdown-scene__time-location {
+	font-size: .7rem;
+}
+.breakdown-scene__time-location-select {
+	appearance: none;
+	border: none;
+	background-color: transparent;
+
+	&:focus {
+		outline: none;
+	}
+}
+.shooting-days-columns-view .breakdown-scene__time-location-select {
+	width: 4rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.shooting-days-columns-view .breakdown-scene__name {
+	font-size: .9rem!important;
+}
+.wombat-timepicker {
+	left: 0;
+}
+
+.breakdown-scene-script-text-dropdown .MuiMenu-list {
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.breakdown-scene__duration-input {
+	width: 4.5rem!important;
+	padding: 0.5rem 0.2rem!important;
+}

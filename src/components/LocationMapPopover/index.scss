@@ -1,0 +1,14 @@
+.locations-map-popover {
+	width: 300px;
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		.close {
+			color: #ffffff !important;
+		}
+	}
+	& > div {
+		max-width: none;
+	}
+}

@@ -1,0 +1,20 @@
+.additional-menu__icon {
+	position: relative;
+	cursor: pointer;
+}
+.additional-menu__dropdown {
+	background-color: #99a9b9;
+	color: white;
+	position: fixed;
+	width: 14rem;
+	padding: 2rem 1rem 8rem;
+	bottom: 0;
+}
+.additional-menu__item {
+	font-size: 1.15rem;
+	cursor: pointer;
+	color: white;
+	&:hover {
+		color: white;
+	}
+}

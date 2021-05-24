@@ -1,0 +1,29 @@
+@import '@src/assets/styles/colors';
+@import '@src/settings';
+
+.Mask {
+    min-width: 327px;
+    min-height: 208px;
+    border-radius: 5px;
+    border: solid 1px #707090;
+    background-color: #41414e;
+    @include flex-column(nowrap, flex-start, space-between);
+  }
+
+  .Mask:hover {
+    box-shadow: 0 0 0.625rem 0 $color-light;
+  }
+
+	.delete-project-button {
+		width: 2rem!important;
+		height: 2rem!important;
+		padding: 0!important;
+		z-index: 2!important;
+		border-radius: 50%!important;
+		display: flex!important;
+		position: absolute;
+		margin-right: -1rem;
+		top: -0.8rem!important;
+		align-items: center!important;
+		justify-content: center!important;
+	}

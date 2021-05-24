@@ -1,0 +1,247 @@
+@import './colors';
+
+.c-content {
+	@include flex-row(nowrap, flex-start, flex-start);
+	flex: 1;
+	// background-color: $color-gray12;
+	overflow: auto;
+
+	&__header {
+		@include flex-row(nowrap, center, space-between);
+		width: 100%;
+
+		.c-add-team-members {
+			@include flex-row(nowrap, center, space-between);
+			border: 0;
+			background-color: transparent;
+			cursor: pointer;
+			font-size: 1.4375rem;
+			color: $color-gray;
+			transition: all $timing $easing;
+
+			span {
+				display: inline-block;
+				position: relative;
+				border: 2px solid $color-gray;
+				border-radius: 50%;
+				width: 20px;
+				height: 20px;
+				margin-right: 0.5625rem;
+				transition: all $timing $easing;
+
+				&::before,
+				&::after {
+					content: '';
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					height: 2px;
+					width: 8px;
+					background-color: $color-gray;
+					transition: all $timing $easing;
+				}
+
+				&::after {
+					transform: translate(-50%, -50%) rotate(90deg);
+				}
+			}
+
+			@include hover {
+				color: $color-yellow;
+
+				span {
+					border-color: $color-yellow;
+
+					&::before,
+					&::after {
+						background-color: $color-yellow;
+					}
+				}
+			}
+		}
+
+		&--planning {
+			padding-bottom: 2rem;
+		}
+
+		&--budget {
+			justify-content: flex-end;
+			margin: 0 -3.2rem 0.8rem 0;
+
+			.c-btn-with-text {
+				margin: 0 1.55rem 0 0;
+			}
+		}
+
+		&--overview {
+			padding-bottom: 3.25rem;
+			width: calc(100% + 2rem);
+			margin-left: -1rem;
+			margin-right: -1rem;
+		}
+	}
+
+	&__header-actions {
+		@include flex-row(nowrap, flex-start, flex-start);
+
+		button:last-child {
+			margin-right: 0;
+		}
+	}
+
+	&__container {
+		&-delimiter {
+			font-size: 1.25rem;
+			text-transform: uppercase;
+			color: $color-gray14;
+			margin: 0;
+			padding: 1.25rem 0;
+		}
+
+		.c-btn {
+			margin-top: 1rem;
+		}
+
+		&--tasks-canban-view {
+			@include flex-row(nowrap, flex-start, flex-start);
+		}
+
+		&--tasks-list-view {
+			// width: 100%;
+		}
+
+
+	}
+
+	&__tasks {
+		flex: 0 0 1;
+		margin-right: 3.125rem;
+		@include flex-row(nowrap, flex-start, flex-start);
+	}
+
+	&__done-tasks-body {
+		.c-table__header {
+			display: none;
+		}
+	}
+
+	&__suppliers {
+		flex: 0 0 1;
+		width: 100%;
+
+		.c-btn--rounded {
+			margin-left: auto;
+		}
+	}
+
+	&__body {
+		&--overview {
+			@include flex-row(nowrap, center, flex-start);
+			margin-left: -1rem;
+			margin-right: -1rem;
+		}
+	}
+
+	&-budget {
+		padding-left: 14rem;
+	}
+
+	&--budget {
+		@include flex-column(nowrap, stretch, flex-start);
+		padding: 6rem 5rem 3rem 13rem;
+		flex: 1;
+		position: relative;
+	}
+
+	&--files {
+		background-color: $color-black;
+		padding-top: 2.625rem;
+		padding-left: 6.6875rem;
+	}
+
+	&--task {
+		padding: 7.5rem 5rem 3rem 13rem;
+		position: relative;
+
+		.c-content__header {
+			flex: 1;
+
+			&-actions {
+				position: absolute;
+				right: 0;
+			}
+		}
+
+		
+
+		&-list-view {
+			padding-top: 2rem;
+			padding-left: 0rem;
+
+			.c-content__container {
+				width: 100%;
+			}
+		}
+	}
+
+	&--planning,
+	&--block {
+		display: block;
+		padding: 6rem 5rem 3rem;
+	}
+
+	&--planning,
+	&--suppliers {
+		padding: 6rem 5rem 3rem;
+	}
+
+	&--suppliers {
+		&-actions {
+			@include flex-row(nowrap, flex-end, flex-end);
+		}
+	}
+
+	&--overview {
+		padding: 6rem 5.5rem 3rem;
+	}
+
+	@media (max-width: 1919px) {
+		&__body {
+			&--overview {
+				display: block;
+			}
+		}
+	}
+
+	@media (max-width: 1280px) {
+		&__header {
+			padding-bottom: 4rem;
+
+			&--planning {
+				@include flex-column(nowrap, flex-start, stretch);
+			}
+		}
+
+		&--task {
+			padding: 6.3rem 2rem 6rem 11rem;
+		}
+
+		&--budget {
+			padding: 3rem 2rem 6rem 12rem;
+		}
+
+		&--overview {
+			padding: 3rem;
+		}
+
+		&--files {
+			padding: 2.625rem 2rem 3rem 4rem;
+		}
+
+		&--planning,
+		&--suppliers {
+			padding: 6.3rem 2rem 3rem;
+		}
+	}
+}

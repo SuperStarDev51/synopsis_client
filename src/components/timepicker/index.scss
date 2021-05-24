@@ -1,0 +1,17 @@
+.wombat-timepicker {
+	position: absolute;
+	top: 100%;
+	right: 0;
+	z-index: 2;
+	border-radius: 0.5rem;
+}
+
+.wombat-timepicker-wrapper {
+	position: relative;
+}
+.timepicker-wrap + .input-group-append {
+	user-select: none;
+	position: absolute;
+	right: 0;
+	top: -.5rem;
+}

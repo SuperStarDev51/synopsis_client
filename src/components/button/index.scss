@@ -1,0 +1,402 @@
+@import '@src/settings';
+@import '@src/assets/styles/colors';
+
+.c-btn {
+	font-family: sans-serif;
+	font-size: 1.25rem;
+	line-height: 1.875;
+	color: $color-white;
+	min-width: 10rem;
+	padding: 0.5rem 1.5rem;
+	background: $color-action;
+	border-radius: 0.3125rem;
+	box-shadow: none;
+	cursor: pointer;
+	transition: all $timing $easing;
+	outline: none;
+
+	@include hover {
+		color: $color-action;
+		background: $color-white;
+	}
+
+	&--outline {
+		color: $color-action;
+		background-color: transparent;
+
+		@include hover {
+			color: $color-white;
+			background-color: $color-action;
+		}
+	}
+
+	&--rounded {
+		background-color: $color-yellow;
+		box-shadow: 0 10px 10px 0 rgba(74, 144, 226, 0.25);
+		border-radius: 1.875rem;
+		border: 1px solid transparent;
+		@include flex-row(nowrap, center, flex-start);
+		min-width: 13.5625rem;
+		padding: 0.5rem 1.25rem;
+		outline: none;
+		letter-spacing: 1px;
+
+		svg {
+			margin-right: 0.5rem;
+			width: 1.875rem;
+			height: 1.875rem;
+			fill: $color-white;
+		}
+
+		&--with-opacity {
+			svg {
+				opacity: 0.5;
+			}
+		}
+
+		@include hover {
+			background-color: $color-yellow;
+			color: $color-white;
+			opacity: 0.6;
+		}
+
+		&-centered {
+			font-size: 1.125rem;
+			font-weight: 700;
+			letter-spacing: 2px;
+			display: block;
+			text-transform: uppercase;
+			padding: 0.65rem 3.125rem;
+			// margin-left: auto;
+		}
+	}
+
+	&-add-more {
+		background-color: transparent;
+		border: none;
+		cursor: pointer;
+		outline: none;
+
+		svg {
+			width: 1.875rem;
+			height: 1.875rem;
+			opacity: 0.3;
+			transition: all $timing $easing;
+		}
+
+		@include hover {
+			svg {
+				opacity: 1;
+			}
+		}
+	}
+
+	&-close {
+		box-shadow: 0 0 0.625rem 0 $color-light2;
+		border-radius: 50%;
+		padding: 0;
+		margin: 0;
+		width: 1.875rem;
+		height: 1.875rem;
+		visibility: hidden;
+		opacity: 0;
+		transition: all $timing $easing;
+
+		svg {
+			transform: rotate(45deg);
+		}
+	}
+
+	&-with-text {
+		font-size: 1.25rem;
+		border: 0;
+		background-color: transparent;
+		color: $color-gray;
+		padding: 0;
+		margin: 0 0.5rem;
+		cursor: pointer;
+		transition: all $timing $easing;
+		position: relative;
+		outline: none;
+
+		&::after {
+			content: '';
+			position: absolute;
+			bottom: -0.125rem;
+			left: 0;
+			right: 0;
+			height: 2px;
+			width: 100%;
+			background-color: $color-yellow;
+			visibility: hidden;
+			opacity: 0;
+			transition: all $timing $easing;
+		}
+
+		&-and-icon {
+			@include flex-row(nowrap, center, flex-start);
+			background-color: transparent;
+			border: none;
+			color: $color-gray3;
+			cursor: pointer;
+			outline: none;
+			transition: all $timing $easing;
+			width: 100%;
+
+			@include hover {
+				opacity: 0.7;
+			}
+		}
+
+		&.active {
+			color: $color-yellow;
+			pointer-events: none;
+
+			&::after {
+				visibility: visible;
+				opacity: 1;
+			}
+		}
+
+		@include hover {
+			color: $color-yellow;
+
+			&::after {
+				visibility: visible;
+				opacity: 1;
+			}
+		}
+	}
+
+	&-arrow-down {
+		width: 1.875rem;
+		height: 1.875rem;
+		background-color: rgba(255, 255, 255, 0.5);
+		box-shadow: 0 0 1px 0 $color-gray13;
+		border: none;
+		border-radius: 50%;
+		position: relative;
+		outline: none;
+		cursor: pointer;
+		transition: all $timing $easing;
+		flex: 0 0 1.875rem;
+
+		&::before {
+			display: inline-block;
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%) rotate(45deg);
+			width: 0.5rem;
+			height: 0.5rem;
+			border-right: 0.125rem solid $color-gray8;
+			border-bottom: 0.125rem solid $color-gray8;
+			transition: all 0.015s $easing;
+		}
+
+		@include hover {
+			box-shadow: 0 0 0.625rem 0 $color-light2;
+		}
+
+		&.popup-open {
+			&::before {
+				transform: translate(-50%, -50%) rotateX(190deg) rotateZ(45deg);
+			}
+		}
+	}
+
+	&-big-icon-with-text {
+		@include flex-row(nowrap, center, flex-start);
+		flex: 1;
+		height: 100%;
+		width: 100%;
+		border: 0;
+		padding: 0 1rem;
+		font-size: 1.25rem;
+		font-weight: 300;
+		cursor: pointer;
+		outline: none;
+		background-color: $color-white;
+
+		span {
+			display: inline-block;
+			min-width: 1.875rem;
+			height: 1.875rem;
+			background-color: $color-blue;
+			margin-right: 1.125rem;
+			border-radius: 50%;
+			position: relative;
+			transform: scale(1);
+			transition: all $timing $easing;
+
+			&::before,
+			&::after {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 1px;
+				height: 10px;
+				background-color: $color-white;
+				z-index: 5;
+			}
+
+			&::after {
+				transform: translate(-50%, -50%) rotate(90deg);
+			}
+		}
+		@include hover {
+			span {
+				transform: scale(1.1);
+			}
+		}
+	}
+
+	&-calculator {
+		padding: 0;
+		border: 0;
+		background-color: transparent;
+		outline: none;
+		position: relative;
+
+		&--hover {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			visibility: hidden;
+			opacity: 0;
+			transition: all $timing $easing;
+		}
+
+		@include hover {
+			cursor: pointer;
+
+			.c-btn-calculator--hover {
+				visibility: visible;
+				opacity: 1;
+			}
+		}
+	}
+
+	&-icon {
+		border: 0;
+		background-color: transparent;
+		display: inline-block;
+		cursor: pointer;
+		outline: none;
+		padding: 0;
+		margin-right: 1.5vw;
+
+		svg {
+			width: 1.5rem;
+			height: auto;
+			transition: all $timing $easing;
+		}
+
+		&--clip {
+			svg {
+				width: 1.75rem;
+				height: auto;
+			}
+		}
+
+		&--email {
+			&.active {
+				svg {
+					fill: $color-yellow;
+				}
+			}
+		}
+
+		&--tick {
+			svg {
+				width: 1.5625;
+				height: auto;
+			}
+		}
+
+		&--list-view,
+		&--canban {
+			margin-right: 20px;
+
+			svg {
+				fill: $color-black;
+				width: 1.875rem;
+				height: auto;
+			}
+
+			&.active {
+				svg {
+					fill: $color-yellow;
+				}
+			}
+		}
+
+		&--canban {
+			margin: 0;
+
+			svg {
+				transform: translate(0px, 3px) rotate(-90deg);
+			}
+		}
+
+		@include hover {
+			svg {
+				fill: $color-yellow;
+			}
+		}
+	}
+
+	&--inline {
+		display: inline-flex;
+		vertical-align: middle;
+	}
+
+	&.bg-alt {
+		background-color: $color-blue;
+	}
+
+	@media (max-width: 1800px) {
+		&-big-icon-with-text {
+			font-size: 1rem;
+		}
+	}
+
+	@media (max-width: 1280px) {
+		&-big-icon-with-text {
+			font-size: 0.85rem;
+			padding: 0;
+
+			span {
+				min-width: 1.1rem;
+				height: 1.1rem;
+				margin-right: 0.5rem;
+			}
+		}
+
+		&-arrow-down {
+			width: 1.625rem;
+			height: 1.625rem;
+		}
+
+		&--rounded {
+			font-size: 1rem;
+			min-width: 12rem;
+
+			svg {
+				width: 1.25rem;
+				height: 1.25rem;
+			}
+		}
+
+		&-icon {
+			svg {
+				width: 1.5rem;
+			}
+		}
+	}
+}

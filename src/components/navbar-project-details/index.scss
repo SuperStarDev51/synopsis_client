@@ -1,0 +1,342 @@
+@import 'normalize.css';
+@import '@src/settings';
+@import '@src/assets/styles/colors';
+@import '@src/assets/styles/mixins.scss';
+
+.c-header {
+	width: 100%;
+	background-color: $color-blue;
+	padding: 0 4.55rem 0 0;
+	position: relative;
+	z-index: 10;
+	color: $color-white;
+
+	.o-shell {
+		padding: 0;
+		align-items: stretch;
+		flex-wrap: nowrap;
+
+		&--flex {
+			@include flex-row(nowrap, stretch, space-between);
+		}
+	}
+
+	&__container {
+		@include flex-row(nowrap, stretch, flex-start);
+		position: relative;
+
+		&:first-of-type {
+			margin-right: 3rem;
+		}
+	}
+
+	&__profile {
+		@include flex-row(nowrap, center, flex-start);
+
+		svg {
+			width: 2.5rem;
+			height: 2.5rem;
+		}
+	}
+
+	&__title {
+		background-color: rgba(50, 50, 93, 0.2);
+		padding: 0 2rem 0 1.6875rem;
+		min-width: 7.5rem;
+
+		&-name {
+			font-size: 1.375rem;
+			font-weight: 400;
+			margin: 0;
+			align-self: center;
+		}
+	}
+
+	&__mail,
+	&__notifications {
+		padding: 1.4rem 1.3125rem 1rem;
+	}
+
+	&__date,
+	&__mail,
+	&__notifications,
+	.c-profile__icon {
+		svg {
+			opacity: 1;
+			transition: all 0.4s ease-in-out;
+		}
+	}
+
+	&__date,
+	&__mail,
+	&__notifications,
+	.c-profile__icon {
+		@include hover {
+			svg {
+				opacity: 0.5;
+			}
+		}
+	}
+
+	&__date {
+		@include flex-column(nowrap, flex-start, center);
+		text-align: center;
+		padding: 0.3125rem 1.6875rem 0.3125rem 0.9375rem;
+		position: relative;
+		cursor: pointer;
+		border-right: 1px solid rgba($color-white, 0.25);
+		font-size: 1.125rem;
+		background-color: $color-blue;
+		min-width: 7.5rem;
+
+		&-meta {
+			font-size: 0.875rem;
+			font-weight: 700;
+		}
+
+		&-button {
+			font-size: 0.875rem;
+			background-color: transparent;
+			border: 0;
+			padding: 0;
+			color: $color-white;
+			cursor: pointer;
+		}
+	}
+
+	&__info-income,
+	&__info-breakeven,
+	&__info-expenses {
+		@include flex-column(nowrap, center, center);
+		padding: 0.625rem 1.5rem 0.625rem 0.9rem;
+	}
+
+	&__info-income {
+		background-color: $color-green2;
+		font-size: 1.375rem;
+
+		input {
+			background-color: transparent;
+			border: 0;
+			width: 100%;
+			color: white;
+		}
+	}
+
+	&__info-expenses {
+		background-color: $color-red2;
+		font-size: 1.25rem;
+	}
+
+	&__info-breakeven {
+		font-size: 1.0625rem;
+		font-weight: 700;
+		padding-left: 1.65rem;
+	}
+
+	&__search {
+		position: relative;
+		font-size: 0.875rem;
+		padding-top: 0.1875rem;
+		padding-right: 0.3125rem;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			left: -1.5rem;
+			bottom: 0;
+			background-image: url('/assets/images/search-icon.svg');
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: 0 0;
+			width: 0.9375rem;
+			height: 0.9375rem;
+			cursor: pointer;
+		}
+
+		input {
+			font-size: 0.875rem;
+			color: $color-white;
+			background-color: transparent;
+			border: none;
+			outline: none;
+			width: 100%;
+
+			&::placeholder {
+				color: $color-white;
+			}
+		}
+	}
+
+	&__search,
+	&__notifications {
+		border-right: 1px solid rgba($color-white, 0.25);
+	}
+
+	&__notifications {
+		a {
+			position: relative;
+
+			&::before {
+				content: '';
+				position: absolute;
+				top: -0.3rem;
+				right: -0.4rem;
+				width: 0.375rem;
+				height: 0.375rem;
+				background-color: $color-blue2;
+				border-radius: 50%;
+				box-shadow: 0 0 0.625rem 0 $color-blue2;
+			}
+		}
+
+		svg {
+			width: 13px;
+			height: 16px;
+		}
+	}
+
+	&__title,
+	&__festival-name,
+	&__info,
+	&__search,
+	&__mail,
+	&__notifications {
+		@include flex-row(nowrap, stretch, flex-start);
+	}
+
+	&__profile {
+		padding-left: 1.5rem;
+		padding-top: 0.3875rem;
+	}
+
+	&__mail {
+		padding-left: 0;
+	}
+
+	.c-profile {
+		&__title {
+			font-size: 0.875rem;
+			color: $color-yellow;
+		}
+
+		&__icon {
+			margin-right: 1rem;
+
+			&:last-child {
+				margin-right: 0;
+				opacity: 0.5;
+			}
+
+			@include hover {
+				svg {
+					opacity: 1;
+				}
+			}
+		}
+	}
+
+	@media (max-width: 1280px) {
+		&__title {
+			flex: 0 0 6rem;
+			padding: 0;
+			@include flex-row(nowrap, center, center);
+		}
+
+		&__title-name {
+			max-width: 9rem;
+
+			input {
+				font-size: 1rem;
+			}
+		}
+
+		&__date {
+			padding-right: 1rem;
+
+			&-button,
+			&-meta {
+				font-size: 0.75rem;
+			}
+		}
+
+		&__info {
+			&-income {
+				font-size: 1rem;
+			}
+
+			&-expenses {
+				font-size: 0.7rem;
+			}
+
+			&-breakeven {
+				font-size: 0.75rem;
+			}
+		}
+
+		&__search {
+			padding: 0 0.5rem 0 0;
+			max-width: 100px;
+
+			&::before {
+				width: 0.7rem;
+				height: auto;
+				margin-top: 0.25rem;
+				left: -1rem;
+			}
+
+			input {
+				font-size: 0.7rem;
+			}
+		}
+
+		&__mail {
+			padding: 1rem 1rem 1rem 0;
+
+			svg {
+				width: 0.9375rem;
+				height: auto;
+			}
+		}
+
+		&__notifications {
+			padding: 1rem;
+
+			svg {
+				width: 0.7rem;
+				height: auto;
+			}
+
+			a {
+				&::before {
+					top: -0.1rem;
+					width: 0.275rem;
+					height: 0.275rem;
+				}
+			}
+		}
+
+		&__profile {
+			padding-left: 1rem;
+
+			.c-profile {
+				&__title {
+					font-size: 0.75rem;
+					padding: 0;
+					margin-right: 0.5rem;
+				}
+
+				&__icon {
+					margin: 0 0.25rem;
+
+					svg {
+						width: 1.2rem;
+						height: auto;
+					}
+				}
+			}
+		}
+	}
+}

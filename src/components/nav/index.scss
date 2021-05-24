@@ -1,0 +1,198 @@
+@import '@src/settings';
+@import '@src/assets/styles/colors';
+@import '@src/assets/styles/utilities/inactive';
+
+.c-nav {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+	@include flex-column(nowrap, center, flex-start);
+
+	&__item {
+		list-style-type: none;
+		padding: .5rem 0 1.3rem;
+		width: 100%;
+		position: relative;
+		@include flex-column(nowrap, center, center);
+		font-size: .7rem;
+		background-color: transparent;
+		border: none;
+		color: $color-gray3;
+		cursor: pointer;
+		transition: all 0.4s ease-in-out;
+		width: 100%;
+		font-weight: 500;
+
+		&.active {
+			color: $color-yellow;
+
+			svg {
+				fill: $color-yellow;
+			}
+
+			&::before {
+				visibility: visible;
+				opacity: 1;
+			}
+		}
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: -0.5rem;
+			left: -1.125rem;
+			bottom: 0;
+			height: 4rem;
+			width: 0.1875rem;
+			background-color: $color-yellow;
+			visibility: hidden;
+			opacity: 0;
+			transition: all 0.4s ease-in-out;
+		}
+
+		svg {
+			fill: $color-gray3;
+			width: 1rem;
+			height: 1rem;
+			display: block;
+			margin-bottom: 0.6rem;
+			transition: all 0.4s ease-in-out;
+		}
+
+		&:first-child {
+			padding-top: 0;
+
+			&::before {
+				top: -0.5rem;
+			}
+		}
+
+		&-last {
+			margin-top: auto;
+			padding-bottom: 0;
+		}
+
+		&:active {
+			&::before {
+				visibility: visible;
+				opacity: 1;
+			}
+		}
+
+		@include hover {
+			color: $color-yellow;
+
+			svg {
+				fill: $color-yellow;
+			}
+
+			&::before {
+				visibility: visible;
+				opacity: 1;
+			}
+		}
+
+		&s {
+			padding: 0;
+			margin: 0;
+			height: 100%;
+			@include flex-column(nowrap, center, flex-start);
+		}
+	}
+
+	&-users {
+		position: fixed;
+		bottom: 3.75rem;
+		left: 10rem;
+		z-index: 25;
+		@include flex-row(nowrap, center, flex-start);
+
+		&__item,
+		&__add-new {
+			width: 2.5rem;
+			height: 2.5rem;
+			border: 0;
+			border-radius: 50%;
+			color: $color-white;
+			background-color: $color-gray;
+			opacity: 0.5;
+			overflow: hidden;
+			cursor: pointer;
+			margin: 0 0.625rem 0 0;
+			transition: all $timing $easing;
+			outline: none;
+
+			&s {
+				@include flex-row(nowrap, center, flex-start);
+			}
+
+			&.current {
+				opacity: 1;
+			}
+
+			@include hover {
+				opacity: 1;
+			}
+		}
+
+		&__item {
+			background-size: cover;
+			background-position: center center;
+			background-repeat: no-repeat;
+			padding: 0;
+
+			&:nth-child(1) {
+				background-image: url('/assets/images/image1.png');
+			}
+
+			&:nth-child(n + 2) {
+				background-image: url('/assets/images/account.svg');
+			}
+		}
+
+		&__add-new {
+			width: 2.375rem;
+			height: 2.375rem;
+			opacity: 1;
+			background-image: radial-gradient(circle at 50% 50%, #6a6aff, $color-blue 81%);
+			border: 1px dashed $color-white;
+			position: relative;
+			box-shadow: 0px 0px 0px 2px $color-blue;
+
+			&::before,
+			&::after {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 0.9375rem;
+				height: 0.125rem;
+				background-color: $color-white;
+				transition: all $timing $easing;
+			}
+
+			&::after {
+				transform: translate(-50%, -50%) rotate(90deg);
+			}
+
+			@include hover {
+				border: 1px dashed $color-blue;
+
+				&::before,
+				&::after {
+					width: 1.125rem;
+				}
+			}
+		}
+	}
+
+	@media (max-width: 1280px) {
+		// &__item {
+		// 	&::before {
+		// 		top: 0;
+		// 		height: 5.25rem;
+		// 	}
+		// }
+	}
+}

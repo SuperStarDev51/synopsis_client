@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+    <defs>
+        <path id="v5633vadia" d="M29.444.556L.556 29.444"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g transform="translate(-214 -388) translate(195 369) translate(20 20)">
+                    <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M0.556 0.556L29.444 29.444"/>
+                    <use stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" xlink:href="#v5633vadia"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

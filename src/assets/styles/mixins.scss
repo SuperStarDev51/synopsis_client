@@ -1,0 +1,14 @@
+@mixin right-border-top-to-bottom {
+	position: relative;
+
+	&::after {
+		content: '';
+		position: absolute;
+		top: -1.5rem;
+		bottom: rem;
+		right: 0;
+		height: 63px;
+		width: 1px;
+		background-color: rgba($color-white, 0.25);
+	}
+}

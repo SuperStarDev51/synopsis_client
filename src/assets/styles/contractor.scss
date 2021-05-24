@@ -1,0 +1,15 @@
+.c-contractor {
+	&-status,
+	&-status-name {
+		font-size: 1rem;
+		color: $color-gray;
+		font-weight: 400;
+		margin: 0;
+	}
+
+	&-status {
+		&.done {
+			color: $color-green3;
+		}
+	}
+}

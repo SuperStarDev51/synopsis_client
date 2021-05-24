@@ -1,0 +1,41 @@
+.tasks__task-item {
+	position: relative;
+}
+.tasks__task-item-delete {
+	display: none;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: .5rem;
+	cursor: pointer;
+	background-color: rgb(242, 244, 246);
+}
+
+.tasks__task-item:hover .tasks__task-item-delete {
+	display: block;
+}
+
+.tasks-team-control {
+	position: relative;
+}
+.tasks-team-control__icon {
+	height: 2rem;
+	& > g {
+		fill: #00294f;
+	}
+	& > g > g {
+		stroke: #00294f;
+	}
+}
+.tasks-team-control__dropdown {
+	right: 0;
+	left: auto;
+}
+
+.tasks-team-control__dropdown .c-popup__items {
+	width: 50rem;
+	display: flex;
+	flex-wrap: wrap;
+	height: auto;
+	max-height: unset!important;
+}

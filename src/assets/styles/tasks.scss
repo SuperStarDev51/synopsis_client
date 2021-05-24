@@ -1,0 +1,26 @@
+.c-task {
+	&s {
+		&__row-owner {
+			@include flex-row(nowrap, center, flex-start);
+			margin: 0;
+		}
+
+		&__row-progress-bar {
+			@include flex-row(nowrap, center, stretch);
+			margin-left: auto;
+			padding-right: 1rem;
+			width: 7.0625rem;
+		}
+
+		&__row-completion {
+			min-width: 2.6875rem;
+			font-size: 1rem;
+			font-weight: 400;
+			color: $color-gray;
+		}
+
+		&__completed {
+			color: rgba($color-green3, 0.7);
+		}
+	}
+}

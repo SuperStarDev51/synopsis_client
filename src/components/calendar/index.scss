@@ -1,0 +1,160 @@
+@import '@src/settings';
+@import '@src/assets/styles/colors';
+@import 'react-date-range/dist/styles.css'; // main style file
+@import 'react-date-range/dist/theme/default.css'; // theme css file
+
+.c-calendar {
+	position: absolute;
+	top: 2.4rem;
+	left: 10.125rem;
+	z-index: 10;
+	box-shadow: 0 1px 2px 0 rgba(48, 50, 70, 0.2);
+
+	&--inRow {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 35;
+	}
+}
+
+.is-calendar-open {
+	&::before {
+		content: '';
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.5);
+		z-index: 30;
+	}
+}
+
+
+
+.rdrMonthAndYearWrapper {
+	background-color: $color-blue5;
+	padding: 0;
+}
+
+.rdrMonth {
+	padding-top: 1.5625rem;
+
+	.rdrWeekDays {
+		padding-bottom: 1.5625rem;
+	}
+}
+
+.rdrMonthPicker {
+	select {
+		color: $color-white;
+		font-size: 1.1875rem;
+		text-align: center;
+		text-align-last: center;
+
+		option {
+			text-align: center;
+		}
+	}
+}
+
+.rdrMonthAndYearPickers select {
+	background: none;
+	padding: 0.625rem;
+}
+
+.rdrWeekDay {
+	font-size: 0.6875rem;
+	font-weight: 300;
+	color: $color-gray9;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	line-height: 1.57;
+}
+
+.rdrNextPrevButton {
+	margin: 0 1.666rem;
+}
+
+.rdrPprevButton,
+.rdrNextButton {
+	position: relative;
+	border-radius: 0;
+	width: 0.6875rem;
+	height: 0.6875rem;
+	background-color: transparent;
+	border-left: 0.125rem solid $color-white;
+	border-bottom: 0.125rem solid $color-white;
+	transition: all $timing $easing;
+
+	i {
+		display: none;
+	}
+
+	@include hover {
+		background-color: transparent;
+		border-left: 0.125rem solid rgba($color-white, 0.5);
+		border-bottom: 0.125rem solid rgba($color-white, 0.5);
+	}
+}
+
+.rdrPprevButton {
+	transform: rotate(45deg);
+}
+
+.rdrNextButton {
+	transform: rotate(225deg);
+}
+
+.rdrYearPicker {
+	display: none;
+}
+
+.rdrDay {
+	width: 3em;
+}
+
+.rdrSelected {
+	border-radius: 50%;
+	background-color: $color-blue5;
+	.rdrDayNumber span {
+		font-weight: 800;
+	}
+}
+
+.rdrDay:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span {
+	font-weight: 800;
+}
+
+.rdrDayStartPreview,
+.rdrDayNumber,
+.rdrEndEdge,
+.rdrInRange,
+.rdrSelected,
+.rdrStartEdge {
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	border-radius: 50% !important;
+}
+
+.rdrDayHovered {
+	span::after {
+		content: none !important;
+	}
+}
+
+.rdrDayToday .rdrDayNumber span:after {
+	background-color: $color-blue5;
+	bottom: 0.4375rem;
+}
+
+.rdrDayStartPreview,
+.rdrEndPrevire {
+	color: $color-blue5 !important;
+}

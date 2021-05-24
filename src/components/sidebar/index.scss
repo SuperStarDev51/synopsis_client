@@ -1,0 +1,20 @@
+@import '@src/assets/styles/colors';
+@import '@src/settings';
+
+.c-sidebar {
+	background-color: $color-black2;
+	flex: 0 0 7.5rem;
+	padding: 1.4875rem 1.125rem 2.8rem;
+	position: relative;
+	z-index: 5;
+	overflow: hidden;
+	max-width: 7vw!important;
+
+	@media (max-width: 1280px) {
+		flex: 0 0 6rem;
+	}
+
+	&--with-shadow {
+		box-shadow: 0px 0px 10px -2px $color-white;
+	}
+}

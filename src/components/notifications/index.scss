@@ -1,0 +1,128 @@
+@import '@src/settings';
+@import '@src/assets/styles/colors';
+
+.c-notifications {
+	min-width: 80%;
+	border-radius: 0.3125rem;
+	box-shadow: 0.25rem 0.5625rem 1.25rem 0 rgba(112, 112, 144, 0.2);
+	background-color: $color-white;
+	display: inline-block;
+	position: absolute;
+	height: 30vh;
+	top: 100%;
+	right: auto;
+	left: 0vw;
+	z-index: 15;
+	overflow: hidden;
+	margin-top: -1rem;
+
+	&__items {
+		color: black;
+	}
+
+	&__item {
+		font-size: 1rem;
+		font-weight: 400;
+		display: block;
+		padding: 0.5rem 1.187rem;
+		color: $color-gray;
+		cursor: pointer;
+		transition: all $timing $easing;
+
+		@include hover {
+			background-color: $color-blue4;
+		}
+
+		&s {
+			padding: 0;
+			margin: 0;
+
+			input {
+				width: 100%;
+			}
+		}
+
+		&--with-input {
+			@include flex-row(nowrap, center, center);
+			margin: 0;
+			position: relative;
+			padding-right: 0;
+			padding-left: 0;
+			background-color: rgba($color-gray, 0.1);
+
+			input {
+				border: 0;
+				margin: 0;
+				max-width: 75%;
+				width: 100%;
+				margin-right: auto;
+				padding: 0.3125rem 0.3125rem 0.3125rem 1.25rem;
+				transition: all $timing $easing;
+				background-color: transparent;
+				outline: none;
+				flex: 1;
+				opacity: 1 !important;
+				pointer-events: all !important;
+
+				&::placeholder {
+					color: $color-gray2;
+				}
+			}
+
+			button {
+				position: absolute;
+				top: 50%;
+				right: 0;
+				transform: translateY(-50%);
+				border: 0;
+				border-left: 1px dashed $color-gray3;
+				background-color: transparent;
+				width: 2.1875rem;
+				height: 1.75rem;
+				z-index: 99;
+				padding: 0;
+				cursor: pointer;
+				outline: none;
+
+				&::before,
+				&::after {
+					content: '';
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					width: 0.5rem;
+					height: 1px;
+					background-color: $color-gray3;
+					z-index: 99;
+					transition: all $timing $easing;
+				}
+
+				&::after {
+					transform: translate(-50%, -50%) rotate(90deg);
+				}
+
+				@include hover {
+					&::before,
+					&::after {
+						width: 0.8125rem;
+						height: 0.125rem;
+					}
+				}
+			}
+		}
+	}
+
+
+
+
+	&--files {
+		top: 2.5rem;
+		left: -6.25rem;
+		right: auto;
+		min-width: 6.5rem;
+	}
+
+}
+
+
