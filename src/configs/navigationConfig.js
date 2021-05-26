@@ -10,11 +10,11 @@ const navigationConfig = (dir, id) => {
   return [
   {
     id: "projects",
-    title: "IMGN",
+    title: "Synopsis",
     type: "item",
-    icon: <Icon src={iconsPath+"logo.svg"}  style={iconStyle}/>,//dir == 'ltr' ? <IconFeatherFeather.ArrowLeft size={35} /> : <IconFeatherFeather.ArrowRight size={35} />,
+    icon: <Icon src={iconsPath+"synopsis_logo.svg"}  style={iconStyle}/>,//dir == 'ltr' ? <IconFeatherFeather.ArrowLeft size={35} /> : <IconFeatherFeather.ArrowRight size={35} />,
     navLink: Routes.PROJECTS,
-	permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
+	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
   },
   {
     id: "script",

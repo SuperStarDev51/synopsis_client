@@ -22,8 +22,8 @@ class SidebarHeader extends Component {
           <li className="nav-item mr-auto">
             <NavLink to="/" className="navbar-brand">
                <div className="brand-logo" />
-              <Icon src="../../../assets/icons/navbar/logo.svg"  style={{height: '4rem', width:'4rem'}} />
-              <h2 className="brand-text mb-0">IMGN</h2>
+              <Icon src="../../../assets/icons/navbar/synopsis_logo.svg"  style={{height: '4rem', width:'4rem'}} />
+              <h2 className="brand-text mb-0">Synopsis</h2>
             </NavLink>
           </li>
   
