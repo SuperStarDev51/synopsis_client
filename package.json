@@ -11,7 +11,8 @@
     "lint": "npm run lint:ts && npm run lint:scss",
     "lint:ts": "eslint 'src/**/*.{ts,tsx}'",
     "lint:scss": "stylelint './src/**/*.scss' --config .stylelintrc",
-    "test": "jest"
+    "test": "jest",
+    "eb:prod": "npm run build && npm run start"
   },
   "engines": { "node" : "14.16.0" },
   "repository": {
