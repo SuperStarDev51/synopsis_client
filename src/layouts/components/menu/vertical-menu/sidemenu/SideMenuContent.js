@@ -217,7 +217,7 @@ class SideMenuContent extends React.Component {
               return item.type === "collapse" ? e.preventDefault() : ""
             }}
             target={item.newTab ? "_blank" : undefined}>
-            <ReactTooltip id= {item.id} place="right" effect="solid" backgroundColor="#00294f" offset={{right:20}}>
+            <ReactTooltip id= {item.id} place="right" effect="solid" backgroundColor="#252c37" offset={{right:20}}>
               <span> {item.title} </span>
            </ReactTooltip>
             <div className="menu-text" data-tip data-for = {item.id}>

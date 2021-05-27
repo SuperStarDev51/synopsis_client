@@ -223,7 +223,7 @@ class Sidebar extends Component {
                   </Hammer>
                 </ScrollbarTag>
 
-				<AdditionalMenu events={this.props.events} />
+				{/* <AdditionalMenu events={this.props.events} /> */}
 			  </div>
             </React.Fragment>
           )
