@@ -140,7 +140,7 @@ class Sidebar extends Component {
     }
 
     let iconStyle = {height: '4.5rem', width:'6rem', marginLeft:'15px'}
-
+    let logo_li_style = {backgroundColor: '#f3f6f8' }
     return (
       <ContextLayout.Consumer>
         {context => {
@@ -201,7 +201,7 @@ class Sidebar extends Component {
                       dir === "rtl" ? "DIRECTION_RIGHT" : "DIRECTION_LEFT"
                     }>
                     <ul className="navigation navigation-main">
-                      <li className={classnames("nav-item R")}>
+                      <li className={classnames("nav-item R")} style = {logo_li_style}>
                         <Icon src="../../../assets/icons/navbar/synopsis_logo.svg"  style={iconStyle}/>
                       </li>
                       <SideMenuContent
