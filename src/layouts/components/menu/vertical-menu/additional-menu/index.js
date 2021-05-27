@@ -29,7 +29,9 @@ const AdditionalMenu = ({ events }) => {
 							to={item.navLink}
 							onClick={() => setIsOpen(!isOpen)}
 							className="additional-menu__item"
+							data-tip = {item.tooltip}
 						>
+							
 							<FormattedMessage id={item.title} />
 						</Link>
 					))}

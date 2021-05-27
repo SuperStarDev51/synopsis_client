@@ -1,4 +1,5 @@
 import React from "react"
+import ReactTooltip from "react-tooltip"
 import { Link } from "react-router-dom"
 import classnames from "classnames"
 import navigationConfig from "../../../../../configs/navigationConfig"
@@ -27,7 +28,7 @@ class SideMenuContent extends React.Component {
     tempArr: []
 
   }
-
+  
 
   static getDerivedStateFromProps(props, state) {
       return {
@@ -128,11 +129,14 @@ class SideMenuContent extends React.Component {
         this.parentArr[0] ? this.parentArr[this.parentArr.length - 1] : []
       )
     }
+    ReactTooltip.rebuild()
   }
 
   render() {
     // Loop over sidebar items
     // eslint-disable-next-line
+    
+
     const {events, customizer} = this.state
     const activeEventId = events.filter((event) => event.preview)[0] ? events.filter((event) => event.preview)[0].id : null
     const menuItems = navigationConfig(customizer.direction, activeEventId).map(item => {
@@ -169,7 +173,9 @@ class SideMenuContent extends React.Component {
                 item.parentOf.includes(this.props.activeItemState)),
             disabled: item.disabled
           })}
+
           key={item.id}
+
           onClick={e => {
             e.stopPropagation()
             if (item.type === "item") {
@@ -181,7 +187,11 @@ class SideMenuContent extends React.Component {
             } else {
               this.handleGroupClick(item.id, null, item.type)
             }
-          }}>
+          }}
+          
+          >
+          
+          
           <CustomAnchorTag
             to={
               item.filterBase
@@ -207,12 +217,16 @@ class SideMenuContent extends React.Component {
               return item.type === "collapse" ? e.preventDefault() : ""
             }}
             target={item.newTab ? "_blank" : undefined}>
-            <div className="menu-text">
+            <ReactTooltip id= {item.id} place="right" effect="solid">
+              <span>{item.title} </span>
+           </ReactTooltip>
+            <div className="menu-text" data-tip data-for = {item.id}>
               {item.icon}
-              <span className="menu-item menu-title">
+              {/* <span className="menu-item menu-title">
                 <FormattedMessage id={item.title} />
-              </span>
+              </span> */}
             </div>
+            
 
             {item.badge ? (
               <div className="menu-badge">
@@ -229,6 +243,7 @@ class SideMenuContent extends React.Component {
               ""
             )}
           </CustomAnchorTag>
+
           {item.type === "collapse" ?
           (
             <SideMenuGroup

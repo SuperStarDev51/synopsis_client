@@ -5,9 +5,18 @@ import { Routes } from '@utilities';
 import { Roles } from './roles';
 
 const navigationConfig = (dir, id) => {
-  let iconStyle = {height: '3.5rem', width:'3rem'};
+  let iconStyle = {height: '4rem', width:'5rem'};
   let iconsPath = '../../../assets/icons/navbar/'
   return [
+    {
+      id: "Logo",
+      title: "t",
+      type: "item",
+      icon: <Icon src={iconsPath+"synopsis_logo.svg"}  style={iconStyle}/>,//dir == 'ltr' ? <IconFeatherFeather.ArrowLeft size={35} /> : <IconFeatherFeather.ArrowRight size={35} />,
+      navLink: Routes.PROJECTS,
+      permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
+      
+    },
   {
     id: "projects",
     title: "Synopsis",
