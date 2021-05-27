@@ -138,6 +138,9 @@ class Sidebar extends Component {
         return
       }
     }
+
+    let iconStyle = {height: '4.5rem', width:'6rem', marginLeft:'15px'}
+
     return (
       <ContextLayout.Consumer>
         {context => {
@@ -198,6 +201,9 @@ class Sidebar extends Component {
                       dir === "rtl" ? "DIRECTION_RIGHT" : "DIRECTION_LEFT"
                     }>
                     <ul className="navigation navigation-main">
+                      <li className={classnames("nav-item R")}>
+                        <Icon src="../../../assets/icons/navbar/synopsis_logo.svg"  style={iconStyle}/>
+                      </li>
                       <SideMenuContent
                         setActiveIndex={this.changeActiveIndex}
                         activeIndex={activeIndex}

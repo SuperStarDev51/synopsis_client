@@ -6,22 +6,15 @@ import { Roles } from './roles';
 
 const navigationConfig = (dir, id) => {
   let iconStyle = {height: '4rem', width:'5rem'};
+  let Projects_iconStyle = {height: '3.5rem', width:'4rem'};
   let iconsPath = '../../../assets/icons/navbar/'
   return [
-    {
-      id: "Logo",
-      title: "t",
-      type: "item",
-      icon: <Icon src={iconsPath+"synopsis_logo.svg"}  style={iconStyle}/>,//dir == 'ltr' ? <IconFeatherFeather.ArrowLeft size={35} /> : <IconFeatherFeather.ArrowRight size={35} />,
-      navLink: Routes.PROJECTS,
-      permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
-      
-    },
+    
   {
     id: "projects",
-    title: "Synopsis",
+    title: "Projects",
     type: "item",
-    icon: <Icon src={iconsPath+"synopsis_logo.svg"}  style={iconStyle}/>,//dir == 'ltr' ? <IconFeatherFeather.ArrowLeft size={35} /> : <IconFeatherFeather.ArrowRight size={35} />,
+    icon: <Icon src={iconsPath+"Projects.svg"}  style={iconStyle}/>,//dir == 'ltr' ? <IconFeatherFeather.ArrowLeft size={35} /> : <IconFeatherFeather.ArrowRight size={35} />,
     navLink: Routes.PROJECTS,
 	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
   },
@@ -35,44 +28,53 @@ const navigationConfig = (dir, id) => {
   },
   {
     id: "tasks",
-    title: "breakdown",
+    title: "Breakdown",
     type: "item",
-    icon: <Icon src={iconsPath+"tasks.svg"}  style={iconStyle}/>,//<IconFeatherFeather.CheckSquare size={35} />,
+    icon: <Icon src={iconsPath+"Breakdown.svg"}  style={iconStyle}/>,//<IconFeatherFeather.CheckSquare size={35} />,
     navLink: Routes.TASKS.replace(':id', String(id)),
 	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
   },
-  {
-	id: "dashboard",
-	title: "Dashboard",
-	type: "item",
-	icon: <Icon src={iconsPath+"dashboard.svg"}  style={iconStyle}/>,//<IconFeatherFeather.Activity size={35} />,
-	navLink: Routes.OVERVIEW.replace(':id', String(id)),
-	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
-  },
-  {
-    id: "budget",
-    title: "insights",
-    type: "item",
-    icon: <Icon src={iconsPath+"budget.svg"}  style={iconStyle}/>,//<IconFeatherFeather.DollarSign size={35} />,
-    navLink: Routes.BUDGET.replace(':id', String(id)),
-	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
-  },
+  // {
+	// id: "dashboard",
+	// title: "Dashboard",
+	// type: "item",
+	// icon: <Icon src={iconsPath+"dashboard.svg"}  style={iconStyle}/>,//<IconFeatherFeather.Activity size={35} />,
+	// navLink: Routes.OVERVIEW.replace(':id', String(id)),
+	//   permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
+  // },
+  // {
+  //   id: "budget",
+  //   title: "insights",
+  //   type: "item",
+  //   icon: <Icon src={iconsPath+"budget.svg"}  style={iconStyle}/>,//<IconFeatherFeather.DollarSign size={35} />,
+  //   navLink: Routes.BUDGET.replace(':id', String(id)),
+	//   permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
+  // },
   {
     id: "team",
-    title: "team",
+    title: "Team",
     type: "item",
     icon: <Icon src={iconsPath+"team.svg"}  style={iconStyle}/>,//<IconFeatherFeather.Users size={35} />,
     navLink: Routes.SUPPLIERS.replace(':id', String(id)),
 	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
   },
   {
-	id: "permissions",
-	title: "set_permissions",
-	type: "additionalMenu",
-	icon: "",
-	navLink: Routes.PERMISSIONS.replace(':id', String(id)),
+    id: "all_contracts",
+    title: "All Contracts",
+    type: "item",
+    icon: <Icon src={iconsPath+"all_contracts.svg"}  style={iconStyle}/>,//<IconFeatherFeather.Users size={35} />,
+    navLink: Routes.SUPPLIERS.replace(':id', String(id)),
 	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
   },
+
+  // {
+	// id: "permissions",
+	// title: "set_permissions",
+	// type: "additionalMenu",
+	// icon: "",
+	// navLink: Routes.PERMISSIONS.replace(':id', String(id)),
+	//   permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
+  // },
   // {
   //   id: "planning",
   //   title: "Planning",
