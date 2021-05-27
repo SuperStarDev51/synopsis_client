@@ -222,9 +222,7 @@ class SideMenuContent extends React.Component {
            </ReactTooltip>
             <div className="menu-text" data-tip data-for = {item.id}>
               {item.icon}
-              {/* <span className="menu-item menu-title">
-                <FormattedMessage id={item.title} />
-              </span> */}
+             
             </div>
             
 
