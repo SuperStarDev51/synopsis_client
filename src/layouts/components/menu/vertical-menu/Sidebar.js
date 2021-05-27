@@ -140,7 +140,7 @@ class Sidebar extends Component {
     }
 
     let iconStyle = {height: '4.5rem', width:'6rem', marginLeft:'15px'}
-    let logo_li_style = {backgroundColor: '#f3f6f8' }
+    let logo_li_style = {backgroundColor: '#ffffff' }
     return (
       <ContextLayout.Consumer>
         {context => {
