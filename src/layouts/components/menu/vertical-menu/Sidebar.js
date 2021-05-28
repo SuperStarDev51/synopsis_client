@@ -201,7 +201,7 @@ class Sidebar extends Component {
                       dir === "rtl" ? "DIRECTION_RIGHT" : "DIRECTION_LEFT"
                     }>
                     <ul className="navigation navigation-main">
-                      <li className={classnames("nav-item R")} style = {logo_li_style}>
+                      <li className={classnames("R")} style = {logo_li_style}>
                         <Icon src="../../../assets/icons/navbar/synopsis_logo.svg"  style={iconStyle}/>
                       </li>
                       <SideMenuContent

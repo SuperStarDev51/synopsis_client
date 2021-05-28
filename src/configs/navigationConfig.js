@@ -14,7 +14,7 @@ const navigationConfig = (dir, id) => {
     id: "projects",
     title: "Projects",
     type: "item",
-    icon: <Icon src={iconsPath+"Projects.svg"}  style={iconStyle}/>,//dir == 'ltr' ? <IconFeatherFeather.ArrowLeft size={35} /> : <IconFeatherFeather.ArrowRight size={35} />,
+    icon: <Icon src={iconsPath+"Projects.svg"}  style={iconStyle}   />,//dir == 'ltr' ? <IconFeatherFeather.ArrowLeft size={35} /> : <IconFeatherFeather.ArrowRight size={35} />,
     navLink: Routes.PROJECTS,
 	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
   },
@@ -27,7 +27,7 @@ const navigationConfig = (dir, id) => {
 	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
   },
   {
-    id: "tasks",
+    id: "call_sheets",
     title: "Call sheets",
     type: "item",
     icon: <Icon src={iconsPath+"call_sheets.svg"}  style={iconStyle}/>,//<IconFeatherFeather.CheckSquare size={35} />,
@@ -63,7 +63,7 @@ const navigationConfig = (dir, id) => {
     title: "All Contracts",
     type: "item",
     icon: <Icon src={iconsPath+"all_contracts.svg"}  style={iconStyle}/>,//<IconFeatherFeather.Users size={35} />,
-    navLink: Routes.SUPPLIERS.replace(':id', String(id)),
+    navLink:"contracts",
 	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
   },
 
