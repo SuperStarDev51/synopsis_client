@@ -3,13 +3,22 @@
 	cursor: pointer;
 }
 .additional-menu__dropdown {
-	background-color: #99a9b9;
+	background-color: #626363;
 	color: white;
 	position: fixed;
 	width: 14rem;
-	padding: 2rem 1rem 8rem;
-	bottom: 0;
+	padding: 1rem 1rem;
+	bottom: 25px;
+	border-radius: 10px;
+	margin-left :122px;
+	ul.navigation-main{
+		background-color: #626363;
+		a:hover{
+			text-decoration: underline;
+		}
+	}
 }
+
 .additional-menu__item {
 	font-size: 1.15rem;
 	cursor: pointer;
