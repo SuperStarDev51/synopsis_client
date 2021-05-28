@@ -59,8 +59,8 @@ const navigationConfig = (dir, id) => {
 	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
   },
   {
-    id: "all_contracts",
-    title: "All Contracts",
+    id: "all_contacts",
+    title: "All Contacts",
     type: "item",
     icon: <Icon src={iconsPath+"all_contracts.svg"}  style={iconStyle}/>,//<IconFeatherFeather.Users size={35} />,
     navLink: Routes.PERMISSIONS.replace(':id', String(id)),
