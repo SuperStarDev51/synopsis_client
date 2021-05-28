@@ -22,7 +22,7 @@ const Footer = props => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            IMGN,
+            Synopsis,
           </a>
           All rights reserved
         </span>
