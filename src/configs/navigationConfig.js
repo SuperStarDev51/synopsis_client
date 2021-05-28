@@ -5,7 +5,7 @@ import { Routes } from '@utilities';
 import { Roles } from './roles';
 
 const navigationConfig = (dir, id) => {
-  let iconStyle = {height: '3rem', width:'3.5rem', marginLeft:"14px"};
+  let iconStyle = {height: '2rem', width:'2rem', marginLeft:"20px"};
   let Projects_iconStyle = {height: '35rem', width:'40rem'};
   let iconsPath = '../../../assets/icons/navbar/'
   return [
@@ -63,18 +63,26 @@ const navigationConfig = (dir, id) => {
     title: "All Contracts",
     type: "item",
     icon: <Icon src={iconsPath+"all_contracts.svg"}  style={iconStyle}/>,//<IconFeatherFeather.Users size={35} />,
-    navLink:"contracts",
+    navLink: Routes.PERMISSIONS.replace(':id', String(id)),
 	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
   },
 
-  // {
-	// id: "permissions",
-	// title: "set_permissions",
-	// type: "additionalMenu",
-	// icon: "",
-	// navLink: Routes.PERMISSIONS.replace(':id', String(id)),
-	//   permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
-  // },
+  {
+	id: "permissions",
+	title: "Profile",
+	type: "additionalMenu",
+	icon: <Icon src={iconsPath+"all_contracts.svg"}  style={iconStyle}/>,
+	navLink: "profile",
+	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
+  },
+  {
+    id: "sign_out",
+    title: "Sign out",
+    type: "additionalMenu",
+    icon: <Icon src={iconsPath+"all_contracts.svg"}  style={iconStyle}/>,
+    navLink: "sign out",
+    permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
+    },
   // {
   //   id: "planning",
   //   title: "Planning",
