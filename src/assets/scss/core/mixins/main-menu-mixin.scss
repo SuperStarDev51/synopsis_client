@@ -147,10 +147,25 @@
         > a {
           padding-left: 25px;
           transition: padding 0.35s ease 0s !important;
+          
+        }
+        
+      }
+      &.nav-item{
+        svg{
+          path , polygon, rect {
+            fill:#7f7f7f !important;
+          }
+        }
+        svg:hover, :focus {
+        path , polygon, rect {
+          fill:white !important;
         }
       }
+      }
+      
     }
-
+    
     > li {
       padding: 10px 5px;
       > a {
@@ -394,4 +409,5 @@
       background-color: transparent !important;
     }
   }
+  
 }
