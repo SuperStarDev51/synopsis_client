@@ -5,8 +5,8 @@ import { Routes } from '@utilities';
 import { Roles } from './roles';
 
 const navigationConfig = (dir, id) => {
-  let iconStyle = {height: '4rem', width:'5rem'};
-  let Projects_iconStyle = {height: '3.5rem', width:'4rem'};
+  let iconStyle = {height: '3rem', width:'3.5rem', marginLeft:"14px"};
+  let Projects_iconStyle = {height: '35rem', width:'40rem'};
   let iconsPath = '../../../assets/icons/navbar/'
   return [
     
@@ -22,15 +22,15 @@ const navigationConfig = (dir, id) => {
     id: "script",
     title: "Script",
     type: "item",
-    icon: <Icon src={iconsPath+"script.svg"}  style={iconStyle}/>,//<IconFeatherFeather.FileText size={35} />,
+    icon: <Icon src={iconsPath+"Script.svg"}  style={iconStyle}/>,//<IconFeatherFeather.FileText size={35} />,
     navLink: Routes.SCRIPT.replace(':id', String(id)),
 	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
   },
   {
     id: "tasks",
-    title: "Breakdown",
+    title: "Call sheets",
     type: "item",
-    icon: <Icon src={iconsPath+"Breakdown.svg"}  style={iconStyle}/>,//<IconFeatherFeather.CheckSquare size={35} />,
+    icon: <Icon src={iconsPath+"call_sheets.svg"}  style={iconStyle}/>,//<IconFeatherFeather.CheckSquare size={35} />,
     navLink: Routes.TASKS.replace(':id', String(id)),
 	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
   },
