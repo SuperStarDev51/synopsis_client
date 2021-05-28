@@ -20,7 +20,7 @@ const AdditionalMenu = ({ events }) => {
 	const activeEventId = events.filter((event) => event.preview)[0] ? events.filter((event) => event.preview)[0].id : null;
 	const additionalNavItems = navigationConfig(direction, activeEventId).filter(item => item.type === 'additionalMenu');
 
-	const avatar_style = {width: "3rem", height:"3rem" , postion:'absolute',borderRadius: "50%", marginLeft:"40px" }
+	const avatar_style = {width: "3rem", height:"3rem" , postion:'absolute',borderRadius: "50%", margin:"20px" }
 	return (
 		<div ref={ref} className="additional-menu" >
 			{isOpen && (

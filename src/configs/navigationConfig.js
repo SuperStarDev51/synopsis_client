@@ -5,8 +5,7 @@ import { Routes } from '@utilities';
 import { Roles } from './roles';
 
 const navigationConfig = (dir, id) => {
-  let iconStyle = {height: '2rem', width:'2rem', marginLeft:"20px", paddingTop:'1px'};
-  let Projects_iconStyle = {height: '35rem', width:'40rem'};
+  let iconStyle = {height: '2rem', width:'2.5rem'};
   let iconsPath = '../../../assets/icons/navbar/'
   return [
     

@@ -356,7 +356,7 @@ html {
   }
   &.menu-collapsed {
     .main-menu.collapsed {
-      width: 120px;//80px;
+      width: 80px;//80px;
       transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       .badge,
       svg.menu-toggle-icon,
@@ -367,13 +367,13 @@ html {
       }
     }
     .app-content {
-      margin-left: 120px;//80px;
+      margin-left: 80px;//80px;
       .header-navbar {
-        width: calc(100% - 4.4rem - 120px);//calc(100% - 4.4rem - 80px);
+        width: calc(100% - 4.4rem - 80px);//calc(100% - 4.4rem - 80px);
       }
     }
     .footer {
-      margin-left: 120px;
+      margin-left: 80px;
     }
   }
 }

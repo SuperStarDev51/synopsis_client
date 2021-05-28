@@ -139,7 +139,7 @@ class Sidebar extends Component {
       }
     }
 
-    let iconStyle = {height: '4.5rem', width:'6rem', marginLeft:'15px'}
+    let iconStyle = {height: '4.5rem', width:'5rem'}
     let logo_li_style = {backgroundColor: '#ffffff' }
     return (
       <ContextLayout.Consumer>
@@ -222,7 +222,7 @@ class Sidebar extends Component {
                     </ul>
                   </Hammer>
                 </ScrollbarTag>
-                    
+
 				        <AdditionalMenu events={this.props.events} />
 			          </div>
             </React.Fragment>
