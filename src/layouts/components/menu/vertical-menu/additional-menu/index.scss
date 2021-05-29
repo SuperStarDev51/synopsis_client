@@ -3,7 +3,7 @@
 	cursor: pointer;
 }
 .additional-menu__dropdown {
-	background-color: #626363;
+	background-color: #4b586b;
 	color: white;
 	position: fixed;
 	width: 14rem;
@@ -12,11 +12,11 @@
 	border-radius: 10px;
 	margin-left :82px;
 	ul.navigation-main{
-		background-color: #626363;
+		background-color: #4b586b;
 		li{
 			padding: 8px 0;
 			&:hover{
-				background-color: #535555;
+				background-color: #3c4757;
 			}
 		}
 		a{
