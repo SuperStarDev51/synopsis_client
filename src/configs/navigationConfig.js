@@ -5,7 +5,8 @@ import { Routes } from '@utilities';
 import { Roles } from './roles';
 
 const navigationConfig = (dir, id) => {
-  let iconStyle = {height: '1.8rem', width:'2.1rem', padingTop:'2px'};
+  let iconStyle = {height: '2.5rem', width:'2.1rem', padingTop:'1px'};
+  let profile_iconStyle = {height: '1rem', width:'1rem', marginRight:'15px'};
   let iconsPath = '../../../assets/icons/navbar/'
   return [
     
@@ -67,10 +68,10 @@ const navigationConfig = (dir, id) => {
   },
 
   {
-	id: "permissions",
+	id: "profile",
 	title: "Profile",
 	type: "additionalMenu",
-	icon: <Icon src={iconsPath+"all_contracts.svg"}  style={iconStyle}/>,
+	icon: <img src={iconsPath+"my_profile.svg"}  style={profile_iconStyle}/>,
 	navLink: "profile",
 	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
   },
@@ -78,7 +79,7 @@ const navigationConfig = (dir, id) => {
     id: "sign_out",
     title: "Sign out",
     type: "additionalMenu",
-    icon: <Icon src={iconsPath+"all_contracts.svg"}  style={iconStyle}/>,
+    icon: <img src={iconsPath+"sign_out.svg"}  style={profile_iconStyle}/>,
     navLink: "sign out",
     permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
     },

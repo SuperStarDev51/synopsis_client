@@ -8,13 +8,27 @@
 	position: fixed;
 	width: 14rem;
 	padding: 1rem 1rem;
-	bottom: 18px;
+	bottom: 5rem;
 	border-radius: 10px;
 	margin-left :82px;
 	ul.navigation-main{
 		background-color: #626363;
-		a:hover{
-			text-decoration: underline;
+		li{
+			padding: 8px 0;
+			&:hover{
+				background-color: #535555;
+			}
+		}
+		a{
+			// path{
+			// 	// fill:#7f7f7f !important;
+			// 	fill: red;
+			// }
+			display: inline-flex;
+			&:hover{
+				text-decoration: underline;
+			}
+			
 		}
 	}
 }
