@@ -23,7 +23,7 @@ const navigationConfig = (dir, id) => {
     title: "Script",
     type: "item",
     icon: <Icon src={iconsPath+"Script.svg"}  style={iconStyle}/>,//<IconFeatherFeather.FileText size={35} />,
-    navLink: Routes.SCRIPT.replace(':id', String(id)),
+    navLink: id !== null? Routes.SCRIPT.replace(':id', String(id)): "",
 	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
   },
   {
@@ -31,7 +31,7 @@ const navigationConfig = (dir, id) => {
     title: "Call sheets",
     type: "item",
     icon: <Icon src={iconsPath+"call_sheets.svg"}  style={iconStyle}/>,//<IconFeatherFeather.CheckSquare size={35} />,
-    navLink: Routes.TASKS.replace(':id', String(id)),
+    navLink:  id !== null? Routes.TASKS.replace(':id', String(id)): "",
 	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
   },
   // {
@@ -55,7 +55,7 @@ const navigationConfig = (dir, id) => {
     title: "Team",
     type: "item",
     icon: <Icon src={iconsPath+"team.svg"}  style={iconStyle}/>,//<IconFeatherFeather.Users size={35} />,
-    navLink: Routes.SUPPLIERS.replace(':id', String(id)),
+    navLink:  id !== null? Routes.SUPPLIERS.replace(':id', String(id)):"",
 	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
   },
   {
@@ -63,7 +63,7 @@ const navigationConfig = (dir, id) => {
     title: "All Contacts",
     type: "item",
     icon: <Icon src={iconsPath+"all_contracts.svg"}  style={iconStyle}/>,//<IconFeatherFeather.Users size={35} />,
-    navLink: Routes.PERMISSIONS.replace(':id', String(id)),
+    navLink:  id !== null? Routes.PERMISSIONS.replace(':id', String(id)) :"",
 	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
   },
 
@@ -72,15 +72,15 @@ const navigationConfig = (dir, id) => {
 	title: "Profile",
 	type: "additionalMenu",
 	icon: <img src={iconsPath+"my_profile.svg"}  style={profile_iconStyle}/>,
-	navLink: "profile",
-	  permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
+	navLink:  id !== null? "profile":"",
+	permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
   },
   {
     id: "sign_out",
     title: "Sign out",
     type: "additionalMenu",
     icon: <img src={iconsPath+"sign_out.svg"}  style={profile_iconStyle}/>,
-    navLink: "sign out",
+    navLink:  id !== null?"sign out":"",
     permissions: [Roles.ADMIN, Roles.MANAGER, Roles.MEMBER],
     },
   // {
