@@ -338,7 +338,8 @@ React.useEffect(() => {
 	return(
 	<Switch>
 		<AppRoute path={Routes.ACTORS} exact={true} component={Loadables.Actors}  />
-		<AppRoute path={Routes.PROJECTS} exact={true} component={Loadables.Projects} fullLayout />
+		{/* <AppRoute path={Routes.PROJECTS} exact={true} component={Loadables.Projects} fullLayout /> */}
+		<AppRoute path={Routes.PROJECTS} exact={true} component={Loadables.Projects}/>
 		{/* <AppRoute path={Routes.SCRIPT} exact={true} component={Loadables.Script} /> */}
 		<AppRoute path={Routes.BREAKDOWN} exact={true} component={Loadables.Breakdown} />
 		<AppRoute path={Routes.SHOOTING_DAYS} exact={true} component={Loadables.ShootingDays} />
