@@ -107,7 +107,7 @@ export const Projects: React.FC = () => {
 	let filteredEvents = search && search.length ? events.filter((event:Event)=> event.project_name.toLowerCase().trim().includes(search.toLowerCase().trim())) : events
 
 	React.useEffect(()=>{
-		setEventActive(null)
+		// setEventActive(null)
 	},[]);
 
 	const setEventActive = (event_id: any): void => {
