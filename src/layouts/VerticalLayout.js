@@ -271,7 +271,8 @@ class VerticalLayout extends PureComponent {
         )}
       >
       
-        {showSidebar  && ( <Sidebar {...sidebarProps} /> )}
+        {/* {showSidebar  && ( <Sidebar {...sidebarProps} /> )} */}
+        {<Sidebar {...sidebarProps} /> }
       
         <div
           className={classnames("app-content", {
