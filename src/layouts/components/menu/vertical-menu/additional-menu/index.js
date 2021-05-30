@@ -35,7 +35,13 @@ const AdditionalMenu = ({ events }) => {
 									className="additional-menu__item"
 									data-tip = {item.tooltip}
 								>
-									<FormattedMessage id={item.title} />
+									
+										{item.icon}
+
+										<span >{item.title}</span>
+									
+									
+
 								</Link>
 							</li>
 						))}
