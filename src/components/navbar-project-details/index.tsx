@@ -24,7 +24,7 @@ export const NavbarProjectDetails: React.FunctionComponent = () => {
 	const [calculatedIncomeValue, setCalculatedIncomeValue] = React.useState<number>(0);
 	const [calculatedExpenses, setCalculatedExpenses] = React.useState<number>(0);
 	const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
-	const [dates, setDates] = React.useState([ new Date(activeEvent.date) ,new Date(activeEvent.date_end)]);
+	// const [dates, setDates] = React.useState([ new Date(activeEvent.date) ,new Date(activeEvent.date_end)]);
 	const [notificationPopupOpen, setNotificationPopupOpen] = React.useState<boolean>(false);
 	const [searchBar, setSearchBar ] = React.useState<string>('');
 	const [searchBarOpen, setSearchBarOpen ] = React.useState<boolean>(false);
@@ -73,7 +73,7 @@ export const NavbarProjectDetails: React.FunctionComponent = () => {
 
 	>
 		<div className="text-center">
-						<CalendarComponent
+						{/* <CalendarComponent
 								flatpickr
 								range
 								className="bg-transparent border-0 text-bold-700 font-medium-1"
@@ -100,7 +100,7 @@ export const NavbarProjectDetails: React.FunctionComponent = () => {
 								}}
 								// placeholder={activeEvent.date? `${activeEvent.date ? moment(new Date(activeEvent.date)).format('DD/MM/YYYY') : null}-${activeEvent.date_end ? moment(new Date(activeEvent.date_end)).format('DD/MM/YYYY'): null}` : `${formatMessage({id: 'select'})} ${formatMessage({id: 'date'})}`}
 								date={dates}
-						/>
+						/> */}
 						{/* {activeEvent.date ?
 							<>
 							<span className="user-status">{moment(new Date(activeEvent.date)).format('DD/MM/YYYY')}</span>-
