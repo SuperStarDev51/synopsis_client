@@ -28,13 +28,13 @@ class SideMenuContent extends React.Component {
     tempArr: []
 
   }
-  
+
 
   static getDerivedStateFromProps(props, state) {
-      return {
-        events: props.events,
-        customizer: props.customizer
-      }
+    return {
+      events: props.events,
+      customizer: props.customizer
+    }
   }
 
   handleGroupClick = (id, parent = null, type = "") => {
@@ -75,12 +75,12 @@ class SideMenuContent extends React.Component {
       // If open group does not include clicked group item
       if (!open_group.includes(id)) {
         // Get unmatched items that are not in the active group
-        let temp = open_group.filter(function(obj) {
+        let temp = open_group.filter(function (obj) {
           return active_group.indexOf(obj) === -1
         })
         // Remove those unmatched items from open group
         if (temp.length > 0 && !open_group.includes(parent)) {
-          open_group = open_group.filter(function(obj) {
+          open_group = open_group.filter(function (obj) {
             return !temp.includes(obj)
           })
         }
@@ -135,9 +135,9 @@ class SideMenuContent extends React.Component {
   render() {
     // Loop over sidebar items
     // eslint-disable-next-line
-    
 
-    const {events, customizer} = this.state
+
+    const { events, customizer } = this.state
     const activeEventId = events.filter((event) => event.preview)[0] ? events.filter((event) => event.preview)[0].id : null
     const menuItems = navigationConfig(customizer.direction, activeEventId).map(item => {
       const CustomAnchorTag = item.type === "external-link" ? `a` : Link
@@ -154,8 +154,8 @@ class SideMenuContent extends React.Component {
 
       // checks if item belongs to additional menu
       if (item.type === "additionalMenu") {
-      	return;
-	  }
+        return;
+      }
 
       let renderItem = (
         <li
@@ -188,24 +188,23 @@ class SideMenuContent extends React.Component {
               this.handleGroupClick(item.id, null, item.type)
             }
           }}
-          
-          >
-          
-          
+
+        >
+
+
           <CustomAnchorTag
             to={
               item.filterBase
                 ? item.filterBase
                 : item.navLink && item.type === "item"
-                ? item.navLink
-                : ""
+                  ? item.navLink
+                  : ""
             }
             href={item.type === "external-link" ? item.navLink : ""}
-            className={`d-flex ${
-              item.badgeText
-                ? "justify-content-between"
-                : "justify-content-start"
-            }`}
+            className={`d-flex ${item.badgeText
+              ? "justify-content-between"
+              : "justify-content-start"
+              }`}
             onMouseEnter={() => {
               this.props.handleSidebarMouseEnter(item.id)
             }}
@@ -217,14 +216,14 @@ class SideMenuContent extends React.Component {
               return item.type === "collapse" ? e.preventDefault() : ""
             }}
             target={item.newTab ? "_blank" : undefined}>
-            <ReactTooltip id= {item.id} place="right" effect="solid" backgroundColor="#4b586b " offset={{right:20}}>
+            <ReactTooltip id={item.id} place="right" effect="solid" backgroundColor="#4b586b " offset={{ right: 20 }}>
               <span> {item.title} </span>
-           </ReactTooltip>
-            <div className="menu-text" data-tip data-for = {item.id}>
+            </ReactTooltip>
+            <div className="menu-text" data-tip data-for={item.id}>
               {item.icon}
-             
+
             </div>
-            
+
 
             {item.badge ? (
               <div className="menu-badge">
@@ -243,30 +242,30 @@ class SideMenuContent extends React.Component {
           </CustomAnchorTag>
 
           {item.type === "collapse" ?
-          (
-            <SideMenuGroup
-              group={item}
-              handleGroupClick={this.handleGroupClick}
-              activeGroup={this.state.activeGroups}
-              handleActiveItem={this.props.handleActiveItem}
-              activeItemState={this.props.activeItemState}
-              handleSidebarMouseEnter={this.props.handleSidebarMouseEnter}
-              activePath={this.props.activePath}
-              hoverIndex={this.props.hoverIndex}
-              initRender={this.initRender}
-              parentArr={this.parentArr}
-              triggerActive={undefined}
-              currentActiveGroup={this.state.currentActiveGroup}
-              permission={this.props.permission}
-              currentUser={this.props.currentUser}
-              redirectUnauthorized={this.redirectUnauthorized}
-              collapsedMenuPaths={this.props.collapsedMenuPaths}
-              toggleMenu={this.props.toggleMenu}
-              deviceWidth={this.props.deviceWidth}
-            />
-          ) : (
-            ""
-          )}
+            (
+              <SideMenuGroup
+                group={item}
+                handleGroupClick={this.handleGroupClick}
+                activeGroup={this.state.activeGroups}
+                handleActiveItem={this.props.handleActiveItem}
+                activeItemState={this.props.activeItemState}
+                handleSidebarMouseEnter={this.props.handleSidebarMouseEnter}
+                activePath={this.props.activePath}
+                hoverIndex={this.props.hoverIndex}
+                initRender={this.initRender}
+                parentArr={this.parentArr}
+                triggerActive={undefined}
+                currentActiveGroup={this.state.currentActiveGroup}
+                permission={this.props.permission}
+                currentUser={this.props.currentUser}
+                redirectUnauthorized={this.redirectUnauthorized}
+                collapsedMenuPaths={this.props.collapsedMenuPaths}
+                toggleMenu={this.props.toggleMenu}
+                deviceWidth={this.props.deviceWidth}
+              />
+            ) : (
+              ""
+            )}
         </li>
       )
 
@@ -293,7 +292,8 @@ class SideMenuContent extends React.Component {
         item.navLink === this.props.activePath &&
         !item.permissions.includes(this.props.currentUser.permission_type_id)
       ) {
-        return this.redirectUnauthorized()
+        // return this.redirectUnauthorized()
+        
       }
     })
     return <React.Fragment>{menuItems}</React.Fragment>
