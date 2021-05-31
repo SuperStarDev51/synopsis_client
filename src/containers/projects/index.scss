@@ -2,18 +2,27 @@
 @import '@src/settings';
 
 .Mask {
-    min-width: 327px;
-    min-height: 208px;
+    min-width: 500px;
+    min-height: 200px;
     border-radius: 5px;
-    border: solid 1px #707090;
-    background-color: #41414e;
-    @include flex-column(nowrap, flex-start, space-between);
+    //border: solid 1px #707090;
+    background-color: #eaeaf0;
+	color: black;
+    //@include flex-column(nowrap, flex-start, space-between);
+	display: inline-flex;
   }
 
   .Mask:hover {
-    box-shadow: 0 0 0.625rem 0 $color-light;
+    box-shadow: 0 0 0.625rem 0 #707090;
   }
-
+ .project_profile{
+	 width: 25%;
+	 height: 100%;
+	 background-color: rgb(87, 194, 87);
+	 &:hover{
+		 background-color: rgb(119, 119, 238);
+	 }
+ }
 	.delete-project-button {
 		width: 2rem!important;
 		height: 2rem!important;

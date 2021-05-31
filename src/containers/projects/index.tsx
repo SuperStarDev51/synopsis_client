@@ -43,52 +43,60 @@ export const EventItem: React.FC = ({ event, setEventActive, user }) => {
 	const [showdeleteAlert, setShowdeleteAlert] =  React.useState<any>(false);
 	const dispatch = useDispatch();
 	return (
-		<div className="position-relative mr-3 mb-2">
-			<Button
-				className="delete-project-button no-edge-right"
-				onClick={() => {
-					setShowdeleteAlert(true)
-				}}
-			>
-				<Icon src={config.iconsPath+"options/x.svg"} style={{height: '1rem', width: '1rem'}} className=""/>
-			</Button>
-			{ showdeleteAlert ? (<SweetAlertCallback
-				showAlert={true}
-				toogle={() => setShowdeleteAlert(!showdeleteAlert) }
-				onConfirm={() => {
-					deleteProject(event.id, user.id);
-					dispatch({
-						type: EventActionTypes.DELETE_EVENT,
-						payload: event.id
-					});
-					setShowdeleteAlert(false)
-				}}
-			/>) : null}
-			<Col
-				className="Mask pointer p-2"
-				onClick={() => {
-					setEventActive(event.id);
+		<div className=" mr-3 mb-2 Mask pointer">
+			<div className = "project_profile" >
+				<img src="assets/icons/navbar/Projects.svg" style={{width: "50%" ,marginTop: '45%', marginLeft: "25%"}}></img>
+			</div>
+			<div style = {{width: '75%'}} onClick={() => {
+						setEventActive(event.id);
 
-				}}
-				lg="2" md="3" sm="4" xs="6"
-			>
-				<div className="font-medium-5">{event.project_name}</div>
-				<div className="width-100-per d-flex justify-content-between mt-1 px-1 font-medium-4">
-					<small className=" mb-25">
-						Updated 15m
-					</small>
-					<small className="mb-25">
-						Series Pod
-					</small>
-				</div>
-				<div className="d-flex">
-					<Avatar className="mr-1" size='md' img={avatarImg} />
-					<Avatar className="mr-1" size='md' img={avatarImg} />
-					<Avatar className="mr-1" size='md' img={avatarImg} />
-					<Avatar className="mr-1" size='md' img={avatarImg} />
-					<Avatar className="mr-1" size='md' img={avatarImg} />
-				</div>
-			</Col>
+					}}>
+				<Button
+					className="delete-project-button no-edge-right"
+					onClick={() => {
+						setShowdeleteAlert(true)
+					}}
+				>
+				<Icon src={config.iconsPath+"options/x.svg"} style={{height: '1rem', width: '1rem'}} className=""/>
+				</Button>
+				{ 
+					showdeleteAlert ? (<SweetAlertCallback
+					showAlert={true}
+					toogle={() => setShowdeleteAlert(!showdeleteAlert) }
+					onConfirm={() => {
+						deleteProject(event.id, user.id);
+						dispatch({
+							type: EventActionTypes.DELETE_EVENT,
+							payload: event.id
+						});
+						setShowdeleteAlert(false)
+						}}
+					/>) : null
+				}
+				<Col
+					className=""
+					
+					lg="2" md="3" sm="4" xs="6"
+				>
+					<div className="font-medium-5" style={{minWidth: "300px"}}>{event.project_name}</div>
+					{/* <div className="width-100-per d-flex justify-content-between mt-1 px-1 font-medium-4">
+						<small className=" mb-25">
+							Updated 15m
+						</small>
+						<small className="mb-25">
+							Series Pod
+						</small>
+					</div>
+					<div className="d-flex">
+						<Avatar className="mr-1" size='md' img={avatarImg} />
+						<Avatar className="mr-1" size='md' img={avatarImg} />
+						<Avatar className="mr-1" size='md' img={avatarImg} />
+						<Avatar className="mr-1" size='md' img={avatarImg} />
+						<Avatar className="mr-1" size='md' img={avatarImg} />
+					</div> */}
+				</Col>
+			</div>
+			
 		</div>
 	)
 };
@@ -164,23 +172,23 @@ export const Projects: React.FC = () => {
                   </ModalBody>
                   <ModalFooter>
 					<Button color="primary"
-					onClick={async ()=>{
-						if( isEventDataFilled ) {
-							let newProject:any = await addProject({user_id: user.id, company_id: user.company_id,project_name: eventName, budget: eventBudget})
-							if( newProject && newProject.project) {
-								dispatch({
-									type: EventActionTypes.SET_EVENTS,
-									payload: [...events,newProject.project]
-								});
-								// setEventActive(newProject.project.id)
-								setShowAddAlert(false)
-								setEventName('');
-								setEventBudget('');
-							}
+						onClick={async ()=>{
+							if( isEventDataFilled ) {
+								let newProject:any = await addProject({user_id: user.id, company_id: user.company_id,project_name: eventName, budget: eventBudget})
+								if( newProject && newProject.project) {
+									dispatch({
+										type: EventActionTypes.SET_EVENTS,
+										payload: [...events,newProject.project]
+									});
+									// setEventActive(newProject.project.id)
+									setShowAddAlert(false)
+									setEventName('');
+									setEventBudget('');
+								}
 
-						}
-					}}>
-                      create
+							}
+						}}>
+						create
                     </Button>{" "}
                   </ModalFooter>
              </Modal>
@@ -202,19 +210,19 @@ export const Projects: React.FC = () => {
 			</div>
 
 			<Row>
-			{filteredEvents.map((event:Event, i:number) => (
-				<EventItem
-					key={i}
-					event={event}
-					setEventActive={setEventActive}
-					user={user}
-				/>
-			))}
+				{filteredEvents.map((event:Event, i:number) => (
+					<EventItem
+						key={i}
+						event={event}
+						setEventActive={setEventActive}
+						user={user}
+					/>
+				))}
 			</Row>
 			<div className="h1 my-3 text-bold-800 text-white">
 				<FormattedMessage id='finished_projects' />
 			</div>
-		  </div>
+		</div>
 
 		);
 };
