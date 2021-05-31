@@ -2,8 +2,8 @@
 @import '@src/settings';
 
 .Mask {
-    min-width: 500px;
-    min-height: 200px;
+    width: 470px;
+    min-height: 232px;
     border-radius: 5px;
     //border: solid 1px #707090;
     background-color: #eaeaf0;
@@ -16,11 +16,11 @@
     box-shadow: 0 0 0.625rem 0 #707090;
   }
  .project_profile{
-	 width: 25%;
+	 width: 34%;
 	 height: 100%;
 	 background-color: rgb(87, 194, 87);
 	 &:hover{
-		 background-color: rgb(119, 119, 238);
+		 background-color: #828a96;
 	 }
  }
 	.delete-project-button {

@@ -7,6 +7,7 @@ import { useOutsideClick } from '@src/utilities';
 import navigationConfig from "../../../../../configs/navigationConfig";
 import './index.scss';
 import classnames from "classnames"
+import Avatar from "@vuexy/avatar/AvatarComponent"
 
 const AdditionalMenu = ({ events }) => {
 	const [isOpen, setIsOpen] = React.useState(false);
@@ -50,9 +51,12 @@ const AdditionalMenu = ({ events }) => {
 			)}
 			<div
 				className="additional-menu__icon"
+				style={avatar_style}
 				onClick={()=> setIsOpen(!isOpen)}
 			>
-				<img src="../../../assets/img/Eliran.jpeg" style={avatar_style}></img>
+				
+				<Avatar className="mr-1" size='md' img={"../../../assets/img/Eliran.jpeg"} />
+				
 			</div>
 		</div>
 	)

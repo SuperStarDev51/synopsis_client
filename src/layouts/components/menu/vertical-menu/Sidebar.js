@@ -8,6 +8,7 @@ import Hammer from "react-hammerjs"
 import SideMenuContent from "./sidemenu/SideMenuContent"
 import AdditionalMenu from "./additional-menu";
 import PerfectScrollbar from "react-perfect-scrollbar"
+import Avatar from "@vuexy/avatar/AvatarComponent"
 
 class Sidebar extends Component {
   static getDerivedStateFromProps(props, state) {

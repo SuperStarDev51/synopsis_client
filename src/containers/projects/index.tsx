@@ -47,18 +47,11 @@ export const EventItem: React.FC = ({ event, setEventActive, user }) => {
 			<div className = "project_profile" >
 				<img src="assets/icons/navbar/Projects.svg" style={{width: "50%" ,marginTop: '45%', marginLeft: "25%"}}></img>
 			</div>
-			<div style = {{width: '75%'}} onClick={() => {
+			<div style = {{width: '66%'}} onClick={() => {
 						setEventActive(event.id);
 
 					}}>
-				<Button
-					className="delete-project-button no-edge-right"
-					onClick={() => {
-						setShowdeleteAlert(true)
-					}}
-				>
-				<Icon src={config.iconsPath+"options/x.svg"} style={{height: '1rem', width: '1rem'}} className=""/>
-				</Button>
+				
 				{ 
 					showdeleteAlert ? (<SweetAlertCallback
 					showAlert={true}
@@ -78,7 +71,16 @@ export const EventItem: React.FC = ({ event, setEventActive, user }) => {
 					
 					lg="2" md="3" sm="4" xs="6"
 				>
-					<div className="font-medium-5" style={{minWidth: "300px"}}>{event.project_name}</div>
+					<div className="font-medium-5" style={{minWidth: "300px"}}>{event.project_name}
+					{/* <Button
+						className="delete-project-button"
+						onClick={() => {
+							setShowdeleteAlert(true)
+						}}
+					>
+						<Icon src={config.iconsPath+"options/x.svg"} style={{height: '1rem', width: '1rem'}} className=""/>
+					</Button> */}
+					</div>
 					{/* <div className="width-100-per d-flex justify-content-between mt-1 px-1 font-medium-4">
 						<small className=" mb-25">
 							Updated 15m
@@ -87,13 +89,11 @@ export const EventItem: React.FC = ({ event, setEventActive, user }) => {
 							Series Pod
 						</small>
 					</div>
+					*/}
 					<div className="d-flex">
-						<Avatar className="mr-1" size='md' img={avatarImg} />
-						<Avatar className="mr-1" size='md' img={avatarImg} />
-						<Avatar className="mr-1" size='md' img={avatarImg} />
-						<Avatar className="mr-1" size='md' img={avatarImg} />
-						<Avatar className="mr-1" size='md' img={avatarImg} />
-					</div> */}
+						<Avatar className="mr-1" size='md' img={"../../../assets/img/Eliran.jpeg"} />
+					
+					</div> 
 				</Col>
 			</div>
 			
