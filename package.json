@@ -1,7 +1,7 @@
 {
   "name": "@three11/react-template",
   "version": "1.0.0",
-  "description": "IMGN",
+  "description": "Synopsis",
   "main": "./src/index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --env.dev",
