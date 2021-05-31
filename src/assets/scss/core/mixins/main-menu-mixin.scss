@@ -151,7 +151,7 @@
         }
         
       }
-      &.nav-item{
+      &.nav-item{   
         svg{
           path , polygon, rect {
             fill:#7f7f7f !important;
@@ -172,6 +172,13 @@
       
     }
     
+    li.active{
+      svg {
+        path , polygon, rect {
+          fill:white !important;
+        }
+      }
+    }
     > li {
       padding: 10px 5px;
       > a {
