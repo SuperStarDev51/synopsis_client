@@ -65,7 +65,7 @@ export const Modals = ({ setScripts }) => {
 			className="modal-dialog-centered modal-md"
 		>
 			<ModalBody className="mx-3 my-1">
-				<h2 className="text-center">Welcome to Imgn</h2>
+				<h2 className="text-center">Welcome to Synopsis</h2>
 				<p>Your knowledge and expertise are valuable and important,
 				please guide us in improving the product for you.</p>
 				<ul className="list-style-none">
