@@ -98,9 +98,7 @@ export const EventItem: React.FC = ({ event, setEventActive, user }) => {
 			</label>
 
 	         {/*After testing uncomment the onclick event handler*/}
-			<div style = {{width: '66%'}} /*onClick={() => {
-						setEventActive(event.id);
-					}}*/>
+			<div style = {{width: '66%'}} >
 				
 				{ 
 					showdeleteAlert ? (<SweetAlertCallback
@@ -119,77 +117,60 @@ export const EventItem: React.FC = ({ event, setEventActive, user }) => {
 				<Col
 					className=""
 					
-					lg="2" md="3" sm="4" xs="6"
 				>
 
-					<div className="font-medium-5" /*style={{minWidth: "300px"}}*/>
+					<div className="font-medium-5">
 					<div className="mt-1">{event.project_name}</div>
-					{/* <div><MoreVertIcon /></div> */}
-					<div>
-				    <IconButton
-						aria-label="more"
-						aria-controls="long-menu"
-						aria-haspopup="true"
-						onClick={handleClick} 
-					>
-						<MoreVertIcon />
-					</IconButton>
-					<Menu
-						id="long-menu"
-						anchorEl={anchorEl}
-						keepMounted
-						open={open}
-						onClose={handleClose}
-						PaperProps={{
-						style: {
-							maxHeight: ITEM_HEIGHT * 4.5,
-							width: '20ch',
-						},
-						}}
-					>
-						{/* {options.map((option) => ( */}
-						<MenuItem   onClick={()=>handleClose('edit')}>
-						
-							{"EDIT PROJECT"}
-
+					
+						<div>
+							<IconButton
+								aria-label="more"
+								aria-controls="long-menu"
+								aria-haspopup="true"
+								onClick={handleClick} 
+							>
+								<MoreVertIcon />
+							</IconButton>
+							<Menu
+							id="long-menu"
+							anchorEl={anchorEl}
+							keepMounted
+							open={open}
+							onClose={handleClose}
+							PaperProps={{
+							style: {
+								maxHeight: ITEM_HEIGHT * 4.5,
+								width: '20ch',
+							},
+							}}
+						>
+							{/* {options.map((option) => ( */}
+							<MenuItem   onClick={()=>handleClose('edit')}>
 							
-						</MenuItem>
-						<MenuItem   onClick={()=>handleClose('remove')} >
-						
-						{"REMOVE PROJECT"}
+								{"EDIT PROJECT"}
 
-						</MenuItem>
-						{/* ))} */}
-					</Menu>
-					</div>
-					{/* <span className="iconify" data-icon="mdi:dots-vertical" data-inline="false"></span> */}
+								
+							</MenuItem>
+							<MenuItem   onClick={()=>handleClose('remove')} >
+							
+							{"REMOVE PROJECT"}
 
-						{/* <div>AAA</div> */}
-					{/* <Button
-						className="delete-project-button"
-						onClick={() => {
-							setShowdeleteAlert(true)
-						}}
-					>
-						<Icon src={config.iconsPath+"options/x.svg"} style={{height: '1rem', width: '1rem'}} className=""/>
-					</Button> */}
-					
+							</MenuItem>
+							{/* ))} */}
+						</Menu>
+						</div>
+
 					</div>
-					{/* <div className="width-100-per d-flex justify-content-between mt-1 px-1 font-medium-4">
-						<small className=" mb-25">
-							Updated 15m
-						</small>
-						<small className="mb-25">
-							Series Pod
-						</small>
-					</div>
-					*/}
-					
-					<div onClick={() => {
+					<div style={{height :"156px", width:"100%"}} onClick={() => {
 						setEventActive(event.id);
-					}} className="d-flex" style={{marginTop: "156px"}}>
+					}}>
+
+					</div>
+					
+					<div  className="d-flex" >
 						<Avatar  className="mr-1" size='md' img={"../../../assets/img/Eliran.jpeg"} /> 
-					    <span style={{marginTop: "10px"}}>{user.first_name}</span>
+					    <span style={{marginTop: "10px"}}>{user.first_name}</span> &nbsp;
+						<span style={{marginTop: "10px"}}>{user.last_name}</span>
 					</div> 
 				</Col>
 			</div>
