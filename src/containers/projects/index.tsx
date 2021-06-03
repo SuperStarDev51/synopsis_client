@@ -10,8 +10,16 @@ import {addProject, deleteProject, getLists} from '@containers/planning/initial-
 import { SweetAlertCallback } from '@extensions'
 import avatarImg from "assets/img/portrait/small/avatar-s-20.jpg"
 import Avatar from "@vuexy/avatar/AvatarComponent"
-
+import { Icon, InlineIcon } from '@iconify/react';
+// import dotsVertical from '@iconify-icons/mdi/dots-vertical';
 import './index.scss';
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import EditProject from './editProject';
+// import Dropdown from './dropDown';
+
 import {
 	Button,
 	Modal,
@@ -29,7 +37,7 @@ import {
   } from "reactstrap"
 import { suppliersInitialState } from '../suppliers/initial-state';
 import { FormattedMessage } from "react-intl"
-import { Icon } from '@components';
+// import { Icon } from '@components';
 import { config } from '../../config';
 import {
 	BudgetStatusActionTypes,
@@ -41,16 +49,58 @@ import {
 
 export const EventItem: React.FC = ({ event, setEventActive, user }) => {
 	const [showdeleteAlert, setShowdeleteAlert] =  React.useState<any>(false);
-	const dispatch = useDispatch();
-	return (
-		<div className=" mr-3 mb-2 Mask pointer">
-			<div className = "project_profile" >
-				<img src="assets/icons/navbar/Projects.svg" style={{width: "50%" ,marginTop: '45%', marginLeft: "25%"}}></img>
-			</div>
-			<div style = {{width: '66%'}} onClick={() => {
-						setEventActive(event.id);
+	const [showEditModal, setShowEditModal] =  React.useState<any>(false);
 
-					}}>
+	const dispatch = useDispatch();
+	console.log("event",event)
+	const options = [
+		'EDIT PROJECT',
+		// 'ARCHIVE PROJECT',
+		'REMOVE PROJECT',
+		
+	  ];
+	  
+	  const ITEM_HEIGHT = 48;
+	  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = (type) => {
+    setAnchorEl(null);
+	if(type === 'edit'){
+	setShowEditModal(true);
+	}
+	if(type === 'remove'){
+		setShowdeleteAlert(true);
+	}
+  };
+  console.log("user",user)
+	return (
+	<>
+	<div>
+	<EditProject showEditModal={showEditModal} projectName = {event.project_name} />
+	<input type="file" id="upload" hidden />
+			
+	
+		<div className=" mr-3 mb-2 Mask pointer"> 
+		<label className="label mt-0" htmlFor="upload">    			
+
+      
+			<div className = "project_profile" >
+			<span className="overLay">
+				<img className="cener" height="50px" width="50px" src="\assets\img\pages/upload-img.png"></img>
+			</span>
+				<img src="assets/icons/navbar/Projects.svg" style={{width: "50%" }} /*marginTop: '45%', marginLeft: "25%"*/></img>
+			</div>
+			</label>
+
+	         {/*After testing uncomment the onclick event handler*/}
+			<div style = {{width: '66%'}} /*onClick={() => {
+						setEventActive(event.id);
+					}}*/>
 				
 				{ 
 					showdeleteAlert ? (<SweetAlertCallback
@@ -71,7 +121,50 @@ export const EventItem: React.FC = ({ event, setEventActive, user }) => {
 					
 					lg="2" md="3" sm="4" xs="6"
 				>
-					<div className="font-medium-5" style={{minWidth: "300px"}}>{event.project_name}
+
+					<div className="font-medium-5" /*style={{minWidth: "300px"}}*/>
+					<div className="mt-1">{event.project_name}</div>
+					{/* <div><MoreVertIcon /></div> */}
+					<div>
+				    <IconButton
+						aria-label="more"
+						aria-controls="long-menu"
+						aria-haspopup="true"
+						onClick={handleClick} 
+					>
+						<MoreVertIcon />
+					</IconButton>
+					<Menu
+						id="long-menu"
+						anchorEl={anchorEl}
+						keepMounted
+						open={open}
+						onClose={handleClose}
+						PaperProps={{
+						style: {
+							maxHeight: ITEM_HEIGHT * 4.5,
+							width: '20ch',
+						},
+						}}
+					>
+						{/* {options.map((option) => ( */}
+						<MenuItem   onClick={()=>handleClose('edit')}>
+						
+							{"EDIT PROJECT"}
+
+							
+						</MenuItem>
+						<MenuItem   onClick={()=>handleClose('remove')} >
+						
+						{"REMOVE PROJECT"}
+
+						</MenuItem>
+						{/* ))} */}
+					</Menu>
+					</div>
+					{/* <span className="iconify" data-icon="mdi:dots-vertical" data-inline="false"></span> */}
+
+						{/* <div>AAA</div> */}
 					{/* <Button
 						className="delete-project-button"
 						onClick={() => {
@@ -80,6 +173,7 @@ export const EventItem: React.FC = ({ event, setEventActive, user }) => {
 					>
 						<Icon src={config.iconsPath+"options/x.svg"} style={{height: '1rem', width: '1rem'}} className=""/>
 					</Button> */}
+					
 					</div>
 					{/* <div className="width-100-per d-flex justify-content-between mt-1 px-1 font-medium-4">
 						<small className=" mb-25">
@@ -90,14 +184,16 @@ export const EventItem: React.FC = ({ event, setEventActive, user }) => {
 						</small>
 					</div>
 					*/}
-					<div className="d-flex">
-						<Avatar className="mr-1" size='md' img={"../../../assets/img/Eliran.jpeg"} />
-					
+					<div className="d-flex" style={{marginTop: "156px"}}>
+						<Avatar onClick={() => {setEventActive(event.id);}} className="mr-1" size='md' img={"../../../assets/img/Eliran.jpeg"} /> 
+					    <span style={{marginTop: "10px"}}>{user.first_name}</span>
 					</div> 
 				</Col>
 			</div>
 			
 		</div>
+		</div>
+	</>
 	)
 };
 

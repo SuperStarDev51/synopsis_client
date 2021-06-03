@@ -12,16 +12,21 @@
 	display: inline-flex;
   }
 
-  .Mask:hover {
+  .project_profile:hover {
     box-shadow: 0 0 0.625rem 0 #707090;
   }
  .project_profile{
-	 width: 34%;
-	 height: 100%;
+	position: relative;
+	 width: 100%;
+	//  height: 100%;
+	 height: 243px;
 	 background-color: rgb(87, 194, 87);
 	 &:hover{
 		 background-color: #828a96;
 	 }
+	display: flex;
+    justify-content: space-around;
+    margin: auto;
  }
 	.delete-project-button {
 		width: 2rem!important;
@@ -36,3 +41,47 @@
 		align-items: center!important;
 		justify-content: center!important;
 	}
+
+
+	.label{
+  
+		display: inline-block;      
+		padding: 0;
+		font-family: sans-serif;
+		border-radius: 0.3rem;
+		cursor: pointer;
+		margin-top: 1rem; 
+		position: relative;
+		width: 92%;
+		height: 87%;
+	  
+	}
+	.overLay{
+	  display: none;
+	}
+	.cener{
+	  position:absolute;
+	  top: 50%;
+	  left:50%;
+	  transform: translate(-50%,-50%);
+	}
+	.label:hover .overLay{
+	  height: 100%;
+	  width: 100%;
+	  background-color: #000000c9;
+	  position:absolute;
+	  z-index: 999;
+	  display: block;
+	   
+	}
+	.font-medium-5{
+		min-width: 290px;
+    /* width: 295px; */
+    /* height: 100px; */
+    // border: 1px solid #c3c3c3;
+    display: flex;
+    justify-content: space-between;
+	}
+.MuiListItem-root{
+	justify-content: flex-end!important;
+}
