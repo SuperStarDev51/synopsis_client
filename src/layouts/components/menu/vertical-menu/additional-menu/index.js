@@ -26,7 +26,7 @@ const AdditionalMenu = ({ events }) => {
 		<div ref={ref} className="additional-menu" >
 			{isOpen && (
 				<div className="additional-menu__dropdown">
-					<ul className="navigation-main">
+					<ul className="navigation-main arrow-right">
 						{additionalNavItems.map(item => (
 							<li
 								className={classnames("nav-item R")}>

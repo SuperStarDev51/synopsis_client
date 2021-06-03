@@ -3,12 +3,25 @@
 	cursor: pointer;
 }
 .additional-menu__dropdown {
+	.arrow-right:after {
+		content: " ";
+		position: absolute;
+		left: -6px;
+		top: 35px;
+		border-top: 15px solid transparent;
+		border-right: 15px solid #4b586b;
+		border-left: none;
+		border-bottom: 15px solid transparent;
+	  
+	  }	
+
+
 	background-color: #4b586b;
 	color: white;
 	position: fixed;
 	width: 14rem;
 	padding: 1rem 1rem;
-	bottom: 5rem;
+	bottom: 47px;
 	border-radius: 10px;
 	margin-left :82px;
 	ul.navigation-main{
@@ -40,4 +53,8 @@
 	&:hover {
 		color: white;
 	}
+	display: flex !important;
+    justify-content: space-around;
+	align-items: center;
+	margin-right: 49px;
 }
