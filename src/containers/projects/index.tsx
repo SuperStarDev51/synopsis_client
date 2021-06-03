@@ -184,8 +184,11 @@ export const EventItem: React.FC = ({ event, setEventActive, user }) => {
 						</small>
 					</div>
 					*/}
-					<div className="d-flex" style={{marginTop: "156px"}}>
-						<Avatar onClick={() => {setEventActive(event.id);}} className="mr-1" size='md' img={"../../../assets/img/Eliran.jpeg"} /> 
+					
+					<div onClick={() => {
+						setEventActive(event.id);
+					}} className="d-flex" style={{marginTop: "156px"}}>
+						<Avatar  className="mr-1" size='md' img={"../../../assets/img/Eliran.jpeg"} /> 
 					    <span style={{marginTop: "10px"}}>{user.first_name}</span>
 					</div> 
 				</Col>
