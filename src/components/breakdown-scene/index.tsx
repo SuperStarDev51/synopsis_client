@@ -619,10 +619,13 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 	const script = (
 		<div className="vx-collapse">
 			{isListPreview && (<div className="text-bold-600 py-1 px-1"><FormattedMessage id={'script'} /></div>)}
-			<Card className={classnames("bg-transparent flex-column", {
-				"collapse-collapsed": !showDescription || !isListPreview,
-				"collapse-shown": showDescription || isListPreview,
-			})}>
+			<Card 
+				className={classnames("bg-transparent flex-column", {
+					"collapse-collapsed": !showDescription || !isListPreview,
+					"collapse-shown": showDescription || isListPreview,
+				})}
+				style= {{height:"730px", overflowY:'auto'}}
+			>
 
 				{!isListPreview && (
 					<CardHeader className="justify-content-start py-1"
@@ -1639,7 +1642,7 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 			{rowExpanded && (
 				<Card className={classnames("text-dark d-flex flex-row", {
 					"scene-disabled": scene.scene_status_id === 4,
-				})}>
+				})} style={{height:"800px"}}>
 
 					<div className="mt-1" style={{ flex: 1 }}>
 						{/* {topListView} */}
@@ -1705,7 +1708,6 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 		: null;
 
 }
-
 
 const propsAreEqual = (prevProps, nextProps): boolean => {
 	return (
