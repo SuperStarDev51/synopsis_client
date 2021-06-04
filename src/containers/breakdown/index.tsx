@@ -155,24 +155,20 @@ export const BreakDown: React.FunctionComponent<Props> = React.memo((props: Prop
 				'bg-white': isHeaderFixed,
 				'overflow-auto': isHeaderFixed,
 			})}>  {/*/className="breakdown-navbar-overlay bg-body"> */}
-				{!isHeaderFixed && (<div className="d-flex float-right pr-1">
+				{/* {!isHeaderFixed && (<div className="d-flex float-right pr-1">
 					<div onClick={() => setIsListPreview(true)} className={classnames("cursor-pointer btn bg-light-gray p-075 ml-1", {
 						"svg-warning": isListPreview
 					})}>
 						<Icon src={config.iconsPath + "options/vertical-view.svg"} className="rotate-90" style={{ width: '1rem' }} />
 					</div>
-					{/* <List onClick={()=> setIsListPreview(true)} className={classnames("ml-1",{
-						"text-warning": isListPreview
-					})}/> */}
+					
 					<div onClick={() => setIsListPreview(false)} className={classnames("cursor-pointer btn bg-light-gray p-075 ml-1", {
 						"svg-warning": !isListPreview
 					})}>
 						<Icon src={config.iconsPath + "options/vertical-view.svg"} style={{ width: '1rem' }} />
 					</div>
-					{/* <Columns onClick={()=> setIsListPreview(false)} className={classnames("ml-1",{
-						"text-warning": !isListPreview
-			})}/> */}
-				</div>)}
+					
+				</div>)} */}
 				{pagiScript.map((pagi: any, pagi_index: number) => {
 					let isClickNextActive = pagi_index == 1 && scripts[script_index] && scripts[script_index].scenes ? scripts[script_index].scenes[pagiScript[pagi_index].end] : pagiScript[pagi_index].end + 1 < scripts.length
 
