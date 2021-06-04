@@ -27,8 +27,9 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import useDidUpdateEffect from '@src/utilities/useDidUpdateEffect';
 import { deleteEpisode } from "@containers/scripts/initial-state";
 import {ScriptsActionTypes} from "@root/src/containers/scripts/enums";
+import { ContactSupportOutlined } from '@material-ui/icons';
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 25;
 
 interface Props {
 	readonly addNew: (script_index: number, scene_index: number, type: string, scene: any, defaultValue?: string) => void;
@@ -40,6 +41,7 @@ interface Props {
 
 export const BreakDown: React.FunctionComponent<Props> = React.memo((props: Props) => {
 	const { isHeaderFixed, addNew, changeScenePropValue, changeScenePropValueDB } = props
+
 	const dispatch = useDispatch();
 	const scripts = useSelector((state: RootStore) => state.scripts)
 	const events = useSelector((state: RootStore) => state.events)
@@ -49,19 +51,19 @@ export const BreakDown: React.FunctionComponent<Props> = React.memo((props: Prop
 	const [scenePreview, setScenePreview] = React.useState<any>(null);
 	const [isListPreview, setIsListPreview] = React.useState<boolean>(true);
 	const [showdeleteAlert, setShowdeleteAlert] =  React.useState<any>(false);
-	const [pagiScript, setPagiScript] = React.useState<any>([{ name: 'episode', start: 0, end: 20 }, { name: 'scene', start: 0, end: 20 }])
+	const [pagiScript, setPagiScript] = React.useState<any>([{ name: 'episode', start: 0, end: 25 }, { name: 'scene', start: 0, end: 25 }])
 	let script_index = scripts ? scripts.findIndex(s => s.chapter_number == preview) : -1
 
 	const previousPagi = (pagi: number): void => {
 		let newPagiScript = pagiScript
-		newPagiScript[pagi].start = pagiScript[pagi].start - 1
-		newPagiScript[pagi].end = pagiScript[pagi].end - 1
+		newPagiScript[pagi].start = pagiScript[pagi].start - 25
+		newPagiScript[pagi].end = pagiScript[pagi].end - 25
 		setPagiScript([...newPagiScript])
 	}
 	const nextPagi = (pagi: number): void => {
 		let newPagiScript = pagiScript
-		newPagiScript[pagi].start = pagiScript[pagi].start + 1
-		newPagiScript[pagi].end = pagiScript[pagi].end + 1
+		newPagiScript[pagi].start = pagiScript[pagi].start + 25
+		newPagiScript[pagi].end = pagiScript[pagi].end + 25
 		setPagiScript([...newPagiScript])
 	}
 
@@ -169,9 +171,11 @@ export const BreakDown: React.FunctionComponent<Props> = React.memo((props: Prop
 					</div>
 					
 				</div>)} */}
+				
 				{pagiScript.map((pagi: any, pagi_index: number) => {
+					
 					let isClickNextActive = pagi_index == 1 && scripts[script_index] && scripts[script_index].scenes ? scripts[script_index].scenes[pagiScript[pagi_index].end] : pagiScript[pagi_index].end + 1 < scripts.length
-
+					
 					return (
 						<div key={pagi_index} className={classnames("mx-1 d-flex align-items-center", {
 							"mt-1": pagi_index == 0 && !isHeaderFixed
@@ -254,6 +258,7 @@ export const BreakDown: React.FunctionComponent<Props> = React.memo((props: Prop
 					)
 				})}
 			</div>
+			{/* -----------------------navigation part ended, main scene page start -------------------------------- */}
 			<Row className="p-1 mt-2">
 				{scripts?.[script_index]?.scenes?.length > 0 && <InfiniteScroll
 					dataLength={current.length}
