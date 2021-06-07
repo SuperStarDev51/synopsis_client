@@ -18,6 +18,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import EditProject from './editProject';
+
 // import Dropdown from './dropDown';
 
 import {
@@ -68,20 +69,31 @@ export const EventItem: React.FC = ({ event, setEventActive, user }) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const setEventUpdate = (project_id: any, field: string, data: any): void => {
+	dispatch({
+		type: EventActionTypes.SET_EVENT_PARAMETER,
+		payload: {
+			project_id,
+			field,
+			data,
+		}
+	});
+}
+
   const handleClose = (type) => {
     setAnchorEl(null);
 	if(type === 'edit'){
-	setShowEditModal(true);
+		setShowEditModal(true);
 	}
 	if(type === 'remove'){
 		setShowdeleteAlert(true);
 	}
   };
-  console.log("user",user)
+  
 	return (
 	<>
 	<div>
-	<EditProject showEditModal={showEditModal} projectName = {event.project_name} />
+	<EditProject showEditModal={showEditModal} projectObject = {event} onChange = {setEventUpdate} setShowEditModal = {setShowEditModal}/>
 	<input type="file" id="upload" hidden />
 			
 	
@@ -208,6 +220,8 @@ export const Projects: React.FC = () => {
 		});
 		if(event_id) history.push(Routes.SCRIPT.replace(':id',String(event_id)))
 	}
+
+	
 
 	const addNewProject = (<>
 			  <button onClick={()=> setShowAddAlert(true)}

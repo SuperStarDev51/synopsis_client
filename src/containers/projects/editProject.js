@@ -6,9 +6,12 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { updateProjectName } from '@containers/projects/initial-state';
 
-export default function FormDialog({showEditModal,projectName}) {
+export default function FormDialog({showEditModal,projectObject, onChange , setShowEditModal}) {
   const [open, setOpen] = React.useState(false);
+  const [inputValue, setInputValue] = React.useState(projectObject.project_name);
+  console.log("projectObject = " , projectObject)
 
   useEffect(()=>{
     if(showEditModal){
@@ -17,13 +20,24 @@ export default function FormDialog({showEditModal,projectName}) {
         setOpen(false);
     }
   },[showEditModal])
+  
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+    setShowEditModal(false)
+    updateProjectName(inputValue, projectObject.id)
+    .then((res) => {
+      console.log("response", res)
+      onChange(res.project.id, 'project_name', res.project.project_name)
+    });
   };
+
+  const onChangeInput = event => {
+    setInputValue(event.target.value);
+  }
 
   console.log("showEditModal",showEditModal)
   return (
@@ -50,8 +64,8 @@ export default function FormDialog({showEditModal,projectName}) {
             label="Name"
             type="text"
             fullWidth
-            value={projectName}
-            
+            value={inputValue}
+            onChange={onChangeInput}
           />
         </DialogContent>
         <DialogActions style={{display: "flex", justifyContent: "center"}}>

@@ -29,7 +29,7 @@ export const eventsReducer = (state = eventsInitialState, { type, payload }: Eve
 
 
 		case EventActionTypes.DELETE_EVENT:
-		 return state.filter((event: Event) => event.id !== payload)
+		 	return state.filter((event: Event) => event.id !== payload)
 	
 
 		case EventActionTypes.SET_VAT:
