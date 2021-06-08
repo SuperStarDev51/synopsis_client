@@ -168,7 +168,7 @@ export const Modals = ({ setScripts }) => {
 		>
 			<ModalBody className="my-1 overflow-auto" style={{maxHeight: 'calc(100vh - 12rem)'}}>
 				<div className="row">
-				{characters.map(character => (
+				{characters.map((character , index )=> (
 					<div key={character.character_id} className="col-3 row align-items-center mb-05">
 						<div
 							className="col-9 d-flex align-items-center p-05 cursor-pointer"
@@ -197,7 +197,7 @@ export const Modals = ({ setScripts }) => {
 								style={{width: '30px'}}
 								className="form-control mr-05 height-1-rem bg-white"
 							/>
-							<span>{character.character_name}</span>
+							<span>{index +1 } . {character.character_name}</span>
 						</div>
 						<div className="col-3">
 							<XCircle
