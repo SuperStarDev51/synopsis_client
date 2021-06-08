@@ -11,7 +11,7 @@ import { updateProjectName } from '@containers/projects/initial-state';
 export default function FormDialog({showEditModal,projectObject, onChange , setShowEditModal}) {
   const [open, setOpen] = React.useState(false);
   const [inputValue, setInputValue] = React.useState(projectObject.project_name);
-  console.log("projectObject = " , projectObject)
+  
 
   useEffect(()=>{
     if(showEditModal){
@@ -39,7 +39,7 @@ export default function FormDialog({showEditModal,projectObject, onChange , setS
     setInputValue(event.target.value);
   }
 
-  console.log("showEditModal",showEditModal)
+  
   return (
     <div>
       {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>

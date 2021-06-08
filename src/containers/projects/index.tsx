@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RootStore } from '@src/store';
 import { useSelector, useDispatch } from 'react-redux';
-// import {Button} from '@components';
+import axios from 'axios';
 import { EventActionTypes } from '@containers/planning/enum';
 import { Event } from '@containers/planning/interfaces';
 import { Route, useHistory } from "react-router-dom";
@@ -18,6 +18,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import EditProject from './editProject';
+import { config } from '../../config';
 
 // import Dropdown from './dropDown';
 
@@ -89,23 +90,45 @@ export const EventItem: React.FC = ({ event, setEventActive, user }) => {
 		setShowdeleteAlert(true);
 	}
   };
+
+  const uploadHandler = (e) =>{
+	
+		const data = new FormData();
+    	data.append('file', e.target.files[0]);
+
+		data.append('project_id', event.id);
+
+		axios.post(config.ipServer + '/imgn/api/v1/project/imgfile/upload', data)
+      	.then((res) => {
+			console.log("res" ,  res.data.img_path)
+
+        	setEventUpdate(event.id, "img_path", res.data.img_path)
+      	});
+		
+  }
+
+  var nonImageStyle = {width: '50%'}
+  var uploadedImageStyle = {maxWidth: '100%', maxHeight: '100%', width: 'auto'}
   
 	return (
 	<>
 	<div>
 	<EditProject showEditModal={showEditModal} projectObject = {event} onChange = {setEventUpdate} setShowEditModal = {setShowEditModal}/>
-	<input type="file" id="upload" hidden />
+	<input type="file" hidden />
 			
 	
 		<div className=" mr-3 mb-2 Mask pointer"> 
-		<label className="label mt-0" htmlFor="upload">    			
-
+		<label className="label mt-0">    			
+			<input type="file" name="file" hidden onChange={uploadHandler}/>
       
 			<div className = "project_profile" >
 			<span className="overLay">
 				<img className="cener" height="50px" width="50px" src="\assets\img\pages/upload-img.png"></img>
 			</span>
-				<img src="assets/icons/navbar/Projects.svg" style={{width: "50%" }} /*marginTop: '45%', marginLeft: "25%"*/></img>
+				<img src={event.img_path == "" || event.img_path == null ? "assets/icons/navbar/Projects.svg": `http://localhost:3000/${event.img_path}`} 
+				style={event.img_path == "" || event.img_path == null ? nonImageStyle: uploadedImageStyle} >
+
+				</img>
 			</div>
 			</label>
 

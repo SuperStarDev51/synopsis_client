@@ -42,19 +42,19 @@ export const addProject = (project: any) => new Promise((resolve,reject) => {
 });
 
 
-	export const deleteProject = (project_id: number, user_id: any) => new Promise((resolve,reject) =>{
-		axios.delete(config.ipServer+'/imgn/api/v1/project/delete', { data: { project_id, user_id }})
-	   .then(function (res: any) {
-			 resolve(res.data)
-	   })
-	 })
-
-	export const getAllUsersCompany = (company_id: number) => new Promise((resolve,reject) => {
-		axios.get(config.ipServer+'/imgn/api/v1/user/company/' + company_id )
-		.then(function (res: any) {
+export const deleteProject = (project_id: number, user_id: any) => new Promise((resolve,reject) =>{
+	axios.delete(config.ipServer+'/imgn/api/v1/project/delete', { data: { project_id, user_id }})
+	.then(function (res: any) {
 			resolve(res.data)
-		})
 	})
+})
+
+export const getAllUsersCompany = (company_id: number) => new Promise((resolve,reject) => {
+	axios.get(config.ipServer+'/imgn/api/v1/user/company/' + company_id )
+	.then(function (res: any) {
+		resolve(res.data)
+	})
+})
 
 
 
