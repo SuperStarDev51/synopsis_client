@@ -1642,7 +1642,7 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 			{rowExpanded && (
 				<Card className={classnames("text-dark d-flex flex-row", {
 					"scene-disabled": scene.scene_status_id === 4,
-				})} style={{height:"800px"}}>
+				})} style={{height:"840px"}}>
 
 					<div className="mt-1" style={{ flex: 1 }}>
 						{/* {topListView} */}
