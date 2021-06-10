@@ -24,9 +24,15 @@ export const Modals = ({ setScripts }) => {
 	const sceneTime = useSelector((state) => state.sceneTime);
 	const user = useSelector((state) => state.user);
 	const [activeStep, setActiveStep] = React.useState(0);
-	const [associatedNumber, setAssociatedNumber] = React.useState(1);
+	const [associatedNumberArrayState, setAssociatedNumberArrayState] = React.useState([]);
 	const [charactersSelectedState, setCharactersSelectedState] = React.useState([]);
+	const [selectCount, setSelectcount] = React.useState(0)
+	const [colorList, setColorList] = React.useState([])
+
 	let charactersSelected = [...charactersSelectedState];
+
+	let bgColor = ['#dce1ff', 'pink', '#DDAE90', '#C3DAEA', '#F4E489' , '#d4459a', '#45bb7a', '#ff324b', '#324bff' ,  '#ccc']
+	let selectedAssociatedNumberArray = [...associatedNumberArrayState]
 
 	const handleDeleteCharacter = characterId => {
 		deleteCharacter(
@@ -56,7 +62,21 @@ export const Modals = ({ setScripts }) => {
 		})
 	};
 
-	const bgColor = ['#dce1ff', '#ccc', 'pink', '#DDAE90', '#C3DAEA', '#F4E489'];
+	useEffect (() => {
+		console.log("Useeffect in modal")
+		characters.map((character , index )=> {
+			let associatedNum = character.associated_num ? character.associated_num : index + 1
+			addCharacter({
+				project_id: activeEvent.id,
+				character_id: character.character_id,
+				associated_num: associatedNum
+			})
+
+			
+		})
+	}, [characters])
+
+	
 
 	return (
 		<>
@@ -174,30 +194,47 @@ export const Modals = ({ setScripts }) => {
 							className="col-9 d-flex align-items-center p-05 cursor-pointer"
 							style={{
 								borderRadius: '.5rem',
-								backgroundColor: character.associated_num || charactersSelectedState.includes(character.character_id) ? bgColor[character.associated_num - 1] : ''
+								backgroundColor:  character.associated_num || charactersSelectedState.includes(character.character_id) ? bgColor[ colorList[index] % 10 ] : ''
 							}}
-							onClick={() => {
-								if (charactersSelected.includes(character.character_id)) {
+							onClick={(e) => {
+								let colorListClone = [...colorList]
+								colorListClone[index] = selectCount
+								setColorList(colorListClone)
+
+								console.log("character.associated_num", character.associated_num)
+								if (charactersSelected.includes(character.character_id)) {    // if existing charater, cancel it
 									let updatedCharacterSelected = charactersSelected.filter(item => item !== character.character_id);
-									setCharactersSelectedState(updatedCharacterSelected);
+									setCharactersSelectedState(updatedCharacterSelected);    // cancel charter selection array
+
+									let selectedCharaterIndex = index + 1
+									let updated_associated_num = selectedAssociatedNumberArray.filter(item => item !== selectedCharaterIndex)
+									setAssociatedNumberArrayState(updated_associated_num)     // cancel character index array
+
 								} else {
 									let updatedCharactersSelected = [...charactersSelected, character.character_id];
 									setCharactersSelectedState(updatedCharactersSelected);
+
+									let selectedCharaterIndex = index + 1
+									let updated_associated_num = [...selectedAssociatedNumberArray, selectedCharaterIndex]
+									setAssociatedNumberArrayState(updated_associated_num)
+
 								}
+								console.log("charactersSelectedState", charactersSelectedState)
+								
 							}}
 						>
 							<input
 								readOnly
-								value={
-									character.associated_num
-										? character.associated_num
-										: charactersSelectedState.includes(character.character_id) ? associatedNumber : ''
+								value={ 
+									character.associated_num ? 
+									 character.associated_num
+									: index +1
 								}
 								type="number"
-								style={{width: '30px'}}
+								style={{width: '38px'}}
 								className="form-control mr-05 height-1-rem bg-white"
 							/>
-							<span>{index +1 } . {character.character_name}</span>
+							<span> {character.character_name}</span>
 						</div>
 						<div className="col-3">
 							<XCircle
@@ -220,16 +257,31 @@ export const Modals = ({ setScripts }) => {
 					className=""
 					disabled={charactersSelectedState.length < 2}
 					onClick={() => {
-						handleSetCharacterAssociated(charactersSelectedState, associatedNumber)
-						setCharactersSelectedState([]);
-						setAssociatedNumber(associatedNumber + 1);
+						handleSetCharacterAssociated(charactersSelectedState, Math.min(...associatedNumberArrayState))
+						setCharactersSelectedState([]); 
+						setAssociatedNumberArrayState([]);
+						setSelectcount(selectCount + 1)
+						
 					}}
 				>
 					Set Associated
 				</Button>
 				<Button color="yellow"
 						className="width-200"
-						onClick={() => setScripts()}>
+						onClick={() => {
+								setScripts()
+								characters.map((character , index )=> {
+									let associatedNum = character.associated_num ? character.associated_num : index + 1
+									let characterIds = []
+									characterIds = [...characterIds, character.character_id]
+									
+									dispatch({
+										type: CharactersActionTypes.SET_CHARACTER_ASSOCIATED,
+										payload: {characterIds, associatedNum},
+									})
+								})
+							}
+						}>
 					<FormattedMessage id='ok'/>
 				</Button>
 			</ModalFooter>
