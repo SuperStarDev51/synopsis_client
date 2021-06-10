@@ -63,7 +63,6 @@ export const Modals = ({ setScripts }) => {
 	};
 
 	useEffect (() => {
-		console.log("Useeffect in modal")
 		characters.map((character , index )=> {
 			let associatedNum = character.associated_num ? character.associated_num : index + 1
 			addCharacter({
@@ -201,7 +200,6 @@ export const Modals = ({ setScripts }) => {
 								colorListClone[index] = selectCount
 								setColorList(colorListClone)
 
-								console.log("character.associated_num", character.associated_num)
 								if (charactersSelected.includes(character.character_id)) {    // if existing charater, cancel it
 									let updatedCharacterSelected = charactersSelected.filter(item => item !== character.character_id);
 									setCharactersSelectedState(updatedCharacterSelected);    // cancel charter selection array
@@ -219,7 +217,6 @@ export const Modals = ({ setScripts }) => {
 									setAssociatedNumberArrayState(updated_associated_num)
 
 								}
-								console.log("charactersSelectedState", charactersSelectedState)
 								
 							}}
 						>
