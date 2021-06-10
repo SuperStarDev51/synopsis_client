@@ -400,6 +400,9 @@ export const AddNewCharacter: React.FunctionComponent<any> = ({ scene, scene_ind
 export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => {
 	const { formatMessage } = useIntl();
 	const { sd, sdId, scene, isListPreview, scene_index, script_index, addNewProp, onDragEnd, changeScenePropValue, changeScenePropValueDB, setReorerd } = props
+	const characterState = useSelector((state: RootStore) => state.characters)
+	let CharacterList = [...characterState]
+
 	const [showDescription, setShowDescription] = React.useState<boolean>(false);
 	const [rowExpanded, setRowExpanded] = React.useState<boolean>(false);
 	// const [showAddCharacter, setShowAddCharacter] = React.useState<boolean>(false);
@@ -412,7 +415,7 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 	const activeEvent = useSelector((state: RootStore) => state.events.filter((event: any) => event.preview)[0], shallowEqual);
 	const sceneTime = useSelector((state: RootStore) => state.sceneTime.filter(st => st.project_id == activeEvent.id), shallowEqual)
 	const sceneLocation = useSelector((state: RootStore) => state.sceneLocation.filter(sl => sl.project_id == activeEvent.id), shallowEqual)
-
+	
 
 	if (!window.x) {
 		let x = {};
@@ -1457,6 +1460,20 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 		</div>
 	)
 
+	let associated_numList = []
+	let non_repeated_characterIDList = []
+
+	scene.characters.length?scene.characters.map((each_character) =>{
+		let associated_num = CharacterList.find(item => item.id === each_character.character_id)?.associated_num
+		if(associated_numList.includes(associated_num)){
+
+		}else{
+			associated_numList.push(associated_num)
+			non_repeated_characterIDList.push(each_character.character_id)
+		}
+		
+	}):null
+
 	const sceneDetails = (
 		<div className={classnames("d-flex", {})} style={{ flex: 1 }}>
 			<div
@@ -1489,16 +1506,20 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 										<FormattedMessage id={field.name} />
 									</div>
 								) : null}
+
 								{scene.characters.length
 								? scene.characters
 									.filter(ch => ch.character_type === 0)
+									.filter(ch => non_repeated_characterIDList.includes(ch.character_id))
 									.sort((a, b) => a.character_name.localeCompare(b.character_name))
 									.map((character, key) => (
+
 										<Chip
 											key={key}
 											className={classnames("mr-05 bg-light-gray text-bold-600", { "chip-smaller": !isListPreview })}
 											avatarColor="danger"
-											text={character.character_name}
+											text={CharacterList.find(item => item.id === character.character_id)?.associated_num }
+											
 										/>
 								)) : null}
 							</div>
