@@ -74,6 +74,7 @@ const ImageSelector: React.FC<ImageSelectorProps> = (props: ImageSelectorProps) 
 	};
 	const onCropComplete = (croppedArea: any, croppedAreaPixels: any) => {
 		console.log(croppedAreaPixels);
+		console.log(croppedArea);
 		setCropArea(croppedAreaPixels);
 	};
 

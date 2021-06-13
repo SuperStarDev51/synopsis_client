@@ -14,6 +14,7 @@ import 'react-phone-input-2/lib/style.css';
 import { UserActionTypes } from '../user/enums';
 import { UserInterface } from '../user/interfaces';
 import NoProfileUserImage from './assets/noProfileUserImage.png';
+import { updateMyProfile } from './action';
 
 const styles = makeStyles(() => ({
 	root: {
@@ -126,6 +127,7 @@ const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) 
 			userInfo.phoneNumber = values.phoneNumber;
 			userInfo.photoURL = selected;
 			console.log(userInfo);
+			updateMyProfile(userInfo);
 			onFormSubmit(userInfo);
 			setTimeout(() => {
 				setOpen(true)
