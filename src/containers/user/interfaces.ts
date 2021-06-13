@@ -26,8 +26,8 @@ export interface ListInterface {
 	task_category: string;
 	color: string;
 	createdAt: any;
-	deletedAt:any;
-	user_id : number;
+	deletedAt: any;
+	user_id: number;
 	project_id: number;
 	tasks: {
 		canban: CanbanTaskInterface[];
@@ -41,7 +41,10 @@ export interface UserInterface {
 	password: string;
 	updatedAt: any;
 	verify_email_token: string;
-	last_name: string
+	last_name: string;
+	fullName?: string;
+	phoneNumber?: string;
+	photoURL?: string;
 	lists: ListInterface[];
 	company_id: number;
 	country_id: number;

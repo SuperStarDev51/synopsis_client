@@ -36,12 +36,12 @@ const AdditionalMenu = ({ events }) => {
 									className="additional-menu__item"
 									data-tip = {item.tooltip}
 								>
-									
+
 										{item.icon}
 
 										<span >{item.title}</span>
-									
-									
+
+
 
 								</Link>
 							</li>
@@ -53,10 +53,12 @@ const AdditionalMenu = ({ events }) => {
 				className="additional-menu__icon"
 				style={avatar_style}
 				onClick={()=> setIsOpen(!isOpen)}
+				onMouseOver={()=> setIsOpen(true)}
+				// onMouseLeave={()=> setIsOpen(false)}
 			>
-				
+
 				<Avatar className="mr-1" size='md' img={"../../../assets/img/Eliran.jpeg"} />
-				
+
 			</div>
 		</div>
 	)

@@ -19,5 +19,6 @@ export enum Routes {
 	PROJECTS = '/',
 	PLANNING = '/:id/planning',
 	BREAKDOWN = ':id/breakdown',
-	NOT_FOUND = '/not-found'
+	NOT_FOUND = '/not-found',
+	PROFILE = '/:id/profile'
 }
