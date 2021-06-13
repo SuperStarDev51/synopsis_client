@@ -4,10 +4,11 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slider from '@material-ui/core/Slider';
 import Cropper from 'react-easy-crop';
+import getCroppedImg from './action/imgCrop';
+
 const useStyles = makeStyles(() => ({
 	root: {
 		height: '180px',
@@ -47,7 +48,21 @@ const useStyles = makeStyles(() => ({
 		background: 'rgba(0,0,0,0.2)',
 		height: '60px',
 		color: 'white'
-	}
+	},
+	imgContainer: {
+		position: 'relative',
+		flex: 1,
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		height: '200px',
+		width: '200px',
+		borderRadius: '50%',
+	  },
+	  img: {
+		maxWidth: '100%',
+		maxHeight: '100%',
+	  },
 }));
 
 interface ImageSelectorProps {
@@ -59,24 +74,24 @@ const ImageSelector: React.FC<ImageSelectorProps> = (props: ImageSelectorProps) 
 	const classes = useStyles();
 	const { selected, setSelected } = props;
 	const [open, setOpen] = React.useState(false);
+	const [croppedImage, setCroppedImage] = React.useState(selected)
 	const [crop, setCrop] = React.useState({
 		x: 0,
-		y: 0
+		y: 0,
+
 	});
 	const [cropArea, setCropArea] = React.useState({
 		x: 0,
-		y: 0
+		y: 0,
+		width: '200px',
+        height: '200px',
 	});
 	const [zoom, setZoom] = React.useState(1);
 	const [aspectRation, setAspectRation] = React.useState(1);
 	const onCropChange = (cropValue: React.SetStateAction<{ x: number; y: number }>) => {
 		setCrop(cropValue);
 	};
-	const onCropComplete = (croppedArea: any, croppedAreaPixels: any) => {
-		console.log(croppedAreaPixels);
-		console.log(croppedArea);
-		setCropArea(croppedAreaPixels);
-	};
+
 
 	const onZoomChange = (zoomValue: any) => {
 		setZoom(zoomValue);
@@ -103,16 +118,52 @@ const ImageSelector: React.FC<ImageSelectorProps> = (props: ImageSelectorProps) 
 		}
 	};
 
-	const handleClose = () => {
-		setOpen(false);
+
+
+
+	const showCroppedImage = React.useCallback(async () => {
+		try {
+		  const croppedImage = await getCroppedImg(
+			selected,
+			cropArea,
+		  )
+		  console.log('donee', { croppedImage })
+		  setCroppedImage(croppedImage)
+		  setSelected(croppedImage)
+		} catch (e) {
+		  console.error(e)
+		}
+	  }, [cropArea])
+
+	  const onCropComplete = (croppedArea: any, croppedAreaPixels: any) => {
+		setCropArea(croppedAreaPixels);
+
 	};
+	const handleClose = () => {
+		showCroppedImage();
+		setOpen(false);
+
+	};
+
+
 	return (
 		<div className={classes.root}>
-			<div className={classes.avatar} style={{ backgroundImage: `url(${selected})`, backgroundPositionX:cropArea.x, backgroundPositionY:cropArea.y }}>
+			<div className={classes.avatar}>
+			<div
+			className={classes.imgContainer}>
+			{/* // style={{
+			// 	// backgroundImage: `url(${croppedImage})`,
+			// 	// backgroundPosition:`${cropArea.x}px ${cropArea.y}px` ,
+			// 	// width: cropArea.width,
+            // 	// height: cropArea.height,
+			// 	}}> */}
+					   <img src={selected} alt="Cropped" className={classes.img} />
+
 				<input type="file" id="selectedFile" style={{ display: 'none' }} onChange={e => selectImage(e)} />
 				<ButtonBase className={classes.inputBtn} onClick={openToSelectImage}>
 					Upload Image
 				</ButtonBase>
+			</div>
 			</div>
 			<Dialog maxWidth={'md'} open={open} onClose={handleClose} >
 				<DialogTitle >Crop Image</DialogTitle>
