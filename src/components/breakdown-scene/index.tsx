@@ -8,7 +8,7 @@ import { eighthsFormat, SupplierWithJob } from '../../helpers/helpers';
 import Select from "react-select"
 import * as moment from 'moment';
 import { Menu, MenuItem, Divider, Slide } from '@material-ui/core';
-
+import AssignCharacter from './AssignCharacter';
 import {
 	Card,
 	CardHeader,
@@ -410,12 +410,15 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 	// const [isLocationPopupOpen, setIsLocationPopupOpen] = React.useState<boolean>(false);
 	const [addNewItemPreview, setAddNewItemPreview] = React.useState<any>(false);
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+	const [anchorACEl, setAnchorACEl] = React.useState<null | HTMLElement>(null);
+	
 	// const [isSceneCollapsed, setIsSceneCollapsed] = React.useState<any>(false);
 	const [isCollapsed, setIsCollapsed] = React.useState<any>(props.isCollapsed);
 	const activeEvent = useSelector((state: RootStore) => state.events.filter((event: any) => event.preview)[0], shallowEqual);
 	const sceneTime = useSelector((state: RootStore) => state.sceneTime.filter(st => st.project_id == activeEvent.id), shallowEqual)
 	const sceneLocation = useSelector((state: RootStore) => state.sceneLocation.filter(sl => sl.project_id == activeEvent.id), shallowEqual)
-	
+	const [showDialog, setShowDialog] =  React.useState<any>(false);
 
 	if (!window.x) {
 		let x = {};
@@ -436,6 +439,7 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 
 	// console.log(activeEvent, sceneTime, sceneLocation);
 	// const [isSceneTimeOpen, setIsSceneTimeOpen] = React.useState<boolean>(false);
+	// 
 
 	// const allSuppliers = useSelector((state: RootStore) => state.suppliers)
 	// const suppliersRootStore: any[] = allSuppliers.map((suppliers, listIndex) => { if (listIndex != 0 && suppliers.suppliers && suppliers.suppliers.default) return suppliers.suppliers.default; else return }).filter(a => a)
@@ -1475,7 +1479,9 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 	}):null
 
 	const sceneDetails = (
+		
 		<div className={classnames("d-flex", {})} style={{ flex: 1 }}>
+			<AssignCharacter showDialog={showDialog} CharacterList = {CharacterList} associatedNumList = {associated_numList} anchorACEl = {anchorACEl} setShowDialog = {setShowDialog} setAnchorACEl = {setAnchorACEl}  />
 			<div
 				className={classnames("d-flex-column justify-content-between", {
 					'w-100': !isListPreview,
@@ -1506,7 +1512,7 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 										<FormattedMessage id={field.name} />
 									</div>
 								) : null}
-
+					
 								{scene.characters.length
 								? scene.characters
 									.filter(ch => ch.character_type === 0)
@@ -1514,6 +1520,7 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 									.sort((a, b) => a.character_name.localeCompare(b.character_name))
 									.map((character, key) => (
 
+										<div onClick = {(ev) => {setShowDialog(true); setAnchorACEl(ev.currentTarget)}}>
 										<Chip
 											key={key}
 											className={classnames("mr-05 bg-light-gray text-bold-600", { "chip-smaller": !isListPreview })}
@@ -1521,6 +1528,7 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 											text={CharacterList.find(item => item.id === character.character_id)?.associated_num }
 											
 										/>
+										</div>
 								)) : null}
 							</div>
 							:
