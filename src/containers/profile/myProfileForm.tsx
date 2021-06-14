@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { makeStyles, TextField, Grid, Button, Typography, Snackbar} from '@material-ui/core';
+import { makeStyles, TextField, Grid, Button, Typography, Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -15,6 +15,15 @@ import { UserActionTypes } from '../user/enums';
 import { UserInterface } from '../user/interfaces';
 import NoProfileUserImage from './assets/noProfileUserImage.png';
 import { updateMyProfile } from './action';
+import 'react-phone-number-input/style.css';
+// import PhoneInput from 'react-phone-number-input';
+import ReactPhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+import clsx from 'clsx';
+
+// const mystyles = {
+// 	position: 'absolute !important',
+//  } as React.CSSProperties;
 
 const styles = makeStyles(() => ({
 	root: {
@@ -46,20 +55,18 @@ const styles = makeStyles(() => ({
 	textField: {
 		marginTop: '20px'
 	},
+	phoneContainer:{
+		paddingBottom: '5px',
+	},
+	phoneInput: {
+		border: '0 !important',
+		width: '100% !important',
+		boxShadow: 'none !important'
+	},
 	countryInput: {
-		paddingRight: '5px',
-
-		'& button': {
-			border: 'none !important',
-			color: '#fff',
-			padding: '0',
-			paddingRight: '5px',
-			textAlign: 'left',
-			'& span': {
-				padding: '0',
-				paddingRight: '5px'
-			}
-		}
+		padding: '5px',
+		left: 0,
+		zIndex: 99,
 	},
 	submitBtn: {
 		marginTop: '20px !important',
@@ -71,9 +78,9 @@ const styles = makeStyles(() => ({
 	}
 }));
 
-function Alert(props: any) {
+function Alert (props: any) {
 	return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
+}
 
 interface MyProfileFormProps {
 	userInfo: UserInterface;
@@ -86,6 +93,7 @@ const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) 
 	const [selected, setSelected] = React.useState('');
 	const [selectedCountry, setSelectedCountry] = React.useState('US');
 	const [open, setOpen] = React.useState(false);
+	const [phone, setPhone] = React.useState('');
 
 	// Form Validation Schema
 	const validationSchema = yup.object({
@@ -117,7 +125,7 @@ const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) 
 	const formik = useFormik({
 		initialValues: {
 			fullName: '',
-			phoneNumber: '',
+			phoneNumber: '+1',
 			email: ''
 		},
 		validationSchema: validationSchema,
@@ -126,11 +134,10 @@ const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) 
 			userInfo.email = values.email;
 			userInfo.phoneNumber = values.phoneNumber;
 			userInfo.photoURL = selected;
-			console.log(userInfo);
 			updateMyProfile(userInfo);
 			onFormSubmit(userInfo);
 			setTimeout(() => {
-				setOpen(true)
+				setOpen(true);
 			}, 1000);
 		}
 	});
@@ -173,28 +180,22 @@ const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) 
 							}}
 							fullWidth
 						/>
-						{/* <PhoneInput/> */}
-
-						<TextField
-							required
-							id="phoneNumber"
-							name="phoneNumber"
-							onChange={formik.handleChange}
-							placeholder="+1 253 625 1555"
-							className={classes.textField}
-							error={formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)}
-							helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
-							InputProps={{
-								startAdornment: (
-									<ReactFlagsSelect
-										selected={selectedCountry}
-										onSelect={code => setSelectedCountry(code)}
-										showSelectedLabel={false}
-										className={classes.countryInput}
-									/>
-								)
+						<ReactPhoneInput
+							buttonClass={classes.countryInput}
+							containerClass ={clsx( 'MuiInput-underline', classes.textField, classes.phoneContainer)}
+							inputClass={clsx(classes.phoneInput)}
+							inputStyle={{
+								width: '100% !important'
 							}}
-							fullWidth
+							inputProps={{
+								name: 'phone',
+								required: true,
+								autoFocus: true,
+
+							}}
+							country={'us'}
+							value={phone}
+							onChange={setPhone}
 						/>
 
 						<Button type="submit" className={classes.submitBtn}>
@@ -203,7 +204,7 @@ const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) 
 					</div>
 				</form>
 			</Grid>
-			<Snackbar open={open} onClose={()=>setOpen(false)} autoHideDuration={6000}>
+			<Snackbar open={open} onClose={() => setOpen(false)} autoHideDuration={6000}>
 				<Alert severity="success">Profile Updated</Alert>
 			</Snackbar>
 		</Grid>
