@@ -9,10 +9,12 @@ export default function FormDialog({showDialog ,CharacterList , associatedNumLis
  
   const [open, setOpen] = React.useState(false);
   const [keyword, setKeyword] = React.useState("")
+  const [showAddCharacterform, setShowAddCharacterform] = React.useState(false);
+
   const id = open ? 'simple-popover' : undefined;
 
-  console.log("CharacterList", CharacterList)
-  console.log("associatedNumList", associatedNumList)
+  // console.log("CharacterList", CharacterList)
+  // console.log("associatedNumList", associatedNumList)
 
   useEffect(()=>{
     if(showDialog){
@@ -36,9 +38,15 @@ export default function FormDialog({showDialog ,CharacterList , associatedNumLis
     setInputValue(event.target.value);
   }
 
+  const AddCharacterFunction = () => {
+    setShowAddCharacterform('flase')
+
+  }
+
 
 
   const searchBarStyle = {width: '270px', padding:"0.5rem", margin: '20px'}
+  const AddCharacterspanstyle = { color: 'blue' , margin : '20px 40px' , cursor: 'pointer'}
   return (
     <Popover
         id={id}
@@ -66,9 +74,9 @@ export default function FormDialog({showDialog ,CharacterList , associatedNumLis
             </div>
             <div >
               <h5 style={{margin: '20px'}}>ASSIGN CHARACTERS</h5>
-              <div style = {{width: "270px" , height: '300px', overflowY: 'auto' , margin: '20px'}}>
+              <div style = {{width: "270px" , height: '185px', overflowY: 'auto' , margin: '20px' , borderBottom: '1px solid' }}>
                   {
-                    CharacterList.sort((a, b) => a.id > b.id? a: b)
+                    CharacterList.sort((a, b) => a.id - b.id)
                     .map((character, index) => (
                         <div> 
                           <input type="checkbox" style={{margin:'0 20px'}} checked = {associatedNumList.includes(index + 1)?"checked":""}/>
@@ -81,11 +89,36 @@ export default function FormDialog({showDialog ,CharacterList , associatedNumLis
                           />
                           {character.character_name}
                         </div>
+                      )
                     )
-                  )}
+                  }
               </div>
-              <div className = {classnames('inline-flex')}>
-                 
+              <div style= {{marginBottom: '20px'}}>
+                {
+                !showAddCharacterform && (
+                 <span style = {AddCharacterspanstyle} onClick = {() => setShowAddCharacterform('true')} >
+                    +Add character
+                 </span>
+                )
+                }
+                {
+                  showAddCharacterform && (
+                    <div>
+                      <div className = {classnames('inline-flex')}>
+                        <input placeholder = "CHARACTER NAME..." style = {{margin: "0 40px" , width:'150px', border:'none', borderBottom:'1px solid'}}></input>
+                        <input value = {CharacterList.length + 1} style = {{ border:'none', width: '30px',  borderBottom:'1px solid'}}></input>
+                      </div>
+                      <div className = {classnames('inline-flex')} style = {{margin: '0 40px'}}>
+                        <input type='checkbox' style = {{margin : '20px 10px 0 0'}}></input>
+                        <span>Tag all mentions in script</span>
+                      </div>
+                      <div className = {classnames('inline-flex')} style = {{margin: '20px 40px'}}>
+                        <button className = {classnames('btn btn-info')} style= {{margin: '0 20px'}} onClick = { () => AddCharacterFunction()}>Create</button>
+                        <button className = {classnames('btn btn-info')} onClick = {() => setShowAddCharacterform(false)}>Cancel</button>
+                      </div>
+                    </div>
+                  )
+                }
               </div> 
             </div>
 
