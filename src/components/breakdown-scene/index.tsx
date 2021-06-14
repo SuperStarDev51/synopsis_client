@@ -1464,8 +1464,10 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 		</div>
 	)
 
-	let associated_numList = []
-	let non_repeated_characterIDList = []
+	let associated_numList: any[] = []
+	let non_repeated_characterIDList: any[] = []
+
+
 
 	scene.characters.length?scene.characters.map((each_character) =>{
 		let associated_num = CharacterList.find(item => item.id === each_character.character_id)?.associated_num
@@ -1517,8 +1519,8 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 								? scene.characters
 									.filter(ch => ch.character_type === 0)
 									.filter(ch => non_repeated_characterIDList.includes(ch.character_id))
-									.sort((a, b) => a.character_name.localeCompare(b.character_name))
-									.map((character, key) => (
+									.sort((a: { character_id: number; }, b: { character_id: number; }) => a.character_id - b.character_id)
+									.map((character: { character_id: any; }, key: React.Key | undefined) => (
 
 										<div onClick = {(ev) => {setShowDialog(true); setAnchorACEl(ev.currentTarget)}}>
 										<Chip
