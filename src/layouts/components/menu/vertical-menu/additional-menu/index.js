@@ -34,7 +34,7 @@ const AdditionalMenu = ({ events }) => {
 							<li
 								className={classnames("nav-item R")}>
 								<Link
-									to={item.navLink}
+									to={item.title==='Profile'?'/profile':''}
 									onClick={() => setIsOpen(!isOpen)}
 									className="additional-menu__item"
 									data-tip = {item.tooltip}
