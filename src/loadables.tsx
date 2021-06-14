@@ -79,3 +79,8 @@ export const Register: any = Loadable({
 	loader: () => import('@containers/register').then((comp: any) => comp),
 	loading: () => <Spinner />
 });
+
+export const UserProfile: any = Loadable({
+	loader: () => import('@containers/profile').then((comp: any) => comp),
+	loading: () => <Spinner />
+});

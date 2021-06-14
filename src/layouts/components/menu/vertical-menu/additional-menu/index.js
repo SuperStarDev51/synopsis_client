@@ -23,25 +23,28 @@ const AdditionalMenu = ({ events }) => {
 
 	const avatar_style = {width: "3rem", height:"3rem" , postion:'absolute',borderRadius: "50%", margin:"0 20px" }
 	return (
+
 		<div ref={ref} className="additional-menu" >
 			{isOpen && (
-				<div className="additional-menu__dropdown">
+
+				<div className="additional-menu__dropdown" onMouseEnter={()=> setIsOpen(true)} onMouseLeave={()=> setIsOpen(false)}>
+				<div className="wraper"></div>
 					<ul className="navigation-main arrow-right">
 						{additionalNavItems.map(item => (
 							<li
 								className={classnames("nav-item R")}>
 								<Link
-									to={item.navLink}
+									to={item.title==='Profile'?'/profile':''}
 									onClick={() => setIsOpen(!isOpen)}
 									className="additional-menu__item"
 									data-tip = {item.tooltip}
 								>
-									
+
 										{item.icon}
 
 										<span >{item.title}</span>
-									
-									
+
+
 
 								</Link>
 							</li>
@@ -53,10 +56,13 @@ const AdditionalMenu = ({ events }) => {
 				className="additional-menu__icon"
 				style={avatar_style}
 				onClick={()=> setIsOpen(!isOpen)}
+				onMouseEnter={()=> setIsOpen(true)}
+				onMouseLeave={()=> setIsOpen(false)}
+
 			>
-				
+
 				<Avatar className="mr-1" size='md' img={"../../../assets/img/Eliran.jpeg"} />
-				
+
 			</div>
 		</div>
 	)

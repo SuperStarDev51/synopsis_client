@@ -62,7 +62,7 @@ export const PrivateRoute = ({ component: Component, ...rest }: any): JSX.Elemen
 	/>
 )};
 
-export const AppRoute = ({ component: Component, fullLayout, ...rest }:any) => {
+export const AppRoute = ({ component: Component, fullLayout, ...rest }: any) => {
 	const user = useSelector((state: RootStore) => state.user)
 	return (
 	  <Route
@@ -72,7 +72,7 @@ export const AppRoute = ({ component: Component, fullLayout, ...rest }:any) => {
 			<ContextLayout.Consumer>
 			  {context => {
 				if( context && context.state ) {
-					let LayoutTag =
+					const LayoutTag =
 					fullLayout === true
 						? context.fullLayout
 						: context.state.activeLayout === "horizontal"
@@ -98,7 +98,7 @@ export const App = hot(() => {
 	const state = useSelector((state: RootStore) => state)
 	const history = useHistory();
 	const events = state.events
-	let URL = window.location.pathname
+	const URL = window.location.pathname
 	const activeEvent = events.filter((event: Event) => event.preview)[0];
 	const user = state.user;
 
@@ -106,7 +106,7 @@ export const App = hot(() => {
 		if( activeEvent && activeEvent.id ) {
 
 			addProject({user_id: user.id, company_id: user.company_id, project_id: activeEvent.id })
-				.then((res:any) => {
+				.then((res: any) => {
 					if (res?.scene_time) {
 						dispatch(scenesBreakdownActions.setScenetime(res.scene_time));
 					}
@@ -116,7 +116,7 @@ export const App = hot(() => {
 				});
 
 			getSuppliersList(activeEvent.id)
-				.then((res:any) => {
+				.then((res: any) => {
 					dispatch({
 						type: SuppliersActionTypes.SET_SUPPLIERS_GROUP,
 						payload: res
@@ -152,8 +152,8 @@ export const App = hot(() => {
 	React.useEffect(() => {
 		if( user && user.company_id && URL !== Routes.NOT_FOUND ){
 			getAllProjectsCompany(user.company_id, user.id)
-			.then((res:any) => {
-				let EventID = Number(URL.split('/')[1])
+			.then((res: any) => {
+				const EventID = Number(URL.split('/')[1])
 					dispatch({
 						type: EventActionTypes.SET_EVENTS,
 						payload: EventID > 0 ? res.map((event: Event, i: number)=>{
@@ -171,7 +171,7 @@ export const App = hot(() => {
 	React.useEffect(() => {
 		if( user && user.company_id && URL !== Routes.NOT_FOUND ){
 			getAllCompanyUsers(user.company_id)
-				.then((res:any) => {
+				.then((res: any) => {
 					dispatch({
 						type: UserActionTypes.SET_ALL_COMPANY_USERS,
 						payload: res
@@ -218,8 +218,8 @@ React.useEffect(() => {
 
 React.useEffect(() => {
 	if ( isAuth() ) {
-		let EventID = Number(URL.split('/')[1])
-		let Route = URL.split('/')[2]
+		const EventID = Number(URL.split('/')[1])
+		const Route = URL.split('/')[2]
 		if ( EventID ) {
 			if( Route ) {
 					const setEvent = (event_id: number): void => {
@@ -355,6 +355,7 @@ React.useEffect(() => {
 
 		<AppRoute path={Routes.SCRIPT} exact={true} component={Loadables.Script} />
 		<AppRoute path={Routes.BUDGET} exact={true} component={Loadables.Budget} />
+		<AppRoute path={Routes.PROFILE} exact={true} component={Loadables.UserProfile} />
 		{/* <AppRoute path={Routes.BUDGETS} exact={true} component={Loadables.Budget} /> */}
 	</Switch>
 )});
