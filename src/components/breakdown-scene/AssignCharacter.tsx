@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
+import * as React from 'react';
 import { RootStore } from '@src/store';
 import TextField from '@material-ui/core/TextField';
 import Popover from '@material-ui/core/Popover';
 import Chip from "@vuexy/chips/ChipComponent"
 import classnames from 'classnames';
 
-export default function FormDialog({showDialog ,CharacterList , associatedNumList , anchorACEl , setShowDialog, setAnchorACEl}) {
+export const  AssignCharacter: React.FunctionComponent = ({showDialog ,CharacterList , associatedNumList , anchorACEl , setShowDialog, setAnchorACEl}) => {
  
   const [open, setOpen] = React.useState(false);
   const [keyword, setKeyword] = React.useState("")
@@ -16,7 +16,7 @@ export default function FormDialog({showDialog ,CharacterList , associatedNumLis
   // console.log("CharacterList", CharacterList)
   // console.log("associatedNumList", associatedNumList)
 
-  useEffect(()=>{
+  React.useEffect(()=>{
     if(showDialog){
         setOpen(true);
     }else{
@@ -113,7 +113,7 @@ export default function FormDialog({showDialog ,CharacterList , associatedNumLis
                         <span>Tag all mentions in script</span>
                       </div>
                       <div className = {classnames('inline-flex')} style = {{margin: '20px 40px'}}>
-                        <button className = {classnames('btn btn-info')} style= {{margin: '0 20px'}} onClick = { () => AddCharacterFunction()}>Create</button>
+                        <button className = {classnames('btn btn-info')} style= {{margin: '0 20px'}} onClick = { () => AddCharacterFunction}>Create</button>
                         <button className = {classnames('btn btn-info')} onClick = {() => setShowAddCharacterform(false)}>Cancel</button>
                       </div>
                     </div>
@@ -128,3 +128,5 @@ export default function FormDialog({showDialog ,CharacterList , associatedNumLis
       </Popover>
   );
 }
+
+export default AssignCharacter;
