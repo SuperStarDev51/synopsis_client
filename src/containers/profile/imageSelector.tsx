@@ -102,8 +102,9 @@ const ImageSelector: React.FC<ImageSelectorProps> = (props: ImageSelectorProps) 
 		setOpen(true);
 		setSelected(data);
 	};
+	const fileReader = new FileReader();
 	const selectImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const fileReader = new FileReader();
+
 		if (e.target.files != null) {
 			fileReader.readAsDataURL(e.target.files[0]);
 			fileReader.addEventListener('load', function () {
@@ -115,7 +116,6 @@ const ImageSelector: React.FC<ImageSelectorProps> = (props: ImageSelectorProps) 
 	const showCroppedImage = React.useCallback(async () => {
 		try {
 			const croppedImage = await getCroppedImg(selected, cropArea);
-			//   console.log('donee', { croppedImage })
 			setSelected(croppedImage);
 		} catch (e) {
 			console.error(e);
@@ -127,14 +127,14 @@ const ImageSelector: React.FC<ImageSelectorProps> = (props: ImageSelectorProps) 
 	};
 	const handleClose = () => {
 		showCroppedImage();
-		setOpen(false);
+		setOpen(false)
 	};
 
 	return (
 		<div className={classes.root}>
 			<div className={classes.avatar}>
 				<div className={classes.imgContainer}>
-					<img src={selected} alt="Cropped" className={classes.img} />
+					<img src={`${selected}`} alt="Cropped" id="croppedImageHere" className={classes.img} />
 
 					<input type="file" id="selectedFile" style={{ display: 'none' }} onChange={e => selectImage(e)} />
 					<ButtonBase className={classes.inputBtn} onClick={openToSelectImage}>

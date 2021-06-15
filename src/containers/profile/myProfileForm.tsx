@@ -8,18 +8,16 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import ReactFlagsSelect from 'react-flags-select';
 import 'yup-phone';
 import 'react-phone-input-2/lib/style.css';
-import { UserActionTypes } from '../user/enums';
 import { UserInterface } from '../user/interfaces';
 import NoProfileUserImage from './assets/noProfileUserImage.png';
-import { updateMyProfile } from './action';
 import 'react-phone-number-input/style.css';
 // import PhoneInput from 'react-phone-number-input';
 import ReactPhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import clsx from 'clsx';
+import { updateUserProfileThunk } from './action/thunk';
 
 // const mystyles = {
 // 	position: 'absolute !important',
@@ -90,10 +88,11 @@ interface MyProfileFormProps {
 const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) => {
 	const classes = styles();
 	const { userInfo, onFormSubmit } = props;
-	const [selected, setSelected] = React.useState('');
-	const [selectedCountry, setSelectedCountry] = React.useState('US');
+	const [selected, setSelected] = React.useState(userInfo.profileImage);
 	const [open, setOpen] = React.useState(false);
 	const [phone, setPhone] = React.useState('');
+
+
 
 	// Form Validation Schema
 	const validationSchema = yup.object({
@@ -101,11 +100,6 @@ const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) 
 			.string()
 			.min(2, 'Full should be of minimum 2 characters length')
 			.required('Full Name is required'),
-		// validate phone number strictly in the given region with custom error message
-		phoneNumber: yup
-			.string()
-			.phone(`${selectedCountry}`, true, 'Phone Number is Invalid')
-			.required(),
 
 		email: yup
 			.string()
@@ -114,10 +108,11 @@ const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) 
 	});
 
 	React.useEffect(() => {
-		if (userInfo.photoURL === undefined || userInfo.photoURL === '') {
+		console.log(userInfo);
+		if (userInfo.profileImage === undefined || userInfo.profileImage === '') {
 			setSelected(NoProfileUserImage);
 		} else {
-			setSelected(userInfo.photoURL);
+			setSelected(userInfo.profileImage);
 		}
 	}, [userInfo]);
 
@@ -125,19 +120,19 @@ const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) 
 	const formik = useFormik({
 		initialValues: {
 			fullName: '',
-			phoneNumber: '+1',
 			email: ''
 		},
 		validationSchema: validationSchema,
 		onSubmit: values => {
 			userInfo.fullName = values.fullName;
 			userInfo.email = values.email;
-			userInfo.phoneNumber = values.phoneNumber;
-			userInfo.photoURL = selected;
-			updateMyProfile(userInfo);
+			userInfo.phoneNumber = phone;
+			userInfo.profileImage = selected;
+			console.log(userInfo);
 			onFormSubmit(userInfo);
 			setTimeout(() => {
 				setOpen(true);
+				localStorage.setItem('user', JSON.stringify(userInfo));
 			}, 1000);
 		}
 	});
@@ -147,7 +142,7 @@ const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) 
 			<Grid item className={classes.container}>
 				<form className={classes.form} onSubmit={formik.handleSubmit}>
 					<div className={classes.formLayout}>
-						<ImageSelector selected={selected} setSelected={setSelected} />
+						<ImageSelector selected={selected as string} setSelected={setSelected} />
 						<Typography variant="h4" className={classes.formTitle}>
 							My Profile
 						</Typography>
@@ -198,13 +193,13 @@ const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) 
 							onChange={setPhone}
 						/>
 
-						<Button type="submit" className={classes.submitBtn}>
+						<Button stype='submit' className={classes.submitBtn}>
 							Save
 						</Button>
 					</div>
 				</form>
 			</Grid>
-			<Snackbar open={open} onClose={() => setOpen(false)} autoHideDuration={6000}>
+			<Snackbar open={open} onClose={() => setOpen(false)} autoHideDuration={2000}>
 				<Alert severity="success">Profile Updated</Alert>
 			</Snackbar>
 		</Grid>
@@ -219,10 +214,7 @@ const mapStateToProps = (state: { user: UserInterface }) => {
 const mapDispatchToProps = (dispatch: React.Dispatch<any>) => {
 	return {
 		onFormSubmit: (userData: any) =>
-			dispatch({
-				type: UserActionTypes.SET_USER,
-				payload: userData
-			})
+			dispatch(updateUserProfileThunk(userData))
 	};
 };
 export default compose(connect(mapStateToProps, mapDispatchToProps)(MyProfileForm));

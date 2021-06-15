@@ -44,7 +44,7 @@ export interface UserInterface {
 	last_name: string;
 	fullName?: string;
 	phoneNumber?: string;
-	photoURL?: string;
+	profileImage?: string;
 	lists: ListInterface[];
 	company_id: number;
 	country_id: number;
