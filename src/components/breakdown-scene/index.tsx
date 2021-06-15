@@ -1052,7 +1052,7 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 
 
 
-
+	
 	// const actorCharacters = scene.characters.filter(item => item.character_type === 0)
 	// const supportCharacters = scene.characters.filter(item => item.character_type === 1)
     //
@@ -1467,8 +1467,6 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 	let associated_numList: any[] = []
 	let non_repeated_characterIDList: any[] = []
 
-
-
 	scene.characters.length?scene.characters.map((each_character) =>{
 		let associated_num = CharacterList.find(item => item.id === each_character.character_id)?.associated_num
 		if(associated_numList.includes(associated_num)){
@@ -1483,7 +1481,7 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 	const sceneDetails = (
 		
 		<div className={classnames("d-flex", {})} style={{ flex: 1 }}>
-			<AssignCharacter showDialog={showDialog} CharacterList = {CharacterList} associatedNumList = {associated_numList} anchorACEl = {anchorACEl} setShowDialog = {setShowDialog} setAnchorACEl = {setAnchorACEl}  />
+			<AssignCharacter showDialog={showDialog} associatedNumList = {associated_numList} anchorACEl = {anchorACEl} setShowDialog = {setShowDialog} setAnchorACEl = {setAnchorACEl}  project_id = {activeEvent.id} project_scene_id = {scene.project_scene_id}/>
 			<div
 				className={classnames("d-flex-column justify-content-between", {
 					'w-100': !isListPreview,
