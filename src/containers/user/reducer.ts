@@ -4,7 +4,7 @@ import { UserActionTypes } from './enums';
 
 export default (state = userInitialState, { type, payload }: UserActionInterface): UserInterface[] => {
 	const copy = [...state];
-
+	console.log(payload);
 	switch (type) {
 		case UserActionTypes.SET_USER:
 			return payload
