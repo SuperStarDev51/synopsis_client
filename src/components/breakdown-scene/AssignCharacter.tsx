@@ -1,20 +1,29 @@
 import * as React from 'react';
 import { RootStore } from '@src/store';
-import TextField from '@material-ui/core/TextField';
 import Popover from '@material-ui/core/Popover';
 import Chip from "@vuexy/chips/ChipComponent"
 import classnames from 'classnames';
+import { useSelector } from 'react-redux';
+import { addCharacter , getAllProjectCharacters , getProjectScript } from "@root/src/containers/scripts/initial-state";
+import { useDispatch } from 'react-redux';
+import { CharactersActionTypes  } from '@containers/tasks/ListsReducer';
+import { ScriptsActionTypes } from '@containers/scripts/enums';
+export const  AssignCharacter: React.FunctionComponent = ({showDialog , associatedNumList , anchorACEl , setShowDialog, setAnchorACEl , project_id,  project_scene_id }) => {
+  const dispatch = useDispatch();
+  const characterState = useSelector((state: RootStore) => state.characters)
+	let CharacterList = [...characterState]
 
-export const  AssignCharacter: React.FunctionComponent = ({showDialog ,CharacterList , associatedNumList , anchorACEl , setShowDialog, setAnchorACEl}) => {
- 
   const [open, setOpen] = React.useState(false);
   const [keyword, setKeyword] = React.useState("")
   const [showAddCharacterform, setShowAddCharacterform] = React.useState(false);
+  const [newCharacterName, setNewCharacterName] = React.useState('')
 
   const id = open ? 'simple-popover' : undefined;
 
   // console.log("CharacterList", CharacterList)
   // console.log("associatedNumList", associatedNumList)
+
+
 
   React.useEffect(()=>{
     if(showDialog){
@@ -34,12 +43,45 @@ export const  AssignCharacter: React.FunctionComponent = ({showDialog ,Character
     setAnchorACEl(null);
   };
 
-  const onChangeInput = event => {
-    setInputValue(event.target.value);
-  }
+  const AddCharacterFunction = async () => {
 
-  const AddCharacterFunction = () => {
-    setShowAddCharacterform('flase')
+    let newCharacter = {
+			character_type: 0,
+			project_id: project_id,
+			character_name: newCharacterName,
+			project_scene_id: project_scene_id,
+      associated_num : CharacterList.length + 1 ,
+		};
+
+		let addedCharacter = await addCharacter(newCharacter);
+
+    
+      let characterIds = []
+      characterIds = [...characterIds, addedCharacter.character_id]
+      
+
+      getProjectScript(project_id, 0)
+			.then(scripts =>{
+				dispatch({
+					type: ScriptsActionTypes.SET_SCRIPTS,
+					payload: scripts
+				});
+			})
+    
+
+    
+
+    getAllProjectCharacters(project_id)
+    .then((characters: any) =>{
+      
+      dispatch({
+        type: CharactersActionTypes.SET_CHARACTERS,
+        payload: characters
+      });
+    })
+
+
+    setNewCharacterName("")
 
   }
 
@@ -77,9 +119,10 @@ export const  AssignCharacter: React.FunctionComponent = ({showDialog ,Character
               <div style = {{width: "270px" , height: '185px', overflowY: 'auto' , margin: '20px' , borderBottom: '1px solid' }}>
                   {
                     CharacterList.sort((a, b) => a.id - b.id)
-                    .map((character, index) => (
+                    .filter((character: { character_name: string | string[]; }) => character.character_name.includes(keyword))
+                    .map((character: { character_name: string ; }, index: number) => (
                         <div> 
-                          <input type="checkbox" style={{margin:'0 20px'}} checked = {associatedNumList.includes(index + 1)?"checked":""}/>
+                          <input type="checkbox" style={{margin:'0 20px'}} checked = {associatedNumList.includes(index + 1)? "checked" : ""} readOnly/>
                           <Chip
                             key={index}
                             className={classnames("mr-05 bg-light-gray text-bold-600")}
@@ -105,15 +148,15 @@ export const  AssignCharacter: React.FunctionComponent = ({showDialog ,Character
                   showAddCharacterform && (
                     <div>
                       <div className = {classnames('inline-flex')}>
-                        <input placeholder = "CHARACTER NAME..." style = {{margin: "0 40px" , width:'150px', border:'none', borderBottom:'1px solid'}}></input>
-                        <input value = {CharacterList.length + 1} style = {{ border:'none', width: '30px',  borderBottom:'1px solid'}}></input>
+                        <input placeholder = "CHARACTER NAME..." value = {newCharacterName} onChange= {(e) => setNewCharacterName(e.target.value)} style = {{margin: "0 40px" , width:'150px', border:'none', borderBottom:'1px solid' , padding:"0.5rem"}}></input>
+                        <input value = {CharacterList.length + 1} readOnly style = {{ border:'none', width: '30px',  borderBottom:'1px solid'}}></input>
                       </div>
                       <div className = {classnames('inline-flex')} style = {{margin: '0 40px'}}>
-                        <input type='checkbox' style = {{margin : '20px 10px 0 0'}}></input>
+                        <input type='checkbox' style = {{margin : '20px 10px 0 0'}} readOnly></input>
                         <span>Tag all mentions in script</span>
                       </div>
                       <div className = {classnames('inline-flex')} style = {{margin: '20px 40px'}}>
-                        <button className = {classnames('btn btn-info')} style= {{margin: '0 20px'}} onClick = { () => AddCharacterFunction}>Create</button>
+                        <button className = {classnames('btn btn-info')} style= {{margin: '0 20px'}} onClick = { () => AddCharacterFunction()}>Create</button>
                         <button className = {classnames('btn btn-info')} onClick = {() => setShowAddCharacterform(false)}>Cancel</button>
                       </div>
                     </div>

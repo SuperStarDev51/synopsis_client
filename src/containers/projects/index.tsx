@@ -248,7 +248,7 @@ export const Projects: React.FC = () => {
 
 	const addNewProject = (<>
 			  <button onClick={()=> setShowAddAlert(true)}
-			  	className={`height-50 width-auto c-btn c-btn--rounded c-btn--rounded-centered`}>
+			  	className={` btn btn-primary`}>
 			 	 <FormattedMessage id='create_new_project' />
 			  </button>
 			  <Modal
@@ -314,15 +314,19 @@ export const Projects: React.FC = () => {
 	);
 
 	return (
-		<div className="text-white" style={{padding: '1.8rem 2.2rem 0'}}>
-			<div className="d-flex  my-5 align-items-center justify-content-between">
-				<div className="h1 text-bold-800 text-white"><FormattedMessage id='active_projects' /></div>
-				<Input
+		<div className="text-white" style={{padding: '2.8rem 2.2rem 0'}}>
+			<div className="d-flex  my-5  justify-content-between" style = {{color: 'black'}}>
+				<div>
+					<img src = "../../assets/icons/top_project_nav.svg" style = {{width: '2rem', height: "2rem"}}/>
+					<span> &nbsp;Projects </span>
+				</div>
+				{/* <div className="h1 text-bold-800 text-white"><FormattedMessage id='active_projects' /></div> */}
+				{/* <Input
 					value={search}
 					onChange={(e)=> setSearch(e.target.value)}
 					placeholder="Search"
 					className="width-300"
-				/>
+				/> */}
 				{addNewProject}
 			</div>
 
