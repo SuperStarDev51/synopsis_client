@@ -193,7 +193,7 @@ const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) 
 							onChange={setPhone}
 						/>
 
-						<Button stype='submit' className={classes.submitBtn}>
+						<Button type='submit' className={classes.submitBtn}>
 							Save
 						</Button>
 					</div>
