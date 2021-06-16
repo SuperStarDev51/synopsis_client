@@ -1,0 +1,2 @@
+export const SET_USER = 'SET_USER';
+export const UPDATE_USER_PROFILE_IMAGE = 'UPDATE_USER_PROFILE_IMAGE';

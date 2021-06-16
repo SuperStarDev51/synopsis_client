@@ -98,14 +98,25 @@ const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) 
 	const validationSchema = yup.object({
 		fullName: yup
 			.string()
-			.min(2, 'Full should be of minimum 2 characters length')
-			.required('Full Name is required'),
-
+			.min(2, 'Full should be of minimum 2 characters length'),
 		email: yup
 			.string()
-			.email()
-			.required('Email is required')
+			.email(),
 	});
+
+	const handleFormSubmit = (values: any) => {
+			if(values.fullName !==''){
+				userInfo.fullName = values.fullName;
+			}
+			if(values.email !== ''){
+				userInfo.email = values.email;
+			}
+			if(phone !== ''){
+				userInfo.phoneNumber = phone;
+			}
+			userInfo.profileImage = selected;
+			onFormSubmit(userInfo);
+	}
 
 	React.useEffect(() => {
 		if (userInfo.profileImage === undefined || userInfo.profileImage === '') {
@@ -123,14 +134,10 @@ const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) 
 		},
 		validationSchema: validationSchema,
 		onSubmit: values => {
-			userInfo.fullName = values.fullName;
-			userInfo.email = values.email;
-			userInfo.phoneNumber = phone;
-			userInfo.profileImage = selected;
-			onFormSubmit(userInfo);
+			handleFormSubmit(values)
 			setTimeout(() => {
 				setOpen(true);
-				localStorage.setItem('user', JSON.stringify(userInfo));
+
 			}, 1000);
 		}
 	});
@@ -145,7 +152,7 @@ const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) 
 							My Profile
 						</Typography>
 						<TextField
-							required
+
 							id="fullName"
 							name="fullName"
 							placeholder={"Full Name"}
@@ -160,7 +167,7 @@ const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) 
 						/>
 
 						<TextField
-							required
+
 							id="email"
 							name="email"
 							placeholder={"Email"}
