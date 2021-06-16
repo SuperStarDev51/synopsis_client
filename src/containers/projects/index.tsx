@@ -204,8 +204,8 @@ export const EventItem: React.FC = ({ event, setEventActive, user }) => {
 					
 					<div  className="d-flex" >
 						<Avatar  className="mr-1" size='md' img={"../../../assets/img/Eliran.jpeg"} /> 
-					    <span style={{marginTop: "10px"}}>{user.first_name}</span> &nbsp;
-						<span style={{marginTop: "10px"}}>{user.last_name}</span>
+					    <span style={{marginTop: "10px"}}>{user.fullName}</span>
+						{/* <span style={{marginTop: "10px"}}>{user.last_name}</span> */}
 					</div> 
 				</Col>
 			</div>

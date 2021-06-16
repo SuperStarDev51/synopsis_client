@@ -148,7 +148,7 @@ const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) 
 							required
 							id="fullName"
 							name="fullName"
-							placeholder={userInfo.first_name}
+							placeholder={userInfo.fullName}
 							className={classes.textField}
 							onChange={formik.handleChange}
 							error={formik.touched.fullName && Boolean(formik.errors.fullName)}
