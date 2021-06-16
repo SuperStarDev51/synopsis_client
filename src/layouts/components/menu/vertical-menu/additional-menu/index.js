@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Link } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { FormattedMessage } from "react-intl";
 import { Icon } from '@components';
 import { useOutsideClick } from '@src/utilities';
 import navigationConfig from "../../../../../configs/navigationConfig";
 import './index.scss';
 import classnames from "classnames"
-import Avatar from "@vuexy/avatar/AvatarComponent"
+import UserAvatar from '@src/components/user-profile/userAvatar';
 
 const AdditionalMenu = ({ events }) => {
 	const [isOpen, setIsOpen] = React.useState(false);
@@ -61,7 +61,7 @@ const AdditionalMenu = ({ events }) => {
 
 			>
 
-				<Avatar className="mr-1" size='md' img={"../../../assets/img/Eliran.jpeg"} />
+				<UserAvatar/>
 
 			</div>
 		</div>
