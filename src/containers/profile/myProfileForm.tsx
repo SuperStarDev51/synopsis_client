@@ -108,7 +108,6 @@ const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) 
 	});
 
 	React.useEffect(() => {
-		console.log(userInfo);
 		if (userInfo.profileImage === undefined || userInfo.profileImage === '') {
 			setSelected(NoProfileUserImage);
 		} else {
@@ -128,7 +127,6 @@ const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) 
 			userInfo.email = values.email;
 			userInfo.phoneNumber = phone;
 			userInfo.profileImage = selected;
-			console.log(userInfo);
 			onFormSubmit(userInfo);
 			setTimeout(() => {
 				setOpen(true);
@@ -192,8 +190,7 @@ const MyProfileForm: React.FC<MyProfileFormProps> = (props: MyProfileFormProps) 
 							value={phone}
 							onChange={setPhone}
 						/>
-
-						<Button stype='submit' className={classes.submitBtn}>
+						<Button type='submit' className={classes.submitBtn}>
 							Save
 						</Button>
 					</div>
