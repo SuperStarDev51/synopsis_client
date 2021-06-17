@@ -9,7 +9,7 @@ import { Routes } from '../../utilities';
 import {addProject, deleteProject, getLists} from '@containers/planning/initial-state';
 import { SweetAlertCallback } from '@extensions'
 import avatarImg from "assets/img/portrait/small/avatar-s-20.jpg"
-import Avatar from "@vuexy/avatar/AvatarComponent"
+import UserAvatar from '@src/components/user-profile/userAvatar';
 import { Icon, InlineIcon } from '@iconify/react';
 // import dotsVertical from '@iconify-icons/mdi/dots-vertical';
 import './index.scss';
@@ -203,7 +203,7 @@ export const EventItem: React.FC = ({ event, setEventActive, user }) => {
 					</div>
 					
 					<div  className="d-flex" >
-						<Avatar  className="mr-1" size='md' img={"../../../assets/img/Eliran.jpeg"} /> 
+						<UserAvatar />
 					    <span style={{marginTop: "10px"}}>{user.fullName}</span>
 						{/* <span style={{marginTop: "10px"}}>{user.last_name}</span> */}
 					</div> 
