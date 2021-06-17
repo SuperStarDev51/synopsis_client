@@ -54,7 +54,6 @@ export const EventItem: React.FC = ({ event, setEventActive, user }) => {
 	const [showEditModal, setShowEditModal] =  React.useState<any>(false);
 
 	const dispatch = useDispatch();
-	console.log("event",event)
 	const options = [
 		'EDIT PROJECT',
 		// 'ARCHIVE PROJECT',
