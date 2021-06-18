@@ -56,12 +56,12 @@ export const  AssignCharacter: React.FunctionComponent = ({showDialog , associat
 		let addedCharacter = await addCharacter(newCharacter);
 
     
-      let characterIds = []
+      let characterIds: any[] = []
       characterIds = [...characterIds, addedCharacter.character_id]
       
 
       getProjectScript(project_id, 0)
-			.then(scripts =>{
+			.then((scripts: any) =>{
 				dispatch({
 					type: ScriptsActionTypes.SET_SCRIPTS,
 					payload: scripts
@@ -88,7 +88,7 @@ export const  AssignCharacter: React.FunctionComponent = ({showDialog , associat
 
 
   const searchBarStyle = {width: '270px', padding:"0.5rem", margin: '20px'}
-  const AddCharacterspanstyle = { color: 'blue' , margin : '20px 40px' , cursor: 'pointer'}
+  const AddCharacterspanstyle = { color: 'blue' , margin : '20px 0 0 40px' , cursor: 'pointer'}
   return (
     <Popover
         id={id}
@@ -127,7 +127,7 @@ export const  AssignCharacter: React.FunctionComponent = ({showDialog , associat
                             key={index}
                             className={classnames("mr-05 bg-light-gray text-bold-600")}
                             avatarColor="danger"
-                            text={index + 1}
+                            text={character.associated_num}
                             
                           />
                           {character.character_name}
@@ -139,9 +139,15 @@ export const  AssignCharacter: React.FunctionComponent = ({showDialog , associat
               <div style= {{marginBottom: '20px'}}>
                 {
                 !showAddCharacterform && (
+                  <div className = {classnames("inline-flex")}>
+
                  <span style = {AddCharacterspanstyle} onClick = {() => setShowAddCharacterform('true')} >
                     +Add character
                  </span>
+                 <span style = {AddCharacterspanstyle}  >
+                 Manage character
+                </span>
+                </div>
                 )
                 }
                 {
