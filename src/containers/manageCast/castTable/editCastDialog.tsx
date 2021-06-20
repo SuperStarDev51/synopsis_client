@@ -44,15 +44,15 @@ const useStyles = makeStyles(() => ({
 }));
 
 interface EditCastDialogProps {
-	character_id: number,
+	Character_id: number;
 	castname: string;
 	castID: number;
 	open: boolean;
 	setOpen(data: boolean): void;
 }
 const EditCastDialog: React.FC<EditCastDialogProps> = (props: EditCastDialogProps) => {
-	
-	const { character_id , castname, castID, open, setOpen } = props;
+
+	const { Character_id , castname, castID, open, setOpen } = props;
 	const classes = useStyles();
 
 	const validationSchema = yup.object({
