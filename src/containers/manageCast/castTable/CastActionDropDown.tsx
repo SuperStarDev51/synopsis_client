@@ -4,21 +4,28 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import RemoveCastDialog from './RemoveCastDialog';
 import EditCastDialog from './editCastDialog';
 
-const CastActionDropDown: React.FC = ({ ID , Character_name , Character_id} ) => {
+interface CastActionDropDownProps{
+	 ID: any;
+	 Character_name: string;
+	 Character_id: number;
+
+}
+
+const CastActionDropDown: React.FC<CastActionDropDownProps> = ( props: CastActionDropDownProps ) => {
 	const [anchorEl, setAnchorEl] = React.useState(null);
+	const { ID , Character_name , Character_id} = props;
 	const [openRemoveDialog, setOpenRemoveDialog] = React.useState(false);
 	const [openRenameDialog, setOpenRenameDialog] = React.useState(false);
-	
+
 	const handleClick = (event: any) => {
 		setAnchorEl(event.currentTarget);
 	};
 
 	const handleClose = (value: number) => {
 		setAnchorEl(null);
-		console.log(value)
-		if(value==0){
+		if(value == 0){
 			setOpenRenameDialog(true)
-		} else {
+		} else if(value == 1) {
 			setOpenRemoveDialog(true)
 		}
 	};
@@ -31,7 +38,6 @@ const CastActionDropDown: React.FC = ({ ID , Character_name , Character_id} ) =>
 			<Menu id="simple-menu"
 			anchorEl={anchorEl}
 			anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-			transformOrigin={{ vertical: "top", horizontal: "right" }}
 			keepMounted
 			open={Boolean(anchorEl)}
 			onClose={handleClose}>
@@ -39,14 +45,14 @@ const CastActionDropDown: React.FC = ({ ID , Character_name , Character_id} ) =>
 				<MenuItem onClick={()=>handleClose(1)}>Remove Cast Member</MenuItem>
 			</Menu>
 			<RemoveCastDialog
-			character_id = {Character_id}
+			Character_id = {Character_id}
 			castname={Character_name}
 			castID= {ID}
 			open={openRemoveDialog}
 			setOpen={setOpenRemoveDialog}
 			/>
 			<EditCastDialog
-			character_id = {Character_id}
+			Character_id = {Character_id}
 			castname= {Character_name}
 			castID= {ID}
 			open={openRenameDialog}

@@ -1663,7 +1663,7 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 					<div className="breakdown-scene-eighth">
 						{eighthsFormat(scene.eighth)}
 					</div>
-					{synofsis(1, true)}
+					{synofsis(2, true)}
 				</div>
 				{sceneDetails}
 				{arrowListView(false)}
