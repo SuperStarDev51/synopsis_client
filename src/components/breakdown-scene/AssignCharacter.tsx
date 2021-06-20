@@ -146,8 +146,8 @@ export const  AssignCharacter: React.FunctionComponent = ({showDialog , associat
                  <span style = {AddCharacterspanstyle} onClick = {() => setShowAddCharacterform('true')} >
                     +Add character
                  </span>
-                 <span style = {AddCharacterspanstyle}  >
-                 Manage character
+                 <span >
+                    <Link to='/cast_member' style = {AddCharacterspanstyle}>Manage character</Link>
                 </span>
                 </div>
                 )

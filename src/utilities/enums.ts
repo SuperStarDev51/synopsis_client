@@ -21,5 +21,5 @@ export enum Routes {
 	BREAKDOWN = ':id/breakdown',
 	NOT_FOUND = '/not-found',
 	PROFILE = '/profile',
-	MANAGE_CAST = '/cast',
+	MANAGE_CAST = '/cast_member',
 }
