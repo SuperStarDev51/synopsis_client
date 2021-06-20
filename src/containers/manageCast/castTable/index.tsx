@@ -135,7 +135,7 @@ const CastDataTable: React.FC  = () => {
             <ExpandableTableRow
               key={character.character_name}
 			  name={character.character_name}
-			  ID={index +1}
+			  ID={character.associated_num}
 			  scencs={character.character_count}
 			  Character_id = {character.id}
             />

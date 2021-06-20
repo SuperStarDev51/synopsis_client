@@ -49,7 +49,7 @@ const ManageCastContainer: React.FC =  () => {
 	return (
 		<div className={classes.root}>
 			<div className={classes.header}>
-				{CharacterList.length + 1} Cast Members
+				{CharacterList.length} Cast Members
 			</div>
 			<div className={classes.table}>
 			<CastDataTable/>
