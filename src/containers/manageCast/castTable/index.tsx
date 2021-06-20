@@ -94,9 +94,9 @@ const ExpandableTableRow: React.FC<ExpandableTableRowProps> = (props: Expandable
 
 		  </TableCell>
         <TableCell align="left">
-			<CastActionDropDown 
-				ID={ID} 
-				Character_name={name} 
+			<CastActionDropDown
+				ID={ID}
+				Character_name={name}
 				Character_id={Character_id}
 			/>
 			</TableCell>
@@ -131,7 +131,7 @@ const CastDataTable: React.FC  = () => {
         </TableHead>
         <TableBody>
           {CharacterList.sort((a, b) => a.id - b.id )
-		  	.map((character, index) => (
+		  	.map((character, _index) => (
             <ExpandableTableRow
               key={character.character_name}
 			  name={character.character_name}
