@@ -8,6 +8,9 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slider from '@material-ui/core/Slider';
 import Cropper from 'react-easy-crop';
 import getCroppedImg from './action/imgCrop';
+import { updateUserProfileImage } from '@src/reduxActions';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 const useStyles = makeStyles(() => ({
 	root: {
@@ -65,11 +68,12 @@ const useStyles = makeStyles(() => ({
 interface ImageSelectorProps {
 	selected: string;
 	setSelected(data: any): void;
+	onImageSelect(image: any): void;
 }
 
 const ImageSelector: React.FC<ImageSelectorProps> = (props: ImageSelectorProps) => {
 	const classes = useStyles();
-	const { selected, setSelected } = props;
+	const { selected, setSelected, onImageSelect } = props;
 	const [open, setOpen] = React.useState(false);
 	const [crop, setCrop] = React.useState({
 		x: 0,
@@ -117,6 +121,8 @@ const ImageSelector: React.FC<ImageSelectorProps> = (props: ImageSelectorProps) 
 		try {
 			const croppedImage = await getCroppedImg(selected, cropArea);
 			setSelected(croppedImage);
+			onImageSelect(croppedImage);
+
 		} catch (e) {
 			console.error(e);
 		}
@@ -177,4 +183,15 @@ const ImageSelector: React.FC<ImageSelectorProps> = (props: ImageSelectorProps) 
 		</div>
 	);
 };
-export default ImageSelector;
+
+
+
+const mapDispatchToProps = (dispatch: React.Dispatch<any>) => {
+	return {
+		onImageSelect: (image: any) =>
+			dispatch(updateUserProfileImage(image))
+	};
+};
+export default compose(connect(null, mapDispatchToProps)(ImageSelector));
+
+

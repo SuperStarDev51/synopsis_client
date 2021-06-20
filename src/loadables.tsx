@@ -84,3 +84,8 @@ export const UserProfile: any = Loadable({
 	loader: () => import('@containers/profile').then((comp: any) => comp),
 	loading: () => <Spinner />
 });
+
+export const ManageCastContainer: any = Loadable({
+	loader: () => import('@containers/manageCast').then((comp: any) => comp),
+	loading: () => <Spinner />
+});

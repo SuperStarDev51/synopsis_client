@@ -9,6 +9,7 @@ import Select from "react-select"
 import * as moment from 'moment';
 import { Menu, MenuItem, Divider, Slide } from '@material-ui/core';
 import { AssignCharacter } from '@root/src/components/breakdown-scene/AssignCharacter';
+
 import {
 	Card,
 	CardHeader,
@@ -613,7 +614,7 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 				script_index={script_index}
 				scene_index={scene_index}
 				scene_time={scene.time_id}
-				value={scene.text}
+				value={scene.synopsis}
 				rows={rows ? rows : 3}
 				scene_number={scene.scene_number}
 				chapter_number={scene.chapter_number}

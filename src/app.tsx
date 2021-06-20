@@ -340,6 +340,7 @@ React.useEffect(() => {
 		<AppRoute path={Routes.ACTORS} exact={true} component={Loadables.Actors}  />
 		{/* <AppRoute path={Routes.PROJECTS} exact={true} component={Loadables.Projects} fullLayout /> */}
 		<AppRoute path={Routes.PROJECTS} exact={true} component={Loadables.Projects}/>
+		<AppRoute path={Routes.PROFILE} exact={true} component={Loadables.UserProfile} />
 		{/* <AppRoute path={Routes.SCRIPT} exact={true} component={Loadables.Script} /> */}
 		<AppRoute path={Routes.BREAKDOWN} exact={true} component={Loadables.Breakdown} />
 		<AppRoute path={Routes.SHOOTING_DAYS} exact={true} component={Loadables.ShootingDays} />
@@ -355,7 +356,9 @@ React.useEffect(() => {
 
 		<AppRoute path={Routes.SCRIPT} exact={true} component={Loadables.Script} />
 		<AppRoute path={Routes.BUDGET} exact={true} component={Loadables.Budget} />
-		<AppRoute path={Routes.PROFILE} exact={true} component={Loadables.UserProfile} />
+
+		<AppRoute path={Routes.MANAGE_CAST} exact={true} component={Loadables.ManageCastContainer} />
+
 		{/* <AppRoute path={Routes.BUDGETS} exact={true} component={Loadables.Budget} /> */}
 	</Switch>
 )});

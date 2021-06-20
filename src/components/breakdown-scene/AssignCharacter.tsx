@@ -8,10 +8,11 @@ import { addCharacter , getAllProjectCharacters , getProjectScript } from "@root
 import { useDispatch } from 'react-redux';
 import { CharactersActionTypes  } from '@containers/tasks/ListsReducer';
 import { ScriptsActionTypes } from '@containers/scripts/enums';
+import { Link } from 'react-router-dom';
 export const  AssignCharacter: React.FunctionComponent = ({showDialog , associatedNumList , anchorACEl , setShowDialog, setAnchorACEl , project_id,  project_scene_id }) => {
   const dispatch = useDispatch();
   const characterState = useSelector((state: RootStore) => state.characters)
-	let CharacterList = [...characterState]
+	const CharacterList = [...characterState]
 
   const [open, setOpen] = React.useState(false);
   const [keyword, setKeyword] = React.useState("")
@@ -32,7 +33,7 @@ export const  AssignCharacter: React.FunctionComponent = ({showDialog , associat
         setOpen(false);
     }
   },[showDialog])
-  
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -45,7 +46,7 @@ export const  AssignCharacter: React.FunctionComponent = ({showDialog , associat
 
   const AddCharacterFunction = async () => {
 
-    let newCharacter = {
+    const newCharacter = {
 			character_type: 0,
 			project_id: project_id,
 			character_name: newCharacterName,
@@ -53,27 +54,28 @@ export const  AssignCharacter: React.FunctionComponent = ({showDialog , associat
       associated_num : CharacterList.length + 1 ,
 		};
 
-		let addedCharacter = await addCharacter(newCharacter);
+		const addedCharacter = await addCharacter(newCharacter);
+
 
     
-      let characterIds = []
+      let characterIds: any[] = []
       characterIds = [...characterIds, addedCharacter.character_id]
-      
+
 
       getProjectScript(project_id, 0)
-			.then(scripts =>{
+			.then((scripts: any) =>{
 				dispatch({
 					type: ScriptsActionTypes.SET_SCRIPTS,
 					payload: scripts
 				});
 			})
-    
 
-    
+
+
 
     getAllProjectCharacters(project_id)
     .then((characters: any) =>{
-      
+
       dispatch({
         type: CharactersActionTypes.SET_CHARACTERS,
         payload: characters
@@ -88,7 +90,7 @@ export const  AssignCharacter: React.FunctionComponent = ({showDialog , associat
 
 
   const searchBarStyle = {width: '270px', padding:"0.5rem", margin: '20px'}
-  const AddCharacterspanstyle = { color: 'blue' , margin : '20px 40px' , cursor: 'pointer'}
+  const AddCharacterspanstyle = { color: 'blue' , margin : '20px 0 0 40px' , cursor: 'pointer'}
   return (
     <Popover
         id={id}
@@ -103,7 +105,7 @@ export const  AssignCharacter: React.FunctionComponent = ({showDialog , associat
           vertical: 'top',
           horizontal: 'center',
         }}
-        
+
         disableScrollLock ={true}
       >
         <div>
@@ -111,7 +113,7 @@ export const  AssignCharacter: React.FunctionComponent = ({showDialog , associat
               <input
                 value = {keyword}
                 style = {searchBarStyle}
-                onChange={(e) => setKeyword(e.target.value)} 
+                onChange={(e) => setKeyword(e.target.value)}
                 placeholder="Search Existing characters by name.."></input>
             </div>
             <div >
@@ -119,15 +121,15 @@ export const  AssignCharacter: React.FunctionComponent = ({showDialog , associat
               <div style = {{width: "270px" , height: '185px', overflowY: 'auto' , margin: '20px' , borderBottom: '1px solid' }}>
                   {
                     CharacterList.sort((a, b) => a.id - b.id)
-                    .filter((character: { character_name: string | string[]; }) => character.character_name.includes(keyword))
-                    .map((character: { character_name: string ; }, index: number) => (
-                        <div> 
+                    .filter((character: { character_name: string | string[] }) => character.character_name.includes(keyword))
+                    .map((character: { character_name: string  }, index: number) => (
+                        <div>
                           <input type="checkbox" style={{margin:'0 20px'}} checked = {associatedNumList.includes(index + 1)? "checked" : ""} readOnly/>
                           <Chip
                             key={index}
                             className={classnames("mr-05 bg-light-gray text-bold-600")}
                             avatarColor="danger"
-                            text={index + 1}
+                            text={character.associated_num}
                             
                           />
                           {character.character_name}
@@ -139,9 +141,15 @@ export const  AssignCharacter: React.FunctionComponent = ({showDialog , associat
               <div style= {{marginBottom: '20px'}}>
                 {
                 !showAddCharacterform && (
+                  <div className = {classnames("inline-flex")}>
+
                  <span style = {AddCharacterspanstyle} onClick = {() => setShowAddCharacterform('true')} >
                     +Add character
                  </span>
+                 <span >
+                    <Link to='/cast_member' style = {AddCharacterspanstyle}>Manage character</Link>
+                </span>
+                </div>
                 )
                 }
                 {
@@ -162,12 +170,12 @@ export const  AssignCharacter: React.FunctionComponent = ({showDialog , associat
                     </div>
                   )
                 }
-              </div> 
+              </div>
             </div>
 
         </div>
-          
-           
+
+
       </Popover>
   );
 }
