@@ -11,6 +11,8 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import CastActionDropDown from './CastActionDropDown';
 import Checkbox from '@material-ui/core/Checkbox';
+import { useSelector } from 'react-redux';
+import { RootStore } from '@src/store';
 
 const useStyles = makeStyles({
   root: {
@@ -47,58 +49,21 @@ const useStyles = makeStyles({
 });
 
 
-
-const rows = [{
-	name: 'batman',
-},
-{
-	name: 'batman',
-},
-{
-	name: 'batman',
-},
-{
-	name: 'batman',
-},
-{
-	name: 'batman',
-},
-{
-	name: 'batman',
-},
-{
-	name: 'batman',
-},
-{
-	name: 'batman',
-},
-{
-	name: 'batman',
-},
-{
-	name: 'batman',
-},
-{
-	name: 'batman',
-},
-{
-	name: 'batman',
-}];
-
 interface ExpandableTableRowProps {
 	[otherProps: string]: any;
-	ID: string;
+	ID: any;
 	selected?: any;
 	scencs: any;
 	name: string;
+	Character_id: number;
 }
 
 // eslint-disable-next-line react/prop-types
 const ExpandableTableRow: React.FC<ExpandableTableRowProps> = (props: ExpandableTableRowProps) => {
 	const [isExpanded, setIsExpanded] = React.useState(false);
 	const classes = useStyles();
-	const {name, otherProps
-	,ID, scencs} = props;
+	const {name, otherProps ,ID, scencs , Character_id} = props;
+
 	const [checked, setChecked] = React.useState(false);
 	const [hide, setHide] = React.useState(true);
 
@@ -111,10 +76,10 @@ const ExpandableTableRow: React.FC<ExpandableTableRowProps> = (props: Expandable
 		<TableRow {...otherProps} onMouseEnter={()=>setHide(false)} onMouseLeave={()=>setHide(true)}>
 		<TableCell align="left">
 			<Checkbox
-        checked={checked}
-        onChange={handleChange}
-        inputProps={{ 'aria-label': 'primary checkbox' }}
-      /></TableCell>
+				checked={checked}
+				onChange={handleChange}
+				inputProps={{ 'aria-label': 'primary checkbox' }}
+      	/></TableCell>
 		<TableCell className={classes.idCell} align="left">{ID}</TableCell>
 		<TableCell  component="th" scope="row">
                 {name}
@@ -128,12 +93,18 @@ const ExpandableTableRow: React.FC<ExpandableTableRowProps> = (props: Expandable
 		)}
 
 		  </TableCell>
-        <TableCell align="left"><CastActionDropDown/></TableCell>
+        <TableCell align="left">
+			<CastActionDropDown 
+				ID={ID} 
+				Character_name={name} 
+				Character_id={Character_id}
+			/>
+			</TableCell>
 		</TableRow>
 		{isExpanded && (
 		  <TableRow>
 			<TableCell padding="checkbox" />
-			<TableCell colSpan={5}> vkdkm</TableCell>
+			<TableCell colSpan={5}> {name} ({scencs} scenes)</TableCell>
 		  </TableRow>
 		)}
 	  </>
@@ -142,6 +113,9 @@ const ExpandableTableRow: React.FC<ExpandableTableRowProps> = (props: Expandable
 
 const CastDataTable: React.FC  = () => {
 	const classes = useStyles();
+	const characterState = useSelector((state: RootStore) => state.characters)
+	const CharacterList = [...characterState]
+
   return (
     <Paper className={classes.root}>
       <Table className={classes.table} aria-label="simple table">
@@ -156,12 +130,14 @@ const CastDataTable: React.FC  = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => (
+          {CharacterList.sort((a, b) => a.id - b.id )
+		  	.map((character, index) => (
             <ExpandableTableRow
-              key={row.name}
-			  name={row.name}
-			  ID={'25'}
-			  scencs={'35'}
+              key={character.character_name}
+			  name={character.character_name}
+			  ID={index +1}
+			  scencs={character.character_count}
+			  Character_id = {character.id}
             />
           ))}
         </TableBody>

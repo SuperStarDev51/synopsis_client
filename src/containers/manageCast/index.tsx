@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { makeStyles } from '@material-ui/core';
 import CastDataTable from './castTable';
-
+import { useSelector } from 'react-redux';
+import { RootStore } from '@src/store';
 
 const useStyles = makeStyles(()=> ({
 	root:{
@@ -42,10 +43,13 @@ const useStyles = makeStyles(()=> ({
 
 const ManageCastContainer: React.FC =  () => {
 	const classes = useStyles();
+	const characterState = useSelector((state: RootStore) => state.characters)
+	const CharacterList = [...characterState]
+
 	return (
 		<div className={classes.root}>
 			<div className={classes.header}>
-				76 Cast Members
+				{CharacterList.length + 1} Cast Members
 			</div>
 			<div className={classes.table}>
 			<CastDataTable/>

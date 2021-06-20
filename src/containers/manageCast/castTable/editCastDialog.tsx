@@ -44,13 +44,15 @@ const useStyles = makeStyles(() => ({
 }));
 
 interface EditCastDialogProps {
+	character_id: number,
 	castname: string;
-	castID: string;
+	castID: number;
 	open: boolean;
 	setOpen(data: boolean): void;
 }
 const EditCastDialog: React.FC<EditCastDialogProps> = (props: EditCastDialogProps) => {
-	const { castname, castID, open, setOpen } = props;
+	
+	const { character_id , castname, castID, open, setOpen } = props;
 	const classes = useStyles();
 
 	const validationSchema = yup.object({
@@ -82,7 +84,7 @@ const EditCastDialog: React.FC<EditCastDialogProps> = (props: EditCastDialogProp
 					<TextField
 						id="Name"
 						name="Name"
-						placeholder={castname}
+						value={castname}
 						onChange={formik.handleChange}
 						error={formik.touched.Name && Boolean(formik.errors.Name)}
 						helperText={formik.touched.Name && formik.errors.Name}
@@ -93,7 +95,7 @@ const EditCastDialog: React.FC<EditCastDialogProps> = (props: EditCastDialogProp
 					<TextField
 						id="ID"
 						name="ID"
-						placeholder={castID}
+						value={castID}
 						onChange={formik.handleChange}
 						error={formik.touched.ID && Boolean(formik.errors.ID)}
 						helperText={formik.touched.ID && formik.errors.ID}

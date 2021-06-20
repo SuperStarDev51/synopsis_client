@@ -30,13 +30,14 @@ const useStyles = makeStyles(()=>({
 
 
 interface RemoveCastDialogProps{
+	Character_id: number,
 	castname: string;
-	castID: string;
+	castID: number;
 	open: boolean;
 	setOpen(data: boolean): void;
 }
 const RemoveCastDialog: React.FC<RemoveCastDialogProps> = (props: RemoveCastDialogProps) => {
-	const {castname, castID, open, setOpen} = props;
+	const { Character_id , castname, castID, open, setOpen} = props;
 	const classes = useStyles();
 	return(
 	<Dialog  onClose={()=>setOpen(false)} open={open}>
