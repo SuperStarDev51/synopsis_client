@@ -16,6 +16,7 @@ import {
   changeMenuColor,
   hideScrollToTop
 } from "../redux/actions/customizer/index";
+import Header from "./components/header";
 
 class VerticalLayout extends PureComponent {
   state = {
@@ -47,7 +48,7 @@ class VerticalLayout extends PureComponent {
 
   componentDidMount = () => {
     this.mounted = true;
-    let {
+    const {
       location: { pathname },
       app: {
         customizer: { theme, direction }
@@ -62,8 +63,8 @@ class VerticalLayout extends PureComponent {
          this.props.collapseSidebar(true);
       }
 
-      let layout = theme;
-      let dir = direction;
+      const layout = theme;
+      const dir = direction;
       if (dir === "rtl")
         document.getElementsByTagName("html")[0].setAttribute("dir", "rtl");
       else document.getElementsByTagName("html")[0].setAttribute("dir", "ltr");
@@ -76,14 +77,14 @@ class VerticalLayout extends PureComponent {
   }
 
   componentDidUpdate = (prevProps, prevState) => {
-    let {
+    const {
       location: { pathname },
       app: {
         customizer: { theme, sidebarCollapsed }
       }
     } = this.props;
 
-    let layout = theme;
+    const layout = theme;
     if (this.mounted) {
       if (layout === "dark") {
         document.body.classList.remove("semi-dark-layout");
@@ -126,7 +127,7 @@ class VerticalLayout extends PureComponent {
   }
 
   handleCollapsedMenuPaths = item => {
-    let collapsedPaths = this.collapsedPaths;
+    const collapsedPaths = this.collapsedPaths;
     if (!collapsedPaths.includes(item)) {
       collapsedPaths.push(item);
       this.collapsedPaths = collapsedPaths;
@@ -192,9 +193,9 @@ class VerticalLayout extends PureComponent {
   };
 
   render() {
-    let appProps = this.props.app.customizer;
-    let showSidebar = this.props.activeEvent
-    let menuThemeArr = [
+    const appProps = this.props.app.customizer;
+    const showSidebar = this.props.activeEvent
+    const menuThemeArr = [
       "primary",
       "success",
       "danger",
@@ -202,7 +203,7 @@ class VerticalLayout extends PureComponent {
       "warning",
       "dark"
     ];
-    let sidebarProps = {
+    const sidebarProps = {
       toggleSidebarMenu: this.props.collapseSidebar,
       toggle: this.toggleSidebarMenu,
       sidebarState: this.state.sidebarState,
@@ -215,9 +216,11 @@ class VerticalLayout extends PureComponent {
       activeTheme: appProps.menuTheme,
       collapsed: this.state.collapsedContent,
       permission: this.props.permission,
-      deviceWidth: this.state.width
+      deviceWidth: this.state.width,
+	  currentLang: this.state.currentLang,
+	  changeCurrentLang: this.handleCurrentLanguage,
     };
-    let navbarProps = {
+    const navbarProps = {
       activePath: this.props.match.path,
       toggleSidebarMenu: this.toggleSidebarMenu,
       sidebarState: this.state.sidebarState,
@@ -230,12 +233,12 @@ class VerticalLayout extends PureComponent {
       navbarType: appProps.navbarType
     };
 
-    let footerProps = {
+    const footerProps = {
       footerType: appProps.footerType,
       hideScrollToTop: appProps.hideScrollToTop
     };
 
-    let customizerProps = {
+    const customizerProps = {
       customizerState: this.state.customizer,
       handleCustomizer: this.handleCustomizer,
       changeMode: this.props.changeMode,
@@ -270,10 +273,10 @@ class VerticalLayout extends PureComponent {
           }
         )}
       >
-      
+
         {/* {showSidebar  && ( <Sidebar {...sidebarProps} /> )} */}
         {<Sidebar {...sidebarProps} /> }
-      
+
         <div
           className={classnames("app-content", {
             "content" : showSidebar,
@@ -281,7 +284,7 @@ class VerticalLayout extends PureComponent {
           })}
           onClick={this.handleAppOverlayClick}
         >
-          <Navbar {...navbarProps} />
+		  <Header activeEvent={this.props.match.path}/>
           {/* <PerfectScrollbar
           className="container"
           component="div"

@@ -8,7 +8,7 @@ import Hammer from "react-hammerjs"
 import SideMenuContent from "./sidemenu/SideMenuContent"
 import AdditionalMenu from "./additional-menu";
 import PerfectScrollbar from "react-perfect-scrollbar"
-import Avatar from "@vuexy/avatar/AvatarComponent"
+import NavbarUser from "../../navbar/NavbarUser"
 
 class Sidebar extends Component {
   static getDerivedStateFromProps(props, state) {
@@ -57,8 +57,8 @@ class Sidebar extends Component {
   }
 
   checkDevice = () => {
-    var prefixes = " -webkit- -moz- -o- -ms- ".split(" ")
-    var mq = function(query) {
+    const prefixes = " -webkit- -moz- -o- -ms- ".split(" ")
+    const mq = function(query) {
       return window.matchMedia(query).matches
     }
 
@@ -71,7 +71,7 @@ class Sidebar extends Component {
         ScrollbarTag: PerfectScrollbar
       })
     }
-    var query = ["(", prefixes.join("touch-enabled),("), "heartz", ")"].join("")
+    const query = ["(", prefixes.join("touch-enabled),("), "heartz", ")"].join("")
     return mq(query)
   }
 
@@ -106,7 +106,7 @@ class Sidebar extends Component {
   }
 
   render() {
-    let {
+    const {
       visibilityState,
       toggleSidebarMenu,
       sidebarHover,
@@ -120,17 +120,18 @@ class Sidebar extends Component {
       currentLang,
       permission,
       currentUser,
-      collapsedMenuPaths
+      collapsedMenuPaths,
+	  changeCurrentLang,
     } = this.props
 
-    let {
+    const {
       menuShadow,
       activeIndex,
       hoveredMenuItem,
       activeItem,
       ScrollbarTag
     } = this.state
-    let scrollShadow = (container, dir) => {
+    const scrollShadow = (container, dir) => {
       if (container && dir === "up" && container.scrollTop >= 100) {
         this.setState({ menuShadow: true })
       } else if (container && dir === "down" && container.scrollTop < 100) {
@@ -140,12 +141,12 @@ class Sidebar extends Component {
       }
     }
 
-    let iconStyle = {height: '4rem', width:'5rem'}
-    let logo_li_style = {backgroundColor: '#ffffff', padding:'2px 5px' }
+    const iconStyle = {height: '4rem', width:'5rem'}
+    const logo_li_style = {backgroundColor: '#ffffff', padding:'2px 5px' }
     return (
       <ContextLayout.Consumer>
         {context => {
-          let dir = context.state.direction
+          const dir = context.state.direction
           return (
             <React.Fragment>
               <Hammer
@@ -159,8 +160,9 @@ class Sidebar extends Component {
               </Hammer>
 
               <div
+				style= {{overflow:'visible !important'}}
                 className={classnames(
-                  `main-menu menu-fixed menu-light menu-accordion menu-shadow theme-${activeTheme}`,
+                  `main-menu menu-fixed notHidden menu-light menu-accordion menu-shadow theme-${activeTheme}`,
                   {
                     collapsed: sidebarState === true,
                     "hide-sidebar":
@@ -222,8 +224,14 @@ class Sidebar extends Component {
                       />
                     </ul>
                   </Hammer>
-                </ScrollbarTag>
 
+                </ScrollbarTag>
+						<div style={{ zIndex: 99999, display:'flex', justifyContent:'center', alignItems:'center', marginBottom: '30px'}}>
+						<NavbarUser
+						changeCurrentLang={changeCurrentLang}
+						currentLang={currentLang}
+						/>
+						</div>
 				        <AdditionalMenu events={this.props.events} />
 			          </div>
             </React.Fragment>

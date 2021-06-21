@@ -11,4 +11,12 @@
     letter-spacing: normal;
     color: #000000;
   }
-  
+  .absolutePosition{
+	  position: absolute !important;
+	  z-index: 999999;
+	  right: 0;
+  }
+
+  .notHidden{
+	  overflow: visible !important;
+  }

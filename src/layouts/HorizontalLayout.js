@@ -65,7 +65,7 @@ class HorizontalLayout extends PureComponent {
           collapsedContent: true
         })
       }
-      let layout = this.props.app.customizer.theme
+      const layout = this.props.app.customizer.theme
       return layout === "dark"
         ? document.body.classList.add("dark-layout")
         : layout === "semi-dark"
@@ -83,7 +83,7 @@ class HorizontalLayout extends PureComponent {
         })
       }
 
-      let layout = this.props.app.customizer.theme
+      const layout = this.props.app.customizer.theme
       if (layout === "dark") {
         document.body.classList.remove("semi-dark-layout")
         document.body.classList.add("dark-layout")
@@ -168,9 +168,9 @@ class HorizontalLayout extends PureComponent {
   }
 
   render() {
-    let customizerProps = this.props.app.customizer
-    let navbarTypeArr = ["sticky", "static", "sticky", "floating", "hidden"]
-    let menuThemeArr = [
+    const customizerProps = this.props.app.customizer
+    const navbarTypeArr = ["sticky", "static", "sticky", "floating", "hidden"]
+    const menuThemeArr = [
       "primary",
       "success",
       "danger",
