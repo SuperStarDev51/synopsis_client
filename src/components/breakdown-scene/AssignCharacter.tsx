@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { CharactersActionTypes  } from '@containers/tasks/ListsReducer';
 import { ScriptsActionTypes } from '@containers/scripts/enums';
 import { Link } from 'react-router-dom';
-export const  AssignCharacter: React.FunctionComponent = ({showDialog , associatedNumList , anchorACEl , setShowDialog, setAnchorACEl , project_id,  project_scene_id }) => {
+export const  AssignCharacter: React.FunctionComponent = ({showDialog , associatedNumList , anchorACEl , setShowDialog, setAnchorACEl , project_id,  scene , project_scene_id }) => {
   const dispatch = useDispatch();
   const characterState = useSelector((state: RootStore) => state.characters)
 	const CharacterList = [...characterState]

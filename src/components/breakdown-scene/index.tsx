@@ -1482,7 +1482,7 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 	const sceneDetails = (
 		
 		<div className={classnames("d-flex", {})} style={{ flex: 1 }}>
-			<AssignCharacter showDialog={showDialog} associatedNumList = {associated_numList} anchorACEl = {anchorACEl} setShowDialog = {setShowDialog} setAnchorACEl = {setAnchorACEl}  project_id = {activeEvent.id} project_scene_id = {scene.project_scene_id}/>
+			<AssignCharacter showDialog={showDialog} associatedNumList = {associated_numList} anchorACEl = {anchorACEl} setShowDialog = {setShowDialog} setAnchorACEl = {setAnchorACEl}  project_id = {activeEvent.id} scene = {scene} project_scene_id = {scene.project_scene_id}/>
 			<div
 				className={classnames("d-flex-column justify-content-between", {
 					'w-100': !isListPreview,
@@ -1521,7 +1521,7 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 									.sort((a: { character_id: number; }, b: { character_id: number; }) => a.character_id - b.character_id)
 									.map((character: { character_id: any; }, key: React.Key | undefined) => (
 
-										<div onClick = {(ev) => {setShowDialog(true); setAnchorACEl(ev.currentTarget)}}>
+										<div onClick = {(ev) => {localStorage.setItem('scene', JSON.stringify(scene));localStorage.setItem('project_id', (String)(activeEvent.id)); setShowDialog(true); setAnchorACEl(ev.currentTarget)}}>
 										<Chip
 											key={key}
 											className={classnames("mr-05 bg-light-gray text-bold-600", { "chip-smaller": !isListPreview })}
