@@ -13,6 +13,8 @@ import CastActionDropDown from './CastActionDropDown';
 import Checkbox from '@material-ui/core/Checkbox';
 import { useSelector } from 'react-redux';
 import { RootStore } from '@src/store';
+import {Snackbar } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles({
   root: {
@@ -56,30 +58,35 @@ interface ExpandableTableRowProps {
 	scencs: any;
 	name: string;
 	Character_id: number;
+	setOpenAlert(data: boolean) : void;
 }
 
 // eslint-disable-next-line react/prop-types
 const ExpandableTableRow: React.FC<ExpandableTableRowProps> = (props: ExpandableTableRowProps) => {
 	const [isExpanded, setIsExpanded] = React.useState(false);
 	const classes = useStyles();
-	const {name, otherProps ,ID, scencs , Character_id} = props;
+	const {name, otherProps ,ID, scencs , Character_id , setOpenAlert} = props;
 
 	const [checked, setChecked] = React.useState(false);
+	
 	const [hide, setHide] = React.useState(true);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 	  setChecked(event.target.checked);
 	};
 
+	
+
 	return (
-	  <>
+	  <> 	
 		<TableRow {...otherProps} onMouseEnter={()=>setHide(false)} onMouseLeave={()=>setHide(true)}>
 		<TableCell align="left">
 			<Checkbox
 				checked={checked}
-				onChange={handleChange}
+				onChange = {handleChange}
 				inputProps={{ 'aria-label': 'primary checkbox' }}
-      	/></TableCell>
+				readOnly
+      		/></TableCell>
 		<TableCell className={classes.idCell} align="left">{ID}</TableCell>
 		<TableCell  component="th" scope="row">
                 {name}
@@ -98,6 +105,7 @@ const ExpandableTableRow: React.FC<ExpandableTableRowProps> = (props: Expandable
 				ID={ID}
 				Character_name={name}
 				Character_id={Character_id}
+				setOpenAlert = {setOpenAlert}
 			/>
 			</TableCell>
 		</TableRow>
@@ -111,11 +119,17 @@ const ExpandableTableRow: React.FC<ExpandableTableRowProps> = (props: Expandable
 	);
   };
 
+
 const CastDataTable: React.FC  = () => {
 	const classes = useStyles();
 	const characterState = useSelector((state: RootStore) => state.characters)
+	console.log("characterState" , characterState)
 	const CharacterList = [...characterState]
+	const [openAlert, setOpenAlert] = React.useState(false);
 
+	function Alert (props: any) {
+		return <MuiAlert elevation={6} variant="filled" {...props} />;
+	}
   return (
     <Paper className={classes.root}>
       <Table className={classes.table} aria-label="simple table">
@@ -138,10 +152,14 @@ const CastDataTable: React.FC  = () => {
 			  ID={character.associated_num}
 			  scencs={character.character_count}
 			  Character_id = {character.id}
+			  setOpenAlert = {setOpenAlert}
             />
           ))}
         </TableBody>
       </Table>
+	  <Snackbar open={openAlert} onClose={() => setOpenAlert(false)} autoHideDuration={2000}>
+			<Alert severity="success">Character untagged </Alert>
+		</Snackbar>
     </Paper>
   );
 }

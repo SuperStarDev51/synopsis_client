@@ -8,12 +8,12 @@ interface CastActionDropDownProps{
 	 ID: any;
 	 Character_name: string;
 	 Character_id: number;
-
+	 setOpenAlert(data: boolean) : void;
 }
 
 const CastActionDropDown: React.FC<CastActionDropDownProps> = ( props: CastActionDropDownProps ) => {
 	const [anchorEl, setAnchorEl] = React.useState(null);
-	const { ID , Character_name , Character_id} = props;
+	const { ID , Character_name , Character_id , setOpenAlert } = props;
 	const [openRemoveDialog, setOpenRemoveDialog] = React.useState(false);
 	const [openRenameDialog, setOpenRenameDialog] = React.useState(false);
 
@@ -50,6 +50,7 @@ const CastActionDropDown: React.FC<CastActionDropDownProps> = ( props: CastActio
 			castID= {ID}
 			open={openRemoveDialog}
 			setOpen={setOpenRemoveDialog}
+			setOpenAlert = {setOpenAlert}
 			/>
 			<EditCastDialog
 			Character_id = {Character_id}
