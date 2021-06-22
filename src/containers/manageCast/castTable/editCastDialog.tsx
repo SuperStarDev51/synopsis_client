@@ -10,8 +10,15 @@ import FaceIcon from '@material-ui/icons/Face';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { TextField } from '@material-ui/core';
-import { addCharacter , getAllProjectCharacters } from "@root/src/containers/scripts/initial-state";
+import { addCharacter ,getProjectScript ,  getAllProjectCharacters } from "@root/src/containers/scripts/initial-state";
 import { useSelector, useDispatch } from 'react-redux';
+import { CharactersActionTypes } from '@containers/tasks/ListsReducer';
+import { ScriptsActionTypes } from '@containers/scripts/enums';
+import { RootStore } from '@src/store';
+import axios from 'axios';
+import { config } from '../../../config';
+
+
 const useStyles = makeStyles(() => ({
 	content: {
 		display: 'flex',
@@ -55,7 +62,8 @@ const EditCastDialog: React.FC<EditCastDialogProps> = (props: EditCastDialogProp
 	
 	let { Character_id , castname, castID, open, setOpen } = props;
 	const classes = useStyles();
-
+	const dispatch = useDispatch();
+	const state = useSelector((state: RootStore) => state)
 	const validationSchema = yup.object({
 		Name: yup.string().min(2, 'Full should be of minimum 2 characters length'),
 		ID: yup.string().min(1, 'Full should be of minimum 2 characters length')
@@ -72,29 +80,58 @@ const EditCastDialog: React.FC<EditCastDialogProps> = (props: EditCastDialogProp
 		onSubmit: values => {
 			handleFormSubmit(values)
 			setOpen(false)
-			console.log(values);
+			
 
 		}
 	});
 
-	const handleFormSubmit = (values: any) => {
-		const dispatch = useDispatch();
+	const handleFormSubmit = async (values: any) => {
+		
 		let character = {
 			character_id	:  values.Character_id, 
 			character_name	:  values.Character_name, 
 			associated_num	:  values.Associated_num ,
 		}
-		const state = useSelector((state: RootStore) => state)
+		
 		const events = state.events
-		const activeEvent = events.filter()[0];
-		addCharacter(character)
-		getAllProjectCharacters(activeEvent.id)
-			.then(characters =>{
+		// const activeEvent = events.filter((event: Event) => event.preview)[0];
+	
+		let addedCharacter = await addCharacter(character)
+
+		let scene_string = localStorage.getItem('scene') 
+		let scene;
+		if(scene_string)
+			scene = JSON.parse(scene_string)
+
+
+		let project_id = localStorage.getItem('project_id')
+		let character_id = values.Character_id
+		let character_name = values.Character_name
+
+		axios.post(config.ipServer+'/imgn/api/v1/project/scriptSceneCharacter/update',  {
+			project_id, character_id , character_name
+			
+		})
+		.then(function (res: any) {
+			console.log("Script character updated")
+
+			getProjectScript(project_id, 0)
+			.then((scripts: any) =>{
+				dispatch({
+					type: ScriptsActionTypes.SET_SCRIPTS,
+					payload: scripts
+				});
+			})
+
+			getAllProjectCharacters(project_id)
+			.then((characters: any) =>{
+
 				dispatch({
 					type: CharactersActionTypes.SET_CHARACTERS,
 					payload: characters
 				});
 			})
+		})
 		
 		
 }
