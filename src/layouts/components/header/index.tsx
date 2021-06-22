@@ -8,6 +8,8 @@ const useStyles = makeStyles(()=>({
 		width: '100%',
 		display: 'flex',
 		flexDirection: 'row',
+		position: 'absolute',
+		top: '0',
 		height: '62px',
 		backgroundColor: 'rgba(33,33,33,0.1)',
 		boxShadow: '5px rgba(33,33,33,0.1)'
