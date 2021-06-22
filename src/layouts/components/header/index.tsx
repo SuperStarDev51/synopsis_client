@@ -5,10 +5,10 @@ import AddNewProject from './AddNewProject';
 
 const useStyles = makeStyles(()=>({
 	root: {
-		width: '100%',
+		width: 'calc(100% - 80px)',
 		display: 'flex',
 		flexDirection: 'row',
-		position: 'absolute',
+		position: 'fixed',
 		top: '0',
 		height: '62px',
 		backgroundColor: 'rgba(33,33,33,0.1)',

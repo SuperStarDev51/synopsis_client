@@ -226,7 +226,7 @@ class Sidebar extends Component {
                   </Hammer>
 
                 </ScrollbarTag>
-						<div style={{ zIndex: 99999, display:'flex', justifyContent:'center', alignItems:'center', marginBottom: '30px'}}>
+						<div style={{ zIndex: 99999, display:'flex', justifyContent:'center', alignItems:'center', position:'absolute', bottom: '130px', width: '100%', marginBottom: '30px'}}>
 						<NavbarUser
 						changeCurrentLang={changeCurrentLang}
 						currentLang={currentLang}
