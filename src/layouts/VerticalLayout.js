@@ -261,12 +261,12 @@ class VerticalLayout extends PureComponent {
           {
             "menu-collapsed":
               this.state.collapsedContent === true && this.state.width >= 1200,
-            "fixed-footer": appProps.footerType === "sticky",
-            "navbar-static": appProps.navbarType === "static",
-            "navbar-sticky": appProps.navbarType === "sticky",
-            "navbar-floating": appProps.navbarType === "floating",
-            "navbar-hidden": appProps.navbarType === "hidden",
-            "theme-primary": !menuThemeArr.includes(appProps.menuTheme)
+              "fixed-footer": appProps.footerType === "sticky",
+              "navbar-static": appProps.navbarType === "static",
+              "navbar-sticky": appProps.navbarType === "sticky",
+              "navbar-floating": appProps.navbarType === "floating",
+              "navbar-hidden": appProps.navbarType === "hidden",
+              "theme-primary": !menuThemeArr.includes(appProps.menuTheme)
           }
         )}
       >
