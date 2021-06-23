@@ -175,7 +175,7 @@ class DropzoneProgrammatically extends React.Component {
   }
   render() {
     return (
-      <div className="height-auto d-flex align-items-center justify-content-center">
+      <div className="height-auto d-flex align-items-center justify-content-center" style={{marginTop: '10rem'}}>
         <Row>
               <ProgrammaticallyDropzone navigateToBreakDownScenes={this.props.navigateToBreakDownScenes}/>
         </Row>

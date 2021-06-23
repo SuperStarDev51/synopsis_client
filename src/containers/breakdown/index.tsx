@@ -151,7 +151,7 @@ export const BreakDown: React.FunctionComponent<Props> = React.memo((props: Prop
 		<>
 			<div className={classnames({
 				'position-fixed': isHeaderFixed,
-				'position-top-10': isHeaderFixed,
+				'position-top-9': isHeaderFixed,
 				'width-100-per': isHeaderFixed,
 				'zindex-4': isHeaderFixed,
 				'bg-white': isHeaderFixed,

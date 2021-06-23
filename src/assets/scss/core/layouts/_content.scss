@@ -73,7 +73,7 @@ html {
       }
       .content-wrapper {
         padding: calc(#{$content-padding} - 0.4rem) #{$content-padding} 0;
-        margin-top: $navbar-height + 1;
+        margin-top: 60px;
         min-height: calc(100vh - 9.75rem);
         .content-header-title {
           font-weight: 500;
