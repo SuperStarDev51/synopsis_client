@@ -8,10 +8,7 @@ import { Route, useHistory } from "react-router-dom";
 import { Routes } from '../../utilities';
 import {addProject, deleteProject, getLists} from '@containers/planning/initial-state';
 import { SweetAlertCallback } from '@extensions'
-import avatarImg from "assets/img/portrait/small/avatar-s-20.jpg"
 import UserAvatar from '@src/components/user-profile/userAvatar';
-import { Icon, InlineIcon } from '@iconify/react';
-// import dotsVertical from '@iconify-icons/mdi/dots-vertical';
 import './index.scss';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
@@ -315,18 +312,11 @@ export const Projects: React.FC = () => {
 	return (
 		<div className="text-white" style={{padding: '2.8rem 2.2rem 0'}}>
 			<div className="d-flex  my-5  justify-content-between" style = {{color: 'black'}}>
-				<div>
+				{/* <div>
 					<img src = "../../assets/icons/top_project_nav.svg" style = {{width: '2rem', height: "2rem"}}/>
 					<span> &nbsp;Projects </span>
 				</div>
-				{/* <div className="h1 text-bold-800 text-white"><FormattedMessage id='active_projects' /></div> */}
-				{/* <Input
-					value={search}
-					onChange={(e)=> setSearch(e.target.value)}
-					placeholder="Search"
-					className="width-300"
-				/> */}
-				{addNewProject}
+				{addNewProject} */}
 			</div>
 
 			<Row>

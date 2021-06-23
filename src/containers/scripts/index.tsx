@@ -144,8 +144,8 @@ export const Scripts: React.FC = () => {
 	);
 
 	return (
-		<div className="mt-12">
-		<Row className="pl-3 pt-1 bg-white position-fixed full-width zindex-4 position-top-6">
+		<div className="mt-1">
+		<Row className="pl-3 pt-1 bg-white position-fixed full-width zindex-4">
      	 <div className="d-flex mb-2 float-left justify-content-center">
 			 {navItems.map((item: any, index:number)=> (
 			 	<>
@@ -194,7 +194,7 @@ export const Scripts: React.FC = () => {
 
 				item.name == 'upload_script' ?
 					<Row>
-					<Col>
+					<Col >
 						<DropzoneProgrammatically  navigateToBreakDownScenes={()=> setActive(1)}/>{" "}
 					</Col>
 					</Row>

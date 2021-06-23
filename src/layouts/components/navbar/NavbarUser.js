@@ -336,6 +336,9 @@ class NavbarUser extends React.PureComponent {
         )
         }}
       </ContextLayout.Consumer>
+
+
+      
         {/* <NavItem className="nav-search" onClick={this.handleNavbarSearch}>
           <NavLink className="nav-link-search">
             <Icon.Search size={21} data-tour="search" />
