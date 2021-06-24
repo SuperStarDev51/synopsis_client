@@ -655,9 +655,14 @@ export const BreakDownScene: React.FunctionComponent<Props> = (props: Props) => 
 						}
 						className={classnames("bg-white mx-1 d-flex-column py-2 text-center px-2 overflow-auto", { 'height-300': !isListPreview })}>
 						{scene && scene.script && (
-							scene.script.map((s: any, key: number) => (
+							scene.script.map((s: any, key: number) =>  (
+								
 								<div key={key} className="font-family-bellefair font-medium-2">
-									<div className="h-2 text-bold-600 text-capitalize">{s.character}</div>
+									<div className={classnames("h-2 text-capitalize",  
+									{"text-bold-800" : scene.characters.filter( item => item.character_name ===  s.character).length > 0? true: false})}
+									>
+										{s.character}
+									</div>
 									<div
 										onMouseUp={() => {
 											const selectedText = x.Selector.getSelected().toString();
