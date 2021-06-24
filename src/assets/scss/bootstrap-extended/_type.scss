@@ -71,6 +71,9 @@
 .text-bold-700 {
   @include font-weight(bold);
 }
+.text-bold-800{
+  font-weight:  800;
+}
 
 // Font style
 .text-italic {

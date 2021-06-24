@@ -71,12 +71,14 @@ const RemoveCastDialog: React.FC<RemoveCastDialogProps> = (props: RemoveCastDial
 		let scene_id = scene.scene_id
 		let chapter_number = scene.chapter_number
 
+		let delete_from_character = 0
+		let delete_from_script = 2 
+		let delete_from_shooting_day = 2
 
-		axios.delete(config.ipServer+'/imgn/api/v1/project/scriptSceneCharacter/delete', {data: {
+		axios.delete(config.ipServer+'/imgn/api/v1/project/scriptAllSceneCharacter/delete', {data: {
 			character_id,
 			project_id,
-			scene_id, 
-			chapter_number
+			chapter_number ,
 		}})
 		.then(function (res: any) {
 			console.log(res.data)
