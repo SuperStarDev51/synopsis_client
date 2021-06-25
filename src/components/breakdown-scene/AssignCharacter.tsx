@@ -16,6 +16,13 @@ export const AssignCharacter: React.FunctionComponent = ({ showDialog, associate
 	const dispatch = useDispatch();
 	const characterState = useSelector((state: RootStore) => state.characters)
 	const CharacterList = [...characterState]
+	const [max_associated_num, setMaxAssociated_num] = React.useState(CharacterList.length + 1)
+	
+	CharacterList.map(item =>{
+		if (item.associated_num >= max_associated_num)
+			 setMaxAssociated_num(item.associated_num + 1)
+	})
+	
 
 	const [open, setOpen] = React.useState(false);
 	const [keyword, setKeyword] = React.useState("")
@@ -230,7 +237,7 @@ export const AssignCharacter: React.FunctionComponent = ({ showDialog, associate
 								<div>
 									<div className={classnames('inline-flex')}>
 										<input placeholder="CHARACTER NAME..." value={newCharacterName} onChange={(e) => setNewCharacterName(e.target.value)} style={{ margin: "0 40px", width: '150px', border: 'none', borderBottom: '1px solid', padding: "0.5rem" }}></input>
-										<input value={CharacterList.length + 1} readOnly style={{ border: 'none', width: '30px', borderBottom: '1px solid' }}></input>
+										<input value={max_associated_num} onChange = {(e) => setMaxAssociated_num(parseInt(e.target.value))} style={{ border: 'none', width: '30px', borderBottom: '1px solid' }}></input>
 									</div>
 									<div className={classnames('inline-flex')} style={{ margin: '0 40px' }}>
 										<input type='checkbox' style={{ margin: '20px 10px 0 0' }} readOnly></input>

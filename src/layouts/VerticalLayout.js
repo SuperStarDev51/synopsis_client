@@ -193,6 +193,7 @@ class VerticalLayout extends PureComponent {
 
   render() {
     let appProps = this.props.app.customizer;
+
     let showSidebar = this.props.activeEvent
     let menuThemeArr = [
       "primary",

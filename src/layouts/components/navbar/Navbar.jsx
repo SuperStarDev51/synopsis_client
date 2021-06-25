@@ -19,6 +19,7 @@ import {
 	Input,
 } from "reactstrap"
 import { useSelector, useDispatch } from 'react-redux';
+import {DropzoneProgrammatically} from "@extensions"
 
 const UserName = props => {
 	let username = props.user.first_name + ' ' + props.user.last_name
@@ -26,6 +27,7 @@ const UserName = props => {
 }
 const ThemeNavbar = props => {
 	const [showAddAlert, setShowAddAlert] = React.useState(false);
+	const [showUplaodWindow, setShowUploadWindow] = React.useState(false)
 	const [eventName, setEventName] = React.useState('');
 	const [eventBudget, setEventBudget] = React.useState(0);
 	const state = useSelector((state) => state);
@@ -37,6 +39,13 @@ const ThemeNavbar = props => {
 	const navbarTypes = ["floating", "static", "sticky", "hidden"]
 	const md = isWidthUp('md', props.width)
 	const isEventDataFilled = eventName ? true : false;
+
+	const projectPage = localStorage.getItem('project_page')
+	const scriptPage = localStorage.getItem('script_page')
+
+	const isProjectPage = projectPage === "on"? true: false;
+	const isScriptPage = scriptPage === "on"? true: false;
+
 	const addNewProject = (<>
 		<button onClick={() => setShowAddAlert(true)}
 			className={` btn btn-primary`}>
@@ -103,7 +112,16 @@ const ThemeNavbar = props => {
 
 	</>
 	);
-
+ 
+	// const uploadScriptButton = (
+	// 	<>
+	// 	<button onClick={() => setShowUploadWindow(true)}
+	// 		className={` btn btn-primary`}>
+	// 		+ Upload Script
+	// 	</button>
+	// 	<DropzoneProgrammatically  navigateToBreakDownScenes={()=> setActive(1)}/>{" "}
+	// 	</>
+	// )
 	return (
 		<React.Fragment>
 			<div className="content-overlay" />
@@ -158,11 +176,14 @@ const ThemeNavbar = props => {
 							<div className=" h2 ml-5 mr-3 text-bold height-4-rem line-height-4-rem overflow-hidden">
 								<div>
 									<img src="../../assets/icons/top_project_nav.svg" style={{ width: '2rem', height: "2rem" }} />
-									&nbsp; Projects {activeEvent && (<> &gt; {activeEvent.project_name} </>)}
+									&nbsp; Projects {!isProjectPage && activeEvent && (<> &gt; {activeEvent.project_name} </>)}
 								</div>
 
 							</div>
-							{addNewProject}
+							{isProjectPage && addNewProject}
+							{/* {isScriptPage && (
+								
+							)} */}
 							{/* {activeEvent && md &&  ( <NavbarProjectDetails /> )} */}
 
 							{/* <NavbarUser

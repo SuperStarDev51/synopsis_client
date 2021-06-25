@@ -2,7 +2,7 @@ import * as React from 'react';
 import { hot } from 'react-hot-loader/root';
 import { useSelector, useDispatch } from 'react-redux';
 import { ScriptsActionTypes } from '@containers/scripts/enums';
-import {getProjectScript, getAllProjectCharacters, getLimitations} from '@containers/scripts/initial-state'
+import { getProjectScript, getAllProjectCharacters, getLimitations } from '@containers/scripts/initial-state'
 
 import { UsersActionTypes } from '@containers/user/enums';
 import { UserActionTypes } from '@containers/user/enums';
@@ -29,7 +29,7 @@ import {
 	ScenePlaceActionTypes,
 	SceneLocationActionTypes, LimitationsActionTypes, CompaniesActionTypes,
 } from '@containers/tasks/ListsReducer';
-import {addProject, getLists} from '@containers/planning/initial-state';
+import { addProject, getLists } from '@containers/planning/initial-state';
 import { getProjectTasks } from '@containers/tasks/initial-state';
 import { getProjectShootingDays } from '@containers/shooting_days/initial-state';
 import { RootStore } from '@src/store';
@@ -52,44 +52,60 @@ import { ShootingDaysActionTypes } from '@containers/shooting_days/enums';
 export const PrivateRoute = ({ component: Component, ...rest }: any): JSX.Element => {
 	console.log('test')
 	return (
-	<Route
-		{...rest}
-		render={(props: any): React.ReactNode =>
-			// TODO: Add real check for auth import {  } from "module";
-			// eslint-disable-next-line
-			isAuth() ?  <Component {...props} {...rest} /> : <Redirect to={Routes.LOGIN} />
-		}
-	/>
-)};
+		<Route
+			{...rest}
+			render={(props: any): React.ReactNode =>
+				// TODO: Add real check for auth import {  } from "module";
+				// eslint-disable-next-line
+				isAuth() ? <Component {...props} {...rest} /> : <Redirect to={Routes.LOGIN} />
+			}
+		/>
+	)
+};
 
 export const AppRoute = ({ component: Component, fullLayout, ...rest }: any) => {
 	const user = useSelector((state: RootStore) => state.user)
-	return (
-	  <Route
-		{...rest}
-		render={props => {
-		  return (
-			<ContextLayout.Consumer>
-			  {context => {
-				if( context && context.state ) {
-					const LayoutTag =
-					fullLayout === true
-						? context.fullLayout
-						: context.state.activeLayout === "horizontal"
-						? context.horizontalLayout
-						: context.VerticalLayout
-					return (
-					<LayoutTag {...props} permission={user}>
-						<Component {...props} />
-					</LayoutTag>
-					)
-				}
-			  }}
 
-			</ContextLayout.Consumer>
-		  )
-		}}
-	  />
+	return (
+		<Route
+			{...rest}
+			render={props => {
+				console.log("App route Props", props)
+				if(props.location.pathname === "/"){
+					localStorage.setItem("project_page", "on")
+					localStorage.setItem('script_page', 'off')
+				}
+				else{
+					localStorage.setItem('project_page', 'off')
+					if(props.location.pathname.includes("/script")){
+						localStorage.setItem('script_page', 'on')
+					}
+					else{
+						localStorage.setItem('script_page', 'off')
+					}
+				}
+				return (
+					<ContextLayout.Consumer>
+						{context => {
+							if (context && context.state) {
+								const LayoutTag =
+									fullLayout === true
+										? context.fullLayout
+										: context.state.activeLayout === "horizontal"
+											? context.horizontalLayout
+											: context.VerticalLayout
+								return (
+									<LayoutTag {...props} permission={user}>
+										<Component {...props} />
+									</LayoutTag>
+								)
+							}
+						}}
+
+					</ContextLayout.Consumer>
+				)
+			}}
+		/>
 	)
 }
 
@@ -103,9 +119,9 @@ export const App = hot(() => {
 	const user = state.user;
 
 	React.useEffect(() => {
-		if( activeEvent && activeEvent.id ) {
+		if (activeEvent && activeEvent.id) {
 
-			addProject({user_id: user.id, company_id: user.company_id, project_id: activeEvent.id })
+			addProject({ user_id: user.id, company_id: user.company_id, project_id: activeEvent.id })
 				.then((res: any) => {
 					if (res?.scene_time) {
 						dispatch(scenesBreakdownActions.setScenetime(res.scene_time));
@@ -121,21 +137,21 @@ export const App = hot(() => {
 						type: SuppliersActionTypes.SET_SUPPLIERS_GROUP,
 						payload: res
 					});
-			});
+				});
 			getProjectScript(activeEvent.id, 0)
-			.then(scripts =>{
-				dispatch({
-					type: ScriptsActionTypes.SET_SCRIPTS,
-					payload: scripts
-				});
-			})
+				.then(scripts => {
+					dispatch({
+						type: ScriptsActionTypes.SET_SCRIPTS,
+						payload: scripts
+					});
+				})
 			getAllProjectCharacters(activeEvent.id)
-			.then(characters =>{
-				dispatch({
-					type: CharactersActionTypes.SET_CHARACTERS,
-					payload: characters
-				});
-			})
+				.then(characters => {
+					dispatch({
+						type: CharactersActionTypes.SET_CHARACTERS,
+						payload: characters
+					});
+				})
 			getLimitations(activeEvent.id)
 				.then(res => {
 					dispatch({
@@ -144,32 +160,32 @@ export const App = hot(() => {
 					});
 				})
 		}
-	},[activeEvent && activeEvent.id]);
+	}, [activeEvent && activeEvent.id]);
 
 
 
 
 	React.useEffect(() => {
-		if( user && user.company_id && URL !== Routes.NOT_FOUND ){
+		if (user && user.company_id && URL !== Routes.NOT_FOUND) {
 			getAllProjectsCompany(user.company_id, user.id)
-			.then((res: any) => {
-				const EventID = Number(URL.split('/')[1])
+				.then((res: any) => {
+					const EventID = Number(URL.split('/')[1])
 					dispatch({
 						type: EventActionTypes.SET_EVENTS,
-						payload: EventID > 0 ? res.map((event: Event, i: number)=>{
-							if( event.id !== EventID ) return event
+						payload: EventID > 0 ? res.map((event: Event, i: number) => {
+							if (event.id !== EventID) return event
 							else return {
 								...event,
 								preview: true
 							}
 						}) : res
 					});
-			});
+				});
 		}
-	},[user]);
+	}, [user]);
 
 	React.useEffect(() => {
-		if( user && user.company_id && URL !== Routes.NOT_FOUND ){
+		if (user && user.company_id && URL !== Routes.NOT_FOUND) {
 			getAllCompanyUsers(user.company_id)
 				.then((res: any) => {
 					dispatch({
@@ -179,186 +195,187 @@ export const App = hot(() => {
 
 				});
 		}
-	},[user]);
+	}, [user]);
 
-React.useEffect(() => {
-	if( activeEvent && activeEvent.id ) {
-		getProjectTasks(activeEvent.id, 1)
-		.then(users =>{
+	React.useEffect(() => {
+		if (activeEvent && activeEvent.id) {
+			getProjectTasks(activeEvent.id, 1)
+				.then(users => {
+					dispatch({
+						type: UsersActionTypes.SET_USERS,
+						payload: users
+					});
+				})
+
+			getProjectShootingDays(activeEvent.id)
+				.then(shootingDays => {
+					dispatch({
+						type: ShootingDaysActionTypes.SET_SHOOTING_DAYS,
+						payload: shootingDays
+					});
+				})
+
+			getExpenseList(activeEvent.id)
+				.then(expenses => { dispatch(ExpensesActions.setExpenseTable(expenses)) })
+		}
+	}, [activeEvent && activeEvent.id]);
+
+
+	React.useEffect(() => {
+		if (isAuth()) {
 			dispatch({
-				type: UsersActionTypes.SET_USERS,
-				payload: users
+				type: UserActionTypes.SET_USER,
+				payload: JSON.parse(isAuth())
 			});
-		})
-
-		getProjectShootingDays(activeEvent.id)
-		.then(shootingDays =>{
-			dispatch({
-				type: ShootingDaysActionTypes.SET_SHOOTING_DAYS,
-				payload: shootingDays
-			});
-		})
-
-		getExpenseList(activeEvent.id)
-		 .then(expenses =>{dispatch(ExpensesActions.setExpenseTable(expenses))})
-	}
-},[activeEvent && activeEvent.id]);
-
-
-React.useEffect(() => {
-	if( isAuth() ) {
-		dispatch({
-			type: UserActionTypes.SET_USER,
-			payload: JSON.parse(isAuth())
-		});
-	}
-},[]);
+		}
+	}, []);
 
 
 
-React.useEffect(() => {
-	if ( isAuth() ) {
-		const EventID = Number(URL.split('/')[1])
-		const Route = URL.split('/')[2]
-		if ( EventID ) {
-			if( Route ) {
+	React.useEffect(() => {
+		if (isAuth()) {
+			const EventID = Number(URL.split('/')[1])
+			const Route = URL.split('/')[2]
+			if (EventID) {
+				if (Route) {
 					const setEvent = (event_id: number): void => {
 						dispatch({
 							type: EventActionTypes.SET_EVENTS,
-							payload: events.map((event: Event, i: number)=>{
-									if( event.id !== event_id ) return {...event, preview: false}
-									else return {...event,preview: true}
-								})
+							payload: events.map((event: Event, i: number) => {
+								if (event.id !== event_id) return { ...event, preview: false }
+								else return { ...event, preview: true }
+							})
 						});
 					}
 					setEvent(EventID)
 
-		} else history.push(Routes.SCRIPT.replace(':id', String(EventID)))
-		}
-	} else history.push(Routes.LOGIN)
-},[]);
-
-
-React.useEffect(() => {
-	getLists().then((data: any) => {
-		if (data) {
-
-			const {permission_status, permission_type, supplier_job_title, companies} = data
-
-			if (permission_status) { // task status
-				dispatch({
-					type: PermissionStatusActionTypes.SET_PERMISSION_STATUS,
-					payload: permission_status
-				});
+				} else history.push(Routes.SCRIPT.replace(':id', String(EventID)))
 			}
+		} else history.push(Routes.LOGIN)
+	}, []);
 
-			if (permission_type) { // task status
 
-				dispatch({
-					type: PermissionTypeActionTypes.SET_PERMISSION_TYPES,
-					payload: permission_type
-				});
-			}
-
-			if(supplier_job_title) { // supplier job title
-				dispatch({
-					type: SupplierJobTitlesActionTypes.SET_SUPPLIER_JOB_TITLES,
-					payload: supplier_job_title
-				})
-			}
-
-			if (companies) { // list of all companies
-				dispatch({
-					type: CompaniesActionTypes.SET_COMPANIES_LIST,
-					payload: companies
-				});
-			}
-		}
-	});
-
-	if( isAuth() &&  URL !== Routes.NOT_FOUND) {
+	React.useEffect(() => {
 		getLists().then((data: any) => {
 			if (data) {
-				const { task_type, task_status, supplier_type, supplier_unit_type, supplier_status, supplier_job_title, budget_type, budget_status, scene_time, scene_place, scene_location} = data
 
+				const { permission_status, permission_type, supplier_job_title, companies } = data
 
-				if (task_type) { // task type
+				if (permission_status) { // task status
 					dispatch({
-						type: TaskTypesActionTypes.SET_TASK_TYPES,
-						payload: task_type
+						type: PermissionStatusActionTypes.SET_PERMISSION_STATUS,
+						payload: permission_status
 					});
 				}
-				if (task_status) { // task status
+
+				if (permission_type) { // task status
+
 					dispatch({
-						type: TaskStatusActionTypes.SET_TASK_STATUS,
-						payload: task_status
+						type: PermissionTypeActionTypes.SET_PERMISSION_TYPES,
+						payload: permission_type
 					});
 				}
-				if (supplier_type) { // supplier type
+
+				if (supplier_job_title) { // supplier job title
 					dispatch({
-						type: SupplierTypesActionTypes.SET_SUPPLIER_TYPES,
-						payload: supplier_type
-					});
+						type: SupplierJobTitlesActionTypes.SET_SUPPLIER_JOB_TITLES,
+						payload: supplier_job_title
+					})
 				}
-				if (supplier_status) { // supplier status
+
+				if (companies) { // list of all companies
 					dispatch({
-						type: SupplierStatusActionTypes.SET_SUPPLIER_STATUS,
-						payload: supplier_status
-					});
-				}
-				if (supplier_unit_type) { // supplier unit type
-					dispatch({
-						type: SupplierUnitTypesActionTypes.SET_SUPPLIER_UNIT_TYPES,
-						payload: supplier_unit_type
-					});
-				}
-				if (budget_type) { // budget type
-					dispatch({
-						type: BudgetTypesActionTypes.SET_BUDGET_TYPES,
-						payload: budget_type
-					});
-				}
-				if (budget_status) { // budget status
-					dispatch({
-						type: BudgetStatusActionTypes.SET_BUDGET_STATUS,
-						payload: budget_status
-					});
-				}
-				if (scene_place) { // scene place
-					dispatch({
-						type: ScenePlaceActionTypes.SET_SCENE_PLACE,
-						payload: scene_place
+						type: CompaniesActionTypes.SET_COMPANIES_LIST,
+						payload: companies
 					});
 				}
 			}
-		})
-	}
-	},[]);
+		});
 
-	return(
-	<Switch>
-		<AppRoute path={Routes.ACTORS} exact={true} component={Loadables.Actors}  />
-		{/* <AppRoute path={Routes.PROJECTS} exact={true} component={Loadables.Projects} fullLayout /> */}
-		<AppRoute path={Routes.PROJECTS} exact={true} component={Loadables.Projects}/>
-		<AppRoute path={Routes.PROFILE} exact={true} component={Loadables.UserProfile} />
-		{/* <AppRoute path={Routes.SCRIPT} exact={true} component={Loadables.Script} /> */}
-		<AppRoute path={Routes.BREAKDOWN} exact={true} component={Loadables.Breakdown} />
-		<AppRoute path={Routes.SHOOTING_DAYS} exact={true} component={Loadables.ShootingDays} />
-		<AppRoute path={Routes.TASKS} exact={true} component={Loadables.Tasks} />
-		<AppRoute path={Routes.SUPPLIERS} exact={true} component={Loadables.Suppliers} />
-		<AppRoute path={Routes.PERMISSIONS} exact={true} component={Loadables.Permissions} />
-		<AppRoute path={Routes.FILES} exact={true} component={Loadables.Files} />
-		{/* <AppRoute path={Routes.PLANNING} exact={true} component={Loadables.Planning} /> */}
-		<AppRoute path={Routes.OVERVIEW} exact={true} component={Loadables.Overview} />
-		<AppRoute path={Routes.NOT_FOUND} component={Loadables.NotFound} />
-		<AppRoute path={Routes.REGISTER} component={Loadables.Register} fullLayout/>
-		<AppRoute path={Routes.LOGIN} component={Loadables.Login} fullLayout/>
+		if (isAuth() && URL !== Routes.NOT_FOUND) {
+			getLists().then((data: any) => {
+				if (data) {
+					const { task_type, task_status, supplier_type, supplier_unit_type, supplier_status, supplier_job_title, budget_type, budget_status, scene_time, scene_place, scene_location } = data
 
-		<AppRoute path={Routes.SCRIPT} exact={true} component={Loadables.Script} />
-		<AppRoute path={Routes.BUDGET} exact={true} component={Loadables.Budget} />
 
-		<AppRoute path={Routes.MANAGE_CAST} exact={true} component={Loadables.ManageCastContainer} />
+					if (task_type) { // task type
+						dispatch({
+							type: TaskTypesActionTypes.SET_TASK_TYPES,
+							payload: task_type
+						});
+					}
+					if (task_status) { // task status
+						dispatch({
+							type: TaskStatusActionTypes.SET_TASK_STATUS,
+							payload: task_status
+						});
+					}
+					if (supplier_type) { // supplier type
+						dispatch({
+							type: SupplierTypesActionTypes.SET_SUPPLIER_TYPES,
+							payload: supplier_type
+						});
+					}
+					if (supplier_status) { // supplier status
+						dispatch({
+							type: SupplierStatusActionTypes.SET_SUPPLIER_STATUS,
+							payload: supplier_status
+						});
+					}
+					if (supplier_unit_type) { // supplier unit type
+						dispatch({
+							type: SupplierUnitTypesActionTypes.SET_SUPPLIER_UNIT_TYPES,
+							payload: supplier_unit_type
+						});
+					}
+					if (budget_type) { // budget type
+						dispatch({
+							type: BudgetTypesActionTypes.SET_BUDGET_TYPES,
+							payload: budget_type
+						});
+					}
+					if (budget_status) { // budget status
+						dispatch({
+							type: BudgetStatusActionTypes.SET_BUDGET_STATUS,
+							payload: budget_status
+						});
+					}
+					if (scene_place) { // scene place
+						dispatch({
+							type: ScenePlaceActionTypes.SET_SCENE_PLACE,
+							payload: scene_place
+						});
+					}
+				}
+			})
+		}
+	}, []);
 
-		{/* <AppRoute path={Routes.BUDGETS} exact={true} component={Loadables.Budget} /> */}
-	</Switch>
-)});
+	return (
+		<Switch>
+			<AppRoute path={Routes.ACTORS} exact={true} component={Loadables.Actors} />
+			{/* <AppRoute path={Routes.PROJECTS} exact={true} component={Loadables.Projects} fullLayout /> */}
+			<AppRoute path={Routes.PROJECTS} exact={true} component={Loadables.Projects} />
+			<AppRoute path={Routes.PROFILE} exact={true} component={Loadables.UserProfile} />
+			{/* <AppRoute path={Routes.SCRIPT} exact={true} component={Loadables.Script} /> */}
+			<AppRoute path={Routes.BREAKDOWN} exact={true} component={Loadables.Breakdown} />
+			<AppRoute path={Routes.SHOOTING_DAYS} exact={true} component={Loadables.ShootingDays} />
+			<AppRoute path={Routes.TASKS} exact={true} component={Loadables.Tasks} />
+			<AppRoute path={Routes.SUPPLIERS} exact={true} component={Loadables.Suppliers} />
+			<AppRoute path={Routes.PERMISSIONS} exact={true} component={Loadables.Permissions} />
+			<AppRoute path={Routes.FILES} exact={true} component={Loadables.Files} />
+			{/* <AppRoute path={Routes.PLANNING} exact={true} component={Loadables.Planning} /> */}
+			<AppRoute path={Routes.OVERVIEW} exact={true} component={Loadables.Overview} />
+			<AppRoute path={Routes.NOT_FOUND} component={Loadables.NotFound} />
+			<AppRoute path={Routes.REGISTER} component={Loadables.Register} fullLayout />
+			<AppRoute path={Routes.LOGIN} component={Loadables.Login} fullLayout />
+
+			<AppRoute path={Routes.SCRIPT} exact={true} component={Loadables.Script} />
+			<AppRoute path={Routes.BUDGET} exact={true} component={Loadables.Budget} />
+
+			<AppRoute path={Routes.MANAGE_CAST} exact={true} component={Loadables.ManageCastContainer} />
+
+			{/* <AppRoute path={Routes.BUDGETS} exact={true} component={Loadables.Budget} /> */}
+		</Switch>
+	)
+});

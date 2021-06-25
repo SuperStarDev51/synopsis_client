@@ -60,6 +60,7 @@ export const addCharacter = (character:any) => new Promise((resolve,reject) =>{
 	const { associated_num, character_id, character_name, character_type, project_id, supplier_id, project_scene_id, add_character_supplier_to_shooting_days  } = character
 	axios.post(config.ipServer+'/imgn/api/v1/character/add', {associated_num, character_id, character_name, character_type, project_id, supplier_id, project_scene_id, add_character_supplier_to_shooting_days })
 	.then(function (res: any) {
+	 console.log("RESPONSE", res.data)
 	  resolve(res.data)
 	})
   })
